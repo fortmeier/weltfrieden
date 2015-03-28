@@ -1,7 +1,12 @@
 // header missing
-
+#include "config.h"
+#ifdef MAC_OSX
+#include <OpenGL/gl.h>
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
 #include <GL/gl.h>
+#endif
 
 extern int server_init(void);
 
