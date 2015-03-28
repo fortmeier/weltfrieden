@@ -41,8 +41,13 @@ drawBox(void)
 void
 display(void)
 {
-  printf("display!\n");
-#if 0
+//  printf("display!\n");
+
+  float r,g,b;
+  r= cube_angle;
+  b = cube_angle;
+  g = cube_angle;
+  glClearColor(r,g,b,1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
    /* Setup cube vertex data. */
   v[0][0] = v[1][0] = v[2][0] = v[3][0] = -1;
@@ -73,18 +78,19 @@ display(void)
 
   /* Adjust cube position to be asthetic angle. */
   glTranslatef(0.0, 0.0, -1.0);
-  glRotatef(cube_angle, 1.0, 0.0, 0.0);
+  glRotatef(60, 1.0, 0.0, 0.0);
   glRotatef(-20, 0.0, 0.0, 1.0);
 
   drawBox();
-#endif
+  
+  glutPostRedisplay();
   glutSwapBuffers();
 }
 
 void
 init(void)
 {
-  //server_init();
+  server_init();
 }
 
 int
