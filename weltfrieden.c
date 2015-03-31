@@ -4,7 +4,7 @@
 #include <OpenGL/gl.h>
 #include <GLUT/glut.h>
 #else
-//#include <GL/glew.h>
+#include <GL/glew.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
 #endif
@@ -112,7 +112,7 @@ display(void)
   glTexCoord2f(0,1); glVertex3f(0,1,0);
   glEnd();
 
-  time += 0.0000001; 
+  time += 0.01; 
 
   glutSwapBuffers();
   glutPostRedisplay();
@@ -179,9 +179,9 @@ initShader(GLuint *shader, const char* filename)
   glAttachShader( prog, *shader );
   checkGlError("attachShader");
 
-  vShader = loadShader( "shaders/basic.vert", GL_VERTEX_SHADER );
-  glAttachShader( prog, vShader );
-  checkGlError("attachVShader");
+  //vShader = loadShader( "shaders/basic.vert", GL_VERTEX_SHADER );
+  //glAttachShader( prog, vShader );
+  //checkGlError("attachVShader");
 
   glLinkProgram( prog );
   checkGlError("link program");
@@ -220,7 +220,6 @@ initShader(GLuint *shader, const char* filename)
 void
 init(void)
 {
-  glewInit();
   // init fbo
   glGenTextures(1, &texId);
   glBindTexture(GL_TEXTURE_2D, texId);
@@ -259,6 +258,10 @@ main(int argc, char **argv)
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
   glutCreateWindow("red 3D lighted cube");
   glutDisplayFunc(display);
+  glewInit();
+
+  printf("GLEW version: s\n", glewGetString(GLEW_VERSION));
+  printf("OpenGL version:  %s\n", glGetString(GL_VERSION));  
   init();
   glutMainLoop();
   return 0;             /* ANSI C requires main to return int. */
