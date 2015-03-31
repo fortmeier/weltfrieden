@@ -10,7 +10,7 @@ else
 		LDFLAGS += -lglut -lGLU -lGLEW
 endif
 
-SOURCES=weltfrieden.c server.c
+SOURCES=weltfrieden.c server.c shader.c
 OBJECTS=$(SOURCES:.c=.o)
 
 

@@ -12,11 +12,14 @@
 //#include "audio.h"
 #include "config.h"
 
+#include "shader.h"
+
 #ifdef ZEROMQ
 #include <zmq.h>
 #define MAXOSCSZ 1024
 #endif
 
+extern float iGlobalTime;
 
 extern float cube_angle;
 
@@ -135,8 +138,23 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
     printf("play server unexpectedly received extra parameters, maybe update Dirt?\n");
   }
 
-  cube_angle = gain;
-  printf("hello! %f\n", cube_angle);
+  printf("play '%s'\n", sample_name);
+  printf(" %f -> %f \n", start, end);
+
+  float endtime = iGlobalTime + end;
+
+  shader s = {
+    UNINITIALIZED,
+    gain,
+    sample_name,
+    NULL,
+    end,
+    endtime,
+    0, // progId
+    0 // shaderId
+  };
+  
+  addShaderLayer( s );
 /*
   int vowelnum = -1;
 

@@ -1,0 +1,17 @@
+#version 330
+
+
+uniform float iGlobalTime;
+uniform vec2 iResolution;
+uniform float gain;
+
+
+in vec4 gl_FragCoord;
+out vec4 fragColor;
+
+
+void main()
+{
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  fragColor = vec4(uv,0.5+0.5*sin(iGlobalTime),gain);
+}
