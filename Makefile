@@ -1,5 +1,6 @@
 CC=gcc
 
+
 CFLAGS += -g -I/usr/local/include -Iinclude -Wall -O3 -std=gnu99 $(shell pkg-config --cflags glfw3)
 LDFLAGS += -lm -L/usr/local/lib -llo -lsndfile -lsamplerate -lpthread $(shell pkg-config --libs glfw3) -lGLEW
 

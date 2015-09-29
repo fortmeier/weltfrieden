@@ -2,10 +2,12 @@
 
 
 enum shaderstate {UNUSED, UNINITIALIZED, INITIALIZED};
-typedef struct 
+typedef struct
 {
   enum shaderstate state;
   float gain; // maps to opacity of shader layer
+  float shape; // maps time to current color value
+  float speed;
   char *filename;
   char *filecontent;
   float duration;

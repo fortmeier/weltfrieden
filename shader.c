@@ -141,10 +141,20 @@ deinitShaderLayer(shader* s)
 void
 addShaderLayer(shader s)
 {
-  assert("too many layers" && activeShaders < MAXSHADERLAYERS-1);
-  printf("adding shader layer %i ending at %f\n", activeShaders, iGlobalTime);
+  if (activeShaders < MAXSHADERLAYERS-1) {
+    printf("adding shader layer %i ending at %f\n", activeShaders, iGlobalTime);
+  }
+  else {
+    /* handling too many layers,
+      this will try to be the least surprise for the user
+    */
+    printf("hit max shader layers, overwriting existing layers");
+    activeShaders = activeShaders % MAXSHADERLAYERS;
+
+  }
   shaderLayerArray[activeShaders] = s;
   activeShaders++;
+
 }
 
 void
@@ -171,6 +181,12 @@ useShaderLayer(shader *s)
 
     GLint gainlocation = glGetUniformLocation( s->progId, "gain");
     glUniform1f(gainlocation, s->gain);
+
+    GLint shapelocation = glGetUniformLocation( s->progId, "shape");
+    glUniform1f(shapelocation, s->shape);
+
+    GLint speedlocation = glGetUniformLocation( s->progId, "speed");
+    glUniform1f(speedlocation, s->speed);
     ///    checkGlError("uniform resolution");
     /*
     glBegin(GL_QUADS);

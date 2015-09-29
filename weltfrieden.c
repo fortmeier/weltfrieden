@@ -28,9 +28,10 @@ extern float iGlobalTime;
 extern float iResolution[2];
 
 float points[] = {
-   0.0f,  0.5f,  0.0f,
-   0.5f, -0.5f,  0.0f,
-  -0.5f, -0.5f,  0.0f
+  1.0, 1.0, 0.0f,
+ -1.0, 1.0, 0.0f,
+  1.0, -1.0, 0.0f,
+ -1.0, -1.0, 0.0f,
 };
 
 
@@ -139,7 +140,7 @@ main(int argc, char **argv)
 GLuint vbo = 0;
 glGenBuffers (1, &vbo);
 glBindBuffer (GL_ARRAY_BUFFER, vbo);
-glBufferData (GL_ARRAY_BUFFER, 9 * sizeof (float), points, GL_STATIC_DRAW);
+glBufferData (GL_ARRAY_BUFFER, 12 * sizeof (float), points, GL_STATIC_DRAW);
 
  GLuint vao = 0;
 glGenVertexArrays (1, &vao);
@@ -175,10 +176,9 @@ glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity(); */
-
   glBindVertexArray (vao);
   // draw points 0-3 from the currently bound VAO with current in-use shader
-  glDrawArrays (GL_TRIANGLES, 0, 3);
+  glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
   // update other events like input handling
   glfwPollEvents ();
     //printf("applying shader layers\n");
