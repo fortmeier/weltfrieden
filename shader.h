@@ -16,7 +16,7 @@ typedef struct
 } shader;
 
 
-
+void applyShaderLayer(unsigned int i);
 void addShaderLayer(shader s);
 void useShaderLayer(shader *s);
 

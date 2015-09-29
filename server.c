@@ -42,7 +42,7 @@ void error(int num, const char *msg, const char *path) {
 int generic_handler(const char *path, const char *types, lo_arg **argv,
 		    int argc, void *data, void *user_data) {
     int i;
-    
+
     printf("path: <%s>\n", path);
     for (i=0; i<argc; i++) {
       printf("arg %d '%c' ", i, types[i]);
@@ -63,7 +63,7 @@ int kriole_handler(const char *path, const char *types, lo_arg **argv,
   float duration = argv[2]->f;
   float pitch_start = argv[3]->f;
   float pitch_stop = argv[4]->f;
-  
+
   //audio_kriole(when, duration, pitch_start, pitch_stop);
 
   return(0);
@@ -88,6 +88,8 @@ int pause_input_handler(const char *path, const char *types, lo_arg **argv,
 
 /**/
 
+
+
 int play_handler(const char *path, const char *types, lo_arg **argv,
                  int argc, void *data, void *user_data) {
 
@@ -103,7 +105,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   poffset = 3;
   //printf("timing info: when, cps = %f\t%f\n", when, cps);
 
-  char *sample_name = strdup((char *) argv[0+poffset]);
+  char *sample_name = (char *) argv[0+poffset];
 
   float offset = argv[1+poffset]->f;
   float start = argv[2+poffset]->f;
@@ -117,14 +119,14 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   float accelerate = argv[10+poffset]->f;
   float shape = argv[11+poffset]->f;
   int kriole_chunk = argv[12+poffset]->i;
-  
+
   float gain = argc > (13+poffset) ? argv[13+poffset]->f : 0;
   int cutgroup = argc > (14+poffset) ? argv[14+poffset]->i : 0;
 
   float delay = argc > (15+poffset) ? argv[15+poffset]->f : 0;
   float delaytime = argc > (16+poffset) ? argv[16+poffset]->f : 0;
   float delayfeedback = argc > (17+poffset) ? argv[17+poffset]->f : 0;
-  
+
   float crush = argc > (18+poffset) ? argv[18+poffset]->f : 0;
   int coarse = argc > (19+poffset) ? argv[19+poffset]->i : 0;
   float hcutoff = argc > (20+poffset) ? argv[20+poffset]->f : 0;
@@ -133,28 +135,41 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   float bandq = argc > (23+poffset) ? argv[23+poffset]->f : 0;
 
   char *unit_name = argc > (24+poffset) ? (char *) argv[24+poffset] : "r";
+  int sample_loop = argc >  (25+poffset) ? argv[25+poffset]->i : 0;
 
-  if (argc > 25+poffset) {
+  if (argc > 26+poffset) {
     printf("play server unexpectedly received extra parameters, maybe update Dirt?\n");
   }
+
+
+  if (speed == 0) {
+    return(0);
+  }
+
 
   printf("play '%s'\n", sample_name);
   printf(" %f -> %f \n", start, end);
 
   float endtime = iGlobalTime + end;
 
+  char* fname = malloc(strlen(sample_name) + 1);
+  strcpy(fname, sample_name);
+
   shader s = {
     UNINITIALIZED,
     gain,
-    sample_name,
+    fname,
     NULL,
     end,
     endtime,
     0, // progId
     0 // shaderId
   };
-  
+
+  printf("adding gain: %f\n", gain);
   addShaderLayer( s );
+
+
 /*
   int vowelnum = -1;
 
@@ -212,6 +227,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   return 0;
 }
 
+
 /**/
 
 #ifdef ZEROMQ
@@ -224,25 +240,25 @@ void *zmqthread(void *data){
   lo_server s = lo_server_new("7772", error);
 
   lo_server_add_method(s, "/play", "iisffffffsffffififfffiffff",
-		       play_handler, 
+		       play_handler,
 		       NULL
 		       );
 
   lo_server_add_method(s, "/play", "iisffffffsffffififfffifff",
-		       play_handler, 
+		       play_handler,
 		       NULL
 		       );
 
   lo_server_add_method(s, "/play", "iisffffffsffffififff",
-		       play_handler, 
+		       play_handler,
 		       NULL
 		       );
 
-/*  lo_server_add_method(s, "/kriole", "iifff",
-		       kriole_handler, 
+  lo_server_add_method(s, "/kriole", "iifff",
+		       kriole_handler,
 		       NULL
 		       );
-*/
+
   lo_server_add_method(s, NULL, NULL, generic_handler, NULL);
 
   assert(rc == 0);
@@ -269,44 +285,49 @@ extern int server_init(void) {
 
   lo_server_thread st = lo_server_thread_new(OSC_PORT, error);
 
+  lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffifffffi",
+                              play_handler,
+                              NULL
+                             );
+
   lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffifffff",
-                              play_handler, 
+                              play_handler,
                               NULL
                              );
 
   lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffiffff",
-                              play_handler, 
+                              play_handler,
                               NULL
                              );
 
   lo_server_thread_add_method(st, "/play", "iisffffffsffffififff",
-                              play_handler, 
+                              play_handler,
                               NULL
                              );
 
   lo_server_thread_add_method(st, "/play", "iisffffffsffffifi",
-                              play_handler, 
-                              NULL
-                             );
-  
-  // last two optional, for backward compatibility
-  lo_server_thread_add_method(st, "/play", "iisffffffsffffi",
-                              play_handler, 
+                              play_handler,
                               NULL
                              );
 
-/*  lo_server_thread_add_method(st, "/kriole", "iifff",
-                              kriole_handler, 
+  // last two optional, for backward compatibility
+  lo_server_thread_add_method(st, "/play", "iisffffffsffffi",
+                              play_handler,
                               NULL
                              );
-*/
+
+  lo_server_thread_add_method(st, "/kriole", "iifff",
+                              kriole_handler,
+                              NULL
+                             );
+
 #ifdef FEEDBACK
   lo_server_thread_add_method(st, "/preload", "s",
-                              preload_handler, 
+                              preload_handler,
                               NULL
                              );
   lo_server_thread_add_method(st, "/pause_input", "i",
-                              pause_input_handler, 
+                              pause_input_handler,
                               NULL
                              );
 #endif
@@ -315,16 +336,16 @@ extern int server_init(void) {
   lo_server_thread_add_method(st, NULL, NULL, generic_handler, NULL);
   lo_server_thread_start(st);
 
-  
+
 #ifdef ZEROMQ
   pthread_t t;
   pthread_create(&t, NULL, (void *(*)(void *)) zmqthread, NULL);
 #endif
-  
+
   return(1);
 }
 
-extern void osc_send_pitch(float starttime, unsigned int chunk, 
+extern void osc_send_pitch(float starttime, unsigned int chunk,
 			   float pitch, float flux, float centroid) {
   static lo_address t = NULL;
   static int pid = 0;
@@ -336,7 +357,7 @@ extern void osc_send_pitch(float starttime, unsigned int chunk,
   }
   //printf("send [%d] %f\n", chunk, pitch);
   // pid, starttime, chunk, v_pitch, v_flux, v_centroid
-  lo_send(t, "/chunk", "ififff", 
+  lo_send(t, "/chunk", "ififff",
           pid,
           starttime,
           (int) chunk,
@@ -344,7 +365,7 @@ extern void osc_send_pitch(float starttime, unsigned int chunk,
           flux,
 	  centroid
           );
-  
+
 }
 
 extern void osc_send_play(double when, int lowchunk, float pitch, float flux, float centroid) {
@@ -358,7 +379,7 @@ extern void osc_send_play(double when, int lowchunk, float pitch, float flux, fl
   }
   printf("play [%d] %f\n", lowchunk, pitch);
   // pid, starttime, chunk, v_pitch, v_flux, v_centroid
-  lo_send(t, "/play", "iiiifff", 
+  lo_send(t, "/play", "iiiifff",
           pid,
           (int) when,
           (int) ((when - floor(when)) * 1000000.0),
@@ -367,6 +388,5 @@ extern void osc_send_play(double when, int lowchunk, float pitch, float flux, fl
           flux,
 	  centroid
           );
-  
-}
 
+}

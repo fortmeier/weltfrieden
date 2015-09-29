@@ -1,10 +1,10 @@
 CC=gcc
 
-CFLAGS += -g -I/usr/local/include -Wall -O3 -std=gnu99 
-LDFLAGS += -lm -L/usr/local/lib -llo -lsndfile -lsamplerate -lpthread
+CFLAGS += -g -I/usr/local/include -Iinclude -Wall -O3 -std=gnu99 $(shell pkg-config --cflags glfw3)
+LDFLAGS += -lm -L/usr/local/lib -llo -lsndfile -lsamplerate -lpthread $(shell pkg-config --libs glfw3) -lGLEW
 
 ifeq ($(shell uname -s), Darwin)
-		LDFLAGS += -framework GLUT -framework OpenGL -framework Cocoa
+		LDFLAGS += -framework OpenGL -framework Cocoa
 		CFLAGS += -DMAC_OSX
 else
 		LDFLAGS += -lglut -lGLU -lGLEW
