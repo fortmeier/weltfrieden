@@ -20,6 +20,7 @@
 #endif
 
 extern float iGlobalTime;
+extern double epochOffset;
 
 extern float cube_angle;
 
@@ -153,6 +154,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   float endtime = iGlobalTime + end;
 
 
+  double playTime = when - epochOffset;
 
   shader s = {
     UNINITIALIZED,
@@ -163,13 +165,14 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
     NULL,
     end,
     endtime,
+    playTime,
     0, // progId
     0 // shaderId
   };
   s.filename = malloc(strlen(sample_name) + 1);
   strcpy(s.filename, sample_name);
 
-  printf("adding gain: %f\n", gain);
+  //  printf("adding gain: %f\n", gain);
   addShaderLayer( s );
 
 

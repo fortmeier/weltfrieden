@@ -8,11 +8,14 @@ uniform float shape;
 uniform float speed;
 
 in vec4 gl_FragCoord;
-out vec4 fragColor;
+//out vec4 fragColor;
+uniform sampler2D tex;
+layout(location = 0) out vec4 fragColor;
 
 
 void main()
 {
  vec2 uv = gl_FragCoord.xy / iResolution.xy;
- fragColor =  vec4(uv,0.5+0.5*sin(iGlobalTime*speed)*shape,0.5);
+ float time = 0.5 + 0.5 * sin(iGlobalTime);
+ fragColor =  vec4(gain*time*speed, gain*time*speed ,gain*time*speed,0.1);
 }

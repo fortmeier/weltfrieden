@@ -28,7 +28,7 @@
 GLuint vShader;
 float iGlobalTime = 0;
 float iResolution[2];
-
+GLuint vao;
 
 int activeShaders = 0;
 shader shaderLayerArray[MAXSHADERLAYERS];
@@ -104,7 +104,7 @@ initShaderLayer(shader* s)
 
   char filename[256];
 
-  sprintf(filename, "shaders/%s", s->filename);
+  sprintf(filename, "shaders/%s.frag", s->filename);
 
   s->shaderId = loadShader( filename, GL_FRAGMENT_SHADER );
   glAttachShader( s->progId, s->shaderId );
@@ -122,7 +122,7 @@ initShaderLayer(shader* s)
   glGetProgramInfoLog( s->progId, 2048, &infolength, infolog );
   printf("log: %s\n", infolog);
 
-  glUseProgram( s->progId );
+  //  glUseProgram( s->progId );
   //  checkGlError( "use program" );
 
   glGetProgramInfoLog( s->progId, 2048, &infolength, infolog );
@@ -134,7 +134,7 @@ initShaderLayer(shader* s)
 void
 deinitShaderLayer(shader* s)
 {
-  printf("remove shader\n");
+  printf("remove shader at %f\n", iGlobalTime);
   s->state = UNUSED;
 }
 
@@ -150,7 +150,6 @@ addShaderLayer(shader s)
     */
     printf("hit max shader layers, overwriting existing layers");
     activeShaders = activeShaders % MAXSHADERLAYERS;
-
   }
   shaderLayerArray[activeShaders] = s;
   activeShaders++;
@@ -187,9 +186,15 @@ useShaderLayer(shader *s)
 
     GLint speedlocation = glGetUniformLocation( s->progId, "speed");
     glUniform1f(speedlocation, s->speed);
-    ///    checkGlError("uniform resolution");
+
+  ///    checkGlError("uniform resolution");
+    glBindVertexArray (vao);
+
+        glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
+
     /*
-    glBegin(GL_QUADS);
+
+  glBegin(GL_QUADS);
     glTexCoord2f(0,0); glVertex3f(0,0,0);
     glTexCoord2f(1,0); glVertex3f(1.0,0,0);
     glTexCoord2f(1,1); glVertex3f(1.0,1,0);
@@ -212,8 +217,9 @@ removeDeadLayers()
   // remove dead layers
   for(int i = 0; i < MAXSHADERLAYERS; i++)
   {
-    if( shaderLayerArray[i].state == INITIALIZED && shaderLayerArray[i].end < iGlobalTime)
+    if( shaderLayerArray[i].state == INITIALIZED && (shaderLayerArray[i].when + shaderLayerArray[i].duration) < iGlobalTime)
     {
+      printf("ending at: %f\n",iGlobalTime);
       deinitShaderLayer( &shaderLayerArray[i] );
       for( int j = i; j < MAXSHADERLAYERS-1; j++ )
       {

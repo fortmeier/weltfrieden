@@ -12,6 +12,7 @@ typedef struct
   char *filecontent;
   float duration;
   float end;
+  double when;
 
   unsigned int progId;
   unsigned int shaderId;

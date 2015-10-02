@@ -3,6 +3,7 @@
 #include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 #if defined(__linux) || defined(_WIN32)
 #  include <GLXW/glxw.h>
@@ -27,12 +28,16 @@ extern float iGlobalTime;
 
 extern float iResolution[2];
 
+extern double epochOffset = 0;
+extern GLuint vao;
+
 float points[] = {
   1.0, 1.0, 0.0f,
  -1.0, 1.0, 0.0f,
   1.0, -1.0, 0.0f,
  -1.0, -1.0, 0.0f,
 };
+
 
 
 
@@ -47,8 +52,6 @@ float points[] = {
 /*   glClearColor(0.0,0.0,0.0,1.0); */
 /*   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); */
 /*   glDisable(GL_DEPTH_TEST); */
-/*   glEnable(GL_BLEND); */
-/*   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); */
 /*   glMatrixMode(GL_PROJECTION); */
 /*   glLoadIdentity(); */
 /*   gluOrtho2D(0, 1, 0, 1);   */
@@ -66,8 +69,6 @@ float points[] = {
 /*   glutSwapBuffers(); */
 /*   glutPostRedisplay(); */
 /* } */
-
-
 
 void
 init(void)
@@ -95,10 +96,11 @@ main(int argc, char **argv)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+  glfwWindowHint(GLFW_FLOATING, GL_TRUE);
   GLFWwindow* win = NULL;
-  int w = 640;
-  int h = 480;
+  int w = 256;
+  int h = 256;
 
 
   win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);
@@ -114,6 +116,8 @@ main(int argc, char **argv)
   /* glfwSetMouseButtonCallback(win, button_callback); */
   glfwMakeContextCurrent(win);
 
+  //  load_extensions();
+
 
   // get version info
   const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
@@ -122,7 +126,11 @@ main(int argc, char **argv)
   printf ("OpenGL version supported %s\n", version);
 
 
-  glfwSwapInterval(1);
+   glfwSwapInterval(1);
+   glDisable(GL_DEPTH_TEST);
+
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   //  glViewport(0, 0, (GLsizei)w, (GLsizei)h);
 
@@ -137,17 +145,16 @@ main(int argc, char **argv)
   /*    glOrtho(0, w, h, 0, 0, 1);*/
 
 
-GLuint vbo = 0;
-glGenBuffers (1, &vbo);
-glBindBuffer (GL_ARRAY_BUFFER, vbo);
-glBufferData (GL_ARRAY_BUFFER, 12 * sizeof (float), points, GL_STATIC_DRAW);
+  GLuint vbo = 0;
+  glGenBuffers (1, &vbo);
+  glBindBuffer (GL_ARRAY_BUFFER, vbo);
+  glBufferData (GL_ARRAY_BUFFER, 12 * sizeof (float), points, GL_STATIC_DRAW);
 
- GLuint vao = 0;
-glGenVertexArrays (1, &vao);
-glBindVertexArray (vao);
-glEnableVertexAttribArray (0);
-glBindBuffer (GL_ARRAY_BUFFER, vbo);
-glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+  glGenVertexArrays (1, &vao);
+  glBindVertexArray (vao);
+  glEnableVertexAttribArray (0);
+  glBindBuffer (GL_ARRAY_BUFFER, vbo);
+  glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 
 #if defined(__linux) || defined(_WIN32)
@@ -157,30 +164,34 @@ glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
   }
 #endif
   init();
+
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  epochOffset = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
+
   printf("Starting Rendering\n");
+  //  if (has_debug_output == 1) {
+  //printf("Debug mode: ON\n");
+  //  }
   // ----------------------------------------------------------------
   // THIS IS WHERE YOU START CALLING OPENGL FUNCTIONS, NOT EARLIER!!
   // ----------------------------------------------------------------
 
   while(!glfwWindowShouldClose(win)) {
-
-
     // printf("iGlobalTime: %f\n", iGlobalTime);
-    iGlobalTime += 0.01;
+    gettimeofday(&tv, NULL);
+    iGlobalTime = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0)) - epochOffset;
+
     iResolution[0] = 256;
     iResolution[1] = 256;
 
+    glClearColor(0.0,0.0,0.0,1.0);
 
-
-    /*    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glMatrixMode(GL_MODELVIEW);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        /* glMatrixMode(GL_MODELVIEW);
     glLoadIdentity(); */
-  glBindVertexArray (vao);
   // draw points 0-3 from the currently bound VAO with current in-use shader
-  glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
   // update other events like input handling
-  glfwPollEvents ();
     //printf("applying shader layers\n");
     for(int i = 0; i < MAXSHADERLAYERS; i++)
       {
@@ -188,30 +199,12 @@ glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
       }
 
     removeDeadLayers();
-
     glfwSwapBuffers(win);
     glfwPollEvents();
+    glUseProgram(0);
   }
 
   glfwTerminate();
 
-
-
-  /* glutInit(&argc, argv); */
-  /* #ifdef MAC_OSX */
-  /* glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); */
-  /* #else */
-  /* glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); */
-  /* #endif */
-  /* //glutInitContextVersion(3, 2); */
-  /* glutInitContextFlags(GLUT_CORE_PROFILE); */
-  /* glutCreateWindow("red 3D lighted cube"); */
-  /* glutDisplayFunc(display); */
-  /* //  glewInit(); */
-
-  /* //  printf("GLEW version: %s\n", glewGetString(GLEW_VERSION)); */
-  /* printf("OpenGL version:  %s\n", glGetString(GL_VERSION));   */
-
-  /* glutMainLoop(); */
   return 0;             /* ANSI C requires main to return int. */
 }
