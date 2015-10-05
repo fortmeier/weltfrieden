@@ -2,6 +2,7 @@
 
 
 uniform float iGlobalTime;
+uniform float iTime;
 uniform vec2 iResolution;
 uniform float gain;
 uniform float shape;
@@ -16,6 +17,6 @@ layout(location = 0) out vec4 fragColor;
 void main()
 {
  vec2 uv = gl_FragCoord.xy / iResolution.xy;
- float time = 0.5 + 0.5 * sin(iGlobalTime);
- fragColor =  vec4(gain*time*speed, gain*time*speed ,gain*time*speed,0.1);
+// float time = 0.5 + 0.3 * sin(iGlobalTime) + 0.2 * cos(iGlobalTime*3);
+ fragColor =  vec4(1.0, 1.0 , 1.0, max(1 - iTime, 0)*gain);
 }

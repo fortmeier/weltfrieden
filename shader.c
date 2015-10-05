@@ -1,18 +1,11 @@
 // header missing
 #include "config.h"
-/* #ifdef MAC_OSX */
-/* //#include <GL/glew.h> */
-/* #include <OpenGL/gl3.h> */
-/* #include <GL/freeglut.h> */
-/* #else */
-/* #include <GL/glew.h> */
-/* #include <GL/glut.h> */
-/* #include <GL/gl.h> */
-/* #endif */
 
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <pthread.h>
 
 #if defined(__linux) || defined(_WIN32)
 #  include <GLXW/glxw.h>
@@ -33,17 +26,7 @@ GLuint vao;
 int activeShaders = 0;
 shader shaderLayerArray[MAXSHADERLAYERS];
 
-/* void checkGlError( const char* comment ) */
-/* { */
-/*   // printf("checked %s\n", comment); */
-/*   GLenum error = glGetError(); */
-/*   if( error != GL_NO_ERROR) */
-/*   { */
-/*     printf("gl error(%s): %s\n", comment, gluErrorString(error) ); */
-/*     exit(-1); */
-/*   } */
-/* }  */
-
+pthread_mutex_t shaders_lock;
 
 
 size_t readFile(FILE* file, char** content)
@@ -61,11 +44,30 @@ size_t readFile(FILE* file, char** content)
   return fsize;
 }
 
+void loadFromCache(shader *s) {
+  for (int i = 0; i < MAXSHADERLAYERS; i++) {
+    if (shaderLayerArray[i].state != UNUSED && strcmp(s->filename, shaderLayerArray[i].filename) == 0) {
+      s->progId = shaderLayerArray[i].progId;
+      s->shaderId = shaderLayerArray[i].shaderId;
+      //      printf("loaded %s from cache id: %d\n", s->filename, s->progId);
+      break;
+    }
+  }
+}
+
+void initShaders()
+{
+  pthread_mutex_init(&shaders_lock, NULL);
+}
+
+void uninitShaders()
+{
+  pthread_mutex_destroy(&shaders_lock);
+}
+
 GLint loadShader( const char *filename, GLenum type )
 {
-  printf("opening shader file %s\n",filename);
   GLint shader = glCreateShader( type);
-  //checkGlError( "glCreateShader" );
 
   FILE* file = fopen(filename, "r");
 
@@ -75,85 +77,70 @@ GLint loadShader( const char *filename, GLenum type )
     exit(1);
   }
 
-
   char* content;
 
   long size = readFile( file, &content );
-  printf("filesize: %i", size);
-  printf(" .. success\n");
-
-  //printf("%s", content);
+  //  printf("filesize: %i", size);
+  //  printf(" .. success\n");
 
   fclose(file);
-  glShaderSource( shader, 1, &content, &size );
-  //checkGlError( "shader source" );
+
+  const char *const *cContent = (const char * const*) (&content);
+  glShaderSource( shader, 1, cContent, ((const int*)&size) );
 
   glCompileShader( shader );
-  //checkGlError( "compile shader" );
-  long infolength;
-  char* infolog[2048];
+
+  int infolength;
+  char infolog[2048];
   glGetShaderInfoLog( shader, 2048, &infolength, infolog );
-  printf("shaderlog: %s\n", infolog);
+  //  printf("shaderlog: %s\n", infolog);
+  free (content);
   return shader;
 }
 
 void
 initShaderLayer(shader* s)
 {
-  s->progId = glCreateProgram();
+  if (s->progId == 0) {
+    s->progId = glCreateProgram();
 
-  char filename[256];
+    char filename[256];
 
-  sprintf(filename, "shaders/%s.frag", s->filename);
+    sprintf(filename, "shaders/%s.frag", s->filename);
 
-  s->shaderId = loadShader( filename, GL_FRAGMENT_SHADER );
-  glAttachShader( s->progId, s->shaderId );
-  //checkGlError("attachShader");
+    s->shaderId = loadShader( filename, GL_FRAGMENT_SHADER );
+    glAttachShader( s->progId, s->shaderId );
 
-  vShader = loadShader( "shaders/basic.vert", GL_VERTEX_SHADER );
-  glAttachShader( s->progId, vShader );
-  //checkGlError("attachVShader");
+    vShader = loadShader( "shaders/basic.vert", GL_VERTEX_SHADER );
+    glAttachShader( s->progId, vShader );
 
-  glLinkProgram( s->progId );
-  //  checkGlError("link program");
+    glLinkProgram( s->progId );
 
-  long infolength;
-  char* infolog[2048];
-  glGetProgramInfoLog( s->progId, 2048, &infolength, infolog );
-  printf("log: %s\n", infolog);
-
-  //  glUseProgram( s->progId );
-  //  checkGlError( "use program" );
-
-  glGetProgramInfoLog( s->progId, 2048, &infolength, infolog );
-  printf("log: %s\n", infolog);
-  //glUseProgram( 0 );
-  //  checkGlError("useprog0");
+    int infolength;
+    char infolog[2048];
+    glGetProgramInfoLog( s->progId, 2048, &infolength, infolog );
+  }
 }
 
 void
 deinitShaderLayer(shader* s)
 {
-  printf("remove shader at %f\n", iGlobalTime);
   s->state = UNUSED;
 }
 
 void
 addShaderLayer(shader s)
 {
-  if (activeShaders < MAXSHADERLAYERS-1) {
-    printf("adding shader layer %i ending at %f\n", activeShaders, iGlobalTime);
-  }
-  else {
-    /* handling too many layers,
-      this will try to be the least surprise for the user
-    */
-    printf("hit max shader layers, overwriting existing layers");
-    activeShaders = activeShaders % MAXSHADERLAYERS;
-  }
+  activeShaders = activeShaders % MAXSHADERLAYERS;
+
+  loadFromCache(&s);
+
+
+  deinitShaderLayer(&shaderLayerArray[activeShaders]);
+  shaderLayerArray[MAXSHADERLAYERS-1].state = UNUSED;
+
   shaderLayerArray[activeShaders] = s;
   activeShaders++;
-
 }
 
 void
@@ -161,46 +148,41 @@ useShaderLayer(shader *s)
 {
   if( s->state == UNINITIALIZED)
   {
-    printf("initializing shader layer\n");
     initShaderLayer(s);
     s->state = INITIALIZED;
   }
   if( s->state == INITIALIZED )
   {
-    //    printf(" applying shader .. \n" );
     glUseProgram( s->progId );
 
-    GLint timelocation = glGetUniformLocation( s->progId, "iGlobalTime");
-    glUniform1f(timelocation, iGlobalTime);
-    //    checkGlError("uniform time");
+    GLint globaltimelocation = glGetUniformLocation( s->progId, "iGlobalTime");
+    glUniform1f(globaltimelocation, iGlobalTime);
+
+    GLint timelocation = glGetUniformLocation( s->progId, "iTime");
+    glUniform1f(timelocation, iGlobalTime - s->when);
+
 
     GLint resolocation = glGetUniformLocation( s->progId, "iResolution");
     glUniform2fv(resolocation, 1,  iResolution);
-    //    checkGlError("uniform resolution");
 
     GLint gainlocation = glGetUniformLocation( s->progId, "gain");
-    glUniform1f(gainlocation, s->gain);
+    glUniform1f(gainlocation, s->args.gain);
 
     GLint shapelocation = glGetUniformLocation( s->progId, "shape");
-    glUniform1f(shapelocation, s->shape);
+    glUniform1f(shapelocation, s->args.shape);
 
     GLint speedlocation = glGetUniformLocation( s->progId, "speed");
-    glUniform1f(speedlocation, s->speed);
+    glUniform1f(speedlocation, s->args.speed);
 
-  ///    checkGlError("uniform resolution");
+    GLint beginlocation = glGetUniformLocation( s->progId, "begin");
+    glUniform1f(beginlocation, s->args.start);
+
+    GLint endlocation = glGetUniformLocation( s->progId, "end");
+    glUniform1f(endlocation, s->args.end);
+
     glBindVertexArray (vao);
 
-        glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
-
-    /*
-
-  glBegin(GL_QUADS);
-    glTexCoord2f(0,0); glVertex3f(0,0,0);
-    glTexCoord2f(1,0); glVertex3f(1.0,0,0);
-    glTexCoord2f(1,1); glVertex3f(1.0,1,0);
-    glTexCoord2f(0,1); glVertex3f(0,1,0);
-    glEnd();
-*/
+    glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
   }
 }
 
@@ -219,14 +201,10 @@ removeDeadLayers()
   {
     if( shaderLayerArray[i].state == INITIALIZED && (shaderLayerArray[i].when + shaderLayerArray[i].duration) < iGlobalTime)
     {
-      printf("ending at: %f\n",iGlobalTime);
       deinitShaderLayer( &shaderLayerArray[i] );
-      for( int j = i; j < MAXSHADERLAYERS-1; j++ )
-      {
-        shaderLayerArray[j] = shaderLayerArray[j+1];
+      if (activeShaders > 0) {
+        activeShaders--;
       }
-      shaderLayerArray[MAXSHADERLAYERS-1].state = UNUSED;
-      activeShaders--;
     }
 
   }

@@ -6,12 +6,14 @@ uniform vec2 iResolution;
 uniform float gain;
 uniform float shape;
 uniform float speed;
+uniform float begin;
+uniform float end;
+uniform float iTime;
 
 in vec4 gl_FragCoord;
 //out vec4 fragColor;
 uniform sampler2D tex;
 layout(location = 0) out vec4 fragColor;
-
 
 
 mat4 rotationMatrix(vec3 axis, float angle)
@@ -29,8 +31,13 @@ mat4 rotationMatrix(vec3 axis, float angle)
 
 void main()
 {
-  mat4 rot = rotationMatrix(vec3(0.5,0.5,0.5), shape);
-
-  vec4 color = vec4(0.2, 0.3,0.5 + 0.5 * sin(iGlobalTime)*shape, gain);
-  fragColor =  vec4 (1,1,1,1) - vec4(rot*color);
+ vec2 uv = gl_FragCoord.xy / iResolution.xy;
+ if ((uv.y > clamp(begin, 0, 1)) && (uv.y < clamp(end, 0, 1))) {
+   mat4 rot = rotationMatrix(vec3(0.5,0.5,0.5), shape);
+   vec4 color = vec4(uv,0.5+0.5*sin(iGlobalTime*speed), (1-iTime)*gain);
+   fragColor =  vec4(color);
+ }
+ else {
+   fragColor = vec4(0,0,0,0.5 + 0.5 * sin(iGlobalTime));
+ }
 }

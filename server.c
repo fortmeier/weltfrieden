@@ -9,15 +9,9 @@
 #include <assert.h>
 
 #include "server.h"
-//#include "audio.h"
 #include "config.h"
 
 #include "shader.h"
-
-#ifdef ZEROMQ
-#include <zmq.h>
-#define MAXOSCSZ 1024
-#endif
 
 extern float iGlobalTime;
 extern double epochOffset;
@@ -54,41 +48,6 @@ int generic_handler(const char *path, const char *types, lo_arg **argv,
 
     return 1;
 }
-
-/**/
-
-int kriole_handler(const char *path, const char *types, lo_arg **argv,
-                   int argc, void *data, void *user_data) {
-
-  double when = (double) argv[0]->i + ((double) argv[1]->i / 1000000.0);
-  float duration = argv[2]->f;
-  float pitch_start = argv[3]->f;
-  float pitch_stop = argv[4]->f;
-
-  //audio_kriole(when, duration, pitch_start, pitch_stop);
-
-  return(0);
-}
-
-/**/
-
-#ifdef FEEDBACK
-int preload_handler(const char *path, const char *types, lo_arg **argv,
-                   int argc, void *data, void *user_data) {
-
-  preload_kriol((char *) argv[0]);
-  return(0);
-}
-
-int pause_input_handler(const char *path, const char *types, lo_arg **argv,
-			int argc, void *data, void *user_data) {
-  audio_pause_input(argv[0]->i);
-  return(0);
-}
-#endif
-
-/**/
-
 
 
 int play_handler(const char *path, const char *types, lo_arg **argv,
@@ -136,7 +95,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   float bandq = argc > (23+poffset) ? argv[23+poffset]->f : 0;
 
   char *unit_name = argc > (24+poffset) ? (char *) argv[24+poffset] : "r";
-  int sample_loop = argc >  (25+poffset) ? argv[25+poffset]->i : 0;
+  //  int sample_loop = argc >  (25+poffset) ? argv[25+poffset]->i : 0;
 
   if (argc > 26+poffset) {
     printf("play server unexpectedly received extra parameters, maybe update Dirt?\n");
@@ -147,36 +106,6 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
     return(0);
   }
 
-
-  printf("play '%s'\n", sample_name);
-  printf(" %f -> %f \n", start, end);
-
-  float endtime = iGlobalTime + end;
-
-
-  double playTime = when - epochOffset;
-
-  shader s = {
-    UNINITIALIZED,
-    gain,
-    shape,
-    speed,
-    NULL,
-    NULL,
-    end,
-    endtime,
-    playTime,
-    0, // progId
-    0 // shaderId
-  };
-  s.filename = malloc(strlen(sample_name) + 1);
-  strcpy(s.filename, sample_name);
-
-  //  printf("adding gain: %f\n", gain);
-  addShaderLayer( s );
-
-
-/*
   int vowelnum = -1;
 
   switch(vowel_s[0]) {
@@ -186,7 +115,6 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   case 'o': case 'O': vowelnum = 3; break;
   case 'u': case 'U': vowelnum = 4; break;
   }
-  //printf("vowel: %s num: %d\n", vowel_s, vowelnum);
 
   int unit = -1;
   switch(unit_name[0]) {
@@ -197,6 +125,9 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
      // cycle
      case 'c': case 'C': unit = 'c'; break;
   }
+
+  float endtime = end;
+  double playTime = when - epochOffset;
 
   t_play_args args = {
     when,
@@ -227,9 +158,24 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
     bandq,
     unit
   };
-  audio_play(&args);
-  free(sample_name);
-*/
+
+
+  shader s = {
+    UNINITIALIZED,
+    args,
+    NULL,
+    NULL,
+    endtime,
+    playTime,
+    0, // progId
+    0 // shaderId
+  };
+  s.filename = malloc(strlen(sample_name) + 1);
+  strcpy(s.filename, sample_name);
+
+  addShaderLayer( s );
+
+  //free(sample_name);
   return 0;
 }
 
@@ -257,11 +203,6 @@ void *zmqthread(void *data){
 
   lo_server_add_method(s, "/play", "iisffffffsffffififff",
 		       play_handler,
-		       NULL
-		       );
-
-  lo_server_add_method(s, "/kriole", "iifff",
-		       kriole_handler,
 		       NULL
 		       );
 
@@ -322,77 +263,9 @@ extern int server_init(void) {
                               NULL
                              );
 
-  lo_server_thread_add_method(st, "/kriole", "iifff",
-                              kriole_handler,
-                              NULL
-                             );
-
-#ifdef FEEDBACK
-  lo_server_thread_add_method(st, "/preload", "s",
-                              preload_handler,
-                              NULL
-                             );
-  lo_server_thread_add_method(st, "/pause_input", "i",
-                              pause_input_handler,
-                              NULL
-                             );
-#endif
-
   lo_server_thread_add_method(st, "/play", NULL, play_handler, NULL);
   lo_server_thread_add_method(st, NULL, NULL, generic_handler, NULL);
   lo_server_thread_start(st);
 
-
-#ifdef ZEROMQ
-  pthread_t t;
-  pthread_create(&t, NULL, (void *(*)(void *)) zmqthread, NULL);
-#endif
-
   return(1);
-}
-
-extern void osc_send_pitch(float starttime, unsigned int chunk,
-			   float pitch, float flux, float centroid) {
-  static lo_address t = NULL;
-  static int pid = 0;
-  if (t == NULL) {
-    t = lo_address_new(NULL, "6010");
-  }
-  if (pid == 0) {
-    pid = (int) getpid();
-  }
-  //printf("send [%d] %f\n", chunk, pitch);
-  // pid, starttime, chunk, v_pitch, v_flux, v_centroid
-  lo_send(t, "/chunk", "ififff",
-          pid,
-          starttime,
-          (int) chunk,
-          pitch,
-          flux,
-	  centroid
-          );
-
-}
-
-extern void osc_send_play(double when, int lowchunk, float pitch, float flux, float centroid) {
-  static lo_address t = NULL;
-  static int pid = 0;
-  if (t == NULL) {
-    t = lo_address_new(NULL, "6010");
-  }
-  if (pid == 0) {
-    pid = (int) getpid();
-  }
-  printf("play [%d] %f\n", lowchunk, pitch);
-  // pid, starttime, chunk, v_pitch, v_flux, v_centroid
-  lo_send(t, "/play", "iiiifff",
-          pid,
-          (int) when,
-          (int) ((when - floor(when)) * 1000000.0),
-          lowchunk,
-          pitch,
-          flux,
-	  centroid
-          );
-
 }

@@ -6,6 +6,8 @@ uniform vec2 iResolution;
 uniform float gain;
 uniform float shape;
 uniform float speed;
+uniform float begin;
+uniform float end;
 
 in vec4 gl_FragCoord;
 //out vec4 fragColor;
@@ -29,12 +31,12 @@ mat4 rotationMatrix(vec3 axis, float angle)
 void main()
 {
  vec2 uv = gl_FragCoord.xy / iResolution.xy;
- if (uv.x > 0.5) {
- mat4 rot = rotationMatrix(vec3(0.5,0.5,0.5), shape);
- vec4 color = vec4(uv,0.5+0.5*sin(iGlobalTime*speed), 0.8);
- fragColor =  vec4(rot*color);
+ if ((uv.x > clamp(begin, 0, 1)) && (uv.x < clamp(end, 0, 1))) {
+   mat4 rot = rotationMatrix(vec3(0.5,0.5,0.5), shape);
+   vec4 color = vec4(uv,0.5+0.5*sin(iGlobalTime*speed), gain);
+   fragColor =  vec4(rot*color);
  }
  else {
- fragColor = vec4(0,0,0,1);
+   fragColor = vec4(0,0,0,0.5 + 0.5 * sin(iGlobalTime));
  }
 }

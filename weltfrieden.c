@@ -9,14 +9,9 @@
 #  include <GLXW/glxw.h>
 #endif
 
-//#define GLFW_INCLUDE_GLCOREARB
+#define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
-/* #define ROXLU_USE_MATH */
-/* #define ROXLU_USE_PNG */
-/* #define ROXLU_USE_OPENGL */
-/* #define ROXLU_IMPLEMENTATION */
-//#include <tinylib.h>
 
 #include <assert.h>
 
@@ -28,7 +23,8 @@ extern float iGlobalTime;
 
 extern float iResolution[2];
 
-extern double epochOffset = 0;
+double epochOffset = 0;
+
 extern GLuint vao;
 
 float points[] = {
@@ -37,38 +33,6 @@ float points[] = {
   1.0, -1.0, 0.0f,
  -1.0, -1.0, 0.0f,
 };
-
-
-
-
-/* void */
-/* display(void) */
-/* { */
-/*   printf("iGlobalTime: %f\n", iGlobalTime); */
-/*   iGlobalTime += 0.01; */
-/*   iResolution[0] = 256; */
-/*   iResolution[1] = 256; */
-
-/*   glClearColor(0.0,0.0,0.0,1.0); */
-/*   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); */
-/*   glDisable(GL_DEPTH_TEST); */
-/*   glMatrixMode(GL_PROJECTION); */
-/*   glLoadIdentity(); */
-/*   gluOrtho2D(0, 1, 0, 1);   */
-/*   glMatrixMode(GL_MODELVIEW); */
-/*   glLoadIdentity(); */
-
-/*   //printf("applying shader layers\n"); */
-/*   for(int i = 0; i < MAXSHADERLAYERS; i++) */
-/*   { */
-/*     applyShaderLayer(i); */
-/*   } */
-
-/*   removeDeadLayers(); */
-
-/*   glutSwapBuffers(); */
-/*   glutPostRedisplay(); */
-/* } */
 
 void
 init(void)
@@ -99,8 +63,8 @@ main(int argc, char **argv)
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
   glfwWindowHint(GLFW_FLOATING, GL_TRUE);
   GLFWwindow* win = NULL;
-  int w = 256;
-  int h = 256;
+  int w = 512;
+  int h = 512;
 
 
   win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);
@@ -108,16 +72,7 @@ main(int argc, char **argv)
     glfwTerminate();
     exit(EXIT_FAILURE);
   }
-
-  /* glfwSetFramebufferSizeCallback(win, resize_callback); */
-  /* glfwSetKeyCallback(win, key_callback); */
-  /* glfwSetCharCallback(win, char_callback); */
-  /* glfwSetCursorPosCallback(win, cursor_callback); */
-  /* glfwSetMouseButtonCallback(win, button_callback); */
   glfwMakeContextCurrent(win);
-
-  //  load_extensions();
-
 
   // get version info
   const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
@@ -125,25 +80,10 @@ main(int argc, char **argv)
   printf ("Renderer: %s\n", renderer);
   printf ("OpenGL version supported %s\n", version);
 
-
-   glfwSwapInterval(1);
-   glDisable(GL_DEPTH_TEST);
-
-   glEnable(GL_BLEND);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-  //  glViewport(0, 0, (GLsizei)w, (GLsizei)h);
-
-  //glClearColor(0.0,0.0,0.0,1.0);
-  //    glEnable(GL_TEXTURE_2D);
-  /*    glDisable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();*/
-    /* gluOrtho2D(0, 1, 0, 1);   */
-  /*    glOrtho(0, w, h, 0, 0, 1);*/
-
+  // glfwSwapInterval(1);
+  glDisable(GL_DEPTH_TEST);
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   GLuint vbo = 0;
   glGenBuffers (1, &vbo);
@@ -170,29 +110,23 @@ main(int argc, char **argv)
   epochOffset = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
 
   printf("Starting Rendering\n");
-  //  if (has_debug_output == 1) {
-  //printf("Debug mode: ON\n");
-  //  }
+
   // ----------------------------------------------------------------
   // THIS IS WHERE YOU START CALLING OPENGL FUNCTIONS, NOT EARLIER!!
   // ----------------------------------------------------------------
 
+  initShaders();
+
   while(!glfwWindowShouldClose(win)) {
-    // printf("iGlobalTime: %f\n", iGlobalTime);
     gettimeofday(&tv, NULL);
     iGlobalTime = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0)) - epochOffset;
 
-    iResolution[0] = 256;
-    iResolution[1] = 256;
+    iResolution[0] = w;
+    iResolution[1] = h;
 
-    glClearColor(0.0,0.0,0.0,1.0);
-
+    //    glClearColor(0.0,0.0,0.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        /* glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity(); */
-  // draw points 0-3 from the currently bound VAO with current in-use shader
-  // update other events like input handling
-    //printf("applying shader layers\n");
+
     for(int i = 0; i < MAXSHADERLAYERS; i++)
       {
 	applyShaderLayer(i);
@@ -201,10 +135,10 @@ main(int argc, char **argv)
     removeDeadLayers();
     glfwSwapBuffers(win);
     glfwPollEvents();
-    glUseProgram(0);
+    //  glUseProgram(0);
   }
 
   glfwTerminate();
-
+  uninitShaders();
   return 0;             /* ANSI C requires main to return int. */
 }
