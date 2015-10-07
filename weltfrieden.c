@@ -63,8 +63,8 @@ main(int argc, char **argv)
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
   glfwWindowHint(GLFW_FLOATING, GL_TRUE);
   GLFWwindow* win = NULL;
-  int w = 512;
-  int h = 512;
+  int w = 256;
+  int h = 256;
 
 
   win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);

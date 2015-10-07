@@ -102,9 +102,6 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   }
 
 
-  if (speed == 0) {
-    return(0);
-  }
 
   // default is GL_ONE_MINUS_SRC_ALPHA
 

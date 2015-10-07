@@ -93,7 +93,7 @@ GLint loadShader( const char *filename, GLenum type )
   int infolength;
   char infolog[2048];
   glGetShaderInfoLog( shader, 2048, &infolength, infolog );
-  printf("shaderlog: %s\n", infolog);
+  //  printf("shaderlog: %s\n", infolog);
   free (content);
   return shader;
 }
