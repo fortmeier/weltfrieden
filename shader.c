@@ -72,10 +72,10 @@ GLint loadShader( const char *filename, GLenum type )
   FILE* file = fopen(filename, "r");
 
   if( file == NULL )
-  {
-    printf("file %s could not be opend\n", filename);
-    exit(1);
-  }
+    {
+      printf("file %s could not be opend\n", filename);
+      exit(1);
+    }
 
   char* content;
 
@@ -93,10 +93,13 @@ GLint loadShader( const char *filename, GLenum type )
   int infolength;
   char infolog[2048];
   glGetShaderInfoLog( shader, 2048, &infolength, infolog );
-  //  printf("shaderlog: %s\n", infolog);
+  printf("shaderlog: %s\n", infolog);
   free (content);
   return shader;
 }
+
+// TODO: check for file's existance first before calling this
+// avoid fatal exit during performance (most of the time)
 
 void
 initShaderLayer(shader* s)
@@ -181,6 +184,22 @@ useShaderLayer(shader *s)
     glUniform1f(endlocation, s->args.end);
 
     glBindVertexArray (vao);
+
+    GLint blend_mode = GL_ONE_MINUS_SRC_ALPHA;
+    switch(s->args.blend_mode) {
+    case NSA: blend_mode = GL_ONE_MINUS_SRC_ALPHA; break;
+    case NSC: blend_mode = GL_ONE_MINUS_SRC_COLOR; break;
+    case NDA: blend_mode = GL_ONE_MINUS_DST_ALPHA; break;
+    case NDC: blend_mode = GL_ONE_MINUS_DST_COLOR; break;
+    case SA: blend_mode = GL_SRC_ALPHA; break;
+    case SC: blend_mode = GL_SRC_COLOR; break;
+    case DA: blend_mode = GL_DST_ALPHA; break;
+    case DC: blend_mode = GL_DST_COLOR; break;
+    case SS: blend_mode = GL_SRC_ALPHA_SATURATE; break;
+    case CC: blend_mode = GL_CONSTANT_COLOR; break;
+    case CA: blend_mode = GL_CONSTANT_ALPHA; break;
+    }
+    glBlendFunc(GL_SRC_ALPHA, blend_mode);
 
     glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
   }

@@ -106,15 +106,25 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
     return(0);
   }
 
-  int vowelnum = -1;
+  // default is GL_ONE_MINUS_SRC_ALPHA
+
+  int blend_mode = NSA;
+
+
 
   switch(vowel_s[0]) {
-  case 'a': case 'A': vowelnum = 0; break;
-  case 'e': case 'E': vowelnum = 1; break;
-  case 'i': case 'I': vowelnum = 2; break;
-  case 'o': case 'O': vowelnum = 3; break;
-  case 'u': case 'U': vowelnum = 4; break;
-  }
+  case 'c':  blend_mode = SC; break; // src color
+  case 'a':  blend_mode = SA; break; // src alpha
+  case 'C': blend_mode = DC; break; // dst color
+  case 'A': blend_mode = DA; break; // dst alpha
+  case 'l': blend_mode = CA; break; // const alpha -- mnemonic lightness?
+  case 't': blend_mode = CC; break; // const color -- mnemonic tint
+  case 's': blend_mode = SS; break; // src saturate
+  case 'x': blend_mode = NSA; break; // 1 - src alpha
+  case 'y': blend_mode =  NSC; break; // 1 - src color
+  case 'X': blend_mode = NDA; break; // 1 - dst alpha
+  case 'Y': blend_mode = NDC; break; // 1 - dst color
+};
 
   int unit = -1;
   switch(unit_name[0]) {
@@ -125,6 +135,8 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
      // cycle
      case 'c': case 'C': unit = 'c'; break;
   }
+
+
 
   float endtime = end;
   double playTime = when - epochOffset;
@@ -139,7 +151,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
     speed,
     pan,
     velocity,
-    vowelnum,
+    blend_mode,
     cutoff,
     resonance,
     accelerate,

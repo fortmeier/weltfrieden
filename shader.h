@@ -1,6 +1,20 @@
-#define MAXSHADERLAYERS 20
+#define MAXSHADERLAYERS 60
 
 enum shaderstate {UNUSED, UNINITIALIZED, INITIALIZED};
+
+enum blend_modes {
+  NSA, // 1 - src alpha
+  NSC, // 1 - src color
+  SC, // src color
+  SA, // src alpha
+  SS, // src saturate
+  NDA, // 1 - dst alpha
+  NDC, // 1 - dst color
+  DC, // dst color
+  DA, // dst alpha
+  CA, // const alpha
+  CC // const color
+};
 
 typedef struct {
   double when;
@@ -12,7 +26,7 @@ typedef struct {
   float speed;
   float pan;
   float velocity;
-  int vowelnum;
+  int blend_mode;
   float cutoff;
   float resonance;
   float accelerate;

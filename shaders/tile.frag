@@ -31,6 +31,6 @@ void main()
 {
   mat4 rot = rotationMatrix(vec3(0.5,0.5,0.5), shape);
 
-  vec4 color = vec4(0.2, 0.3,0.5 + 0.5 * sin(iGlobalTime)*shape, gain);
+  vec4 color = vec4(0.2, 0.8,0.5 + 0.5 * sin(iGlobalTime)*shape, gain);
   fragColor =  vec4 (1,1,1,1) - vec4(rot*color);
 }
