@@ -183,6 +183,9 @@ useShaderLayer(shader *s)
     GLint endlocation = glGetUniformLocation( s->progId, "end");
     glUniform1f(endlocation, s->args.end);
 
+    GLint offsetlocation = glGetUniformLocation( s->progId, "offset");
+    glUniform1f(offsetlocation, s->args.offset);
+
     glBindVertexArray (vao);
 
     GLint blend_mode = GL_ONE_MINUS_SRC_ALPHA;
