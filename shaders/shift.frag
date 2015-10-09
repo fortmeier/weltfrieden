@@ -37,6 +37,6 @@ void main()
    fragColor =  vec4(rot*color);
  }
  else {
-   fragColor = vec4(0,0,0,0.5 + 0.5 * sin(iGlobalTime));
+   fragColor = vec4(0,0,0,0);
  }
 }
