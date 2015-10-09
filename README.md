@@ -65,7 +65,7 @@ They implement at least the following method: `gain`
 - **fall** rainbow, define vertical extent via `begin` and `end`
 
 ## Overlays
-- **grid** white squares, evenly spaces, define size via `shape` and move via `offset`
+- **grid** white squares, evenly spaced, define size via `shape` and move via `offset`
 - **form** - product of tangent of x and y of frag coord visualized, alternate via `offset` which is added 
 before computing tangents and `shape` which is a threshold
 
