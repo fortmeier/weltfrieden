@@ -135,8 +135,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
 
 
 
-  float endtime = end;
-  double playTime = when - epochOffset;
+  double playTime = iGlobalTime;
 
   t_play_args args = {
     when,
@@ -174,7 +173,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
     args,
     NULL,
     NULL,
-    endtime,
+    (1./cps),
     playTime,
     0, // progId
     0 // shaderId

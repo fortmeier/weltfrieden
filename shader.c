@@ -7,10 +7,6 @@
 #include <string.h>
 #include <pthread.h>
 
-#if defined(__linux) || defined(_WIN32)
-#  include <GLXW/glxw.h>
-#endif
-
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
@@ -93,7 +89,7 @@ GLint loadShader( const char *filename, GLenum type )
   int infolength;
   char infolog[2048];
   glGetShaderInfoLog( shader, 2048, &infolength, infolog );
-  //  printf("shaderlog: %s\n", infolog);
+  printf("shaderlog: %s\n", infolog);
   free (content);
   return shader;
 }
@@ -131,18 +127,46 @@ deinitShaderLayer(shader* s)
   s->state = UNUSED;
 }
 
+#define uarg(s, key, value) glUniform1f( glGetUniformLocation(s->progId, key), value )
+#define uarg2fv(s, key, num, value) glUniform2fv( glGetUniformLocation(s->progId, key), num, value )
+
+void mapPlayArgs(shader* s) {
+  uarg(s, "cps", s->args.cps);
+  uarg(s, "offset", s->args.offset);
+  uarg(s, "start", s->args.start);
+  uarg(s, "end", s->args.end);
+  uarg(s, "speed", s->args.speed);
+  uarg(s, "pan", s->args.pan);
+  uarg(s, "velocity", s->args.velocity);
+  uarg(s, "cutoff", s->args.cutoff);
+  uarg(s, "resonance", s->args.resonance);
+  uarg(s, "accelerate", s->args.accelerate);
+  uarg(s, "shape", s->args.shape);
+  uarg(s, "gain", s->args.gain);
+  uarg(s, "delay", s->args.delay);
+  uarg(s, "delaytime", s->args.delaytime);
+  uarg(s, "delayfeedback", s->args.delayfeedback);
+  uarg(s, "crush", s->args.crush);
+  uarg(s, "coarse", s->args.coarse);
+  uarg(s, "hcutoff", s->args.hcutoff);
+  uarg(s, "hresonance", s->args.hresonance);
+  uarg(s, "bandf", s->args.bandf);
+  uarg(s, "bandq", s->args.bandq);
+}
+
 void
 addShaderLayer(shader s)
 {
   activeShaders = activeShaders % MAXSHADERLAYERS;
 
-  loadFromCache(&s);
+  //  loadFromCache(&s);
 
 
   deinitShaderLayer(&shaderLayerArray[activeShaders]);
   shaderLayerArray[MAXSHADERLAYERS-1].state = UNUSED;
 
   shaderLayerArray[activeShaders] = s;
+
   activeShaders++;
 }
 
@@ -156,35 +180,14 @@ useShaderLayer(shader *s)
   }
   if( s->state == INITIALIZED )
   {
+    if(s->when <= iGlobalTime) {
     glUseProgram( s->progId );
 
-    GLint globaltimelocation = glGetUniformLocation( s->progId, "iGlobalTime");
-    glUniform1f(globaltimelocation, iGlobalTime);
+    uarg(s, "iGlobalTime", iGlobalTime);
+    uarg(s, "iTime", iGlobalTime - s->when);
+    uarg2fv(s, "iResolution", 1, iResolution);
 
-    GLint timelocation = glGetUniformLocation( s->progId, "iTime");
-    glUniform1f(timelocation, iGlobalTime - s->when);
-
-
-    GLint resolocation = glGetUniformLocation( s->progId, "iResolution");
-    glUniform2fv(resolocation, 1,  iResolution);
-
-    GLint gainlocation = glGetUniformLocation( s->progId, "gain");
-    glUniform1f(gainlocation, s->args.gain);
-
-    GLint shapelocation = glGetUniformLocation( s->progId, "shape");
-    glUniform1f(shapelocation, s->args.shape);
-
-    GLint speedlocation = glGetUniformLocation( s->progId, "speed");
-    glUniform1f(speedlocation, s->args.speed);
-
-    GLint beginlocation = glGetUniformLocation( s->progId, "begin");
-    glUniform1f(beginlocation, s->args.start);
-
-    GLint endlocation = glGetUniformLocation( s->progId, "end");
-    glUniform1f(endlocation, s->args.end);
-
-    GLint offsetlocation = glGetUniformLocation( s->progId, "offset");
-    glUniform1f(offsetlocation, s->args.offset);
+    mapPlayArgs(s);
 
     glBindVertexArray (vao);
 
@@ -205,6 +208,11 @@ useShaderLayer(shader *s)
     glBlendFunc(GL_SRC_ALPHA, blend_mode);
 
     glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
+    //  debug("playing at %f\n", iGlobalTime);
+    }
+    /* else { */
+    /*   debug("not yet playing: %f %f", iGlobalTime, s->when); */
+    /* } */
   }
 }
 
@@ -228,6 +236,5 @@ removeDeadLayers()
         activeShaders--;
       }
     }
-
   }
 }

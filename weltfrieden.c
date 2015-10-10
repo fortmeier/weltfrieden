@@ -4,14 +4,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <getopt.h>
 
-#if defined(__linux) || defined(_WIN32)
-#  include <GLXW/glxw.h>
-#endif
+#include "dbg.h"
 
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
+#if defined(__linux)
+#include <GL/glut.h>
+#endif
 
 #include <assert.h>
 
@@ -38,6 +40,7 @@ void
 init(void)
 {
   server_init();
+
 }
 
 void error_callback(int err, const char* desc) {
@@ -77,8 +80,8 @@ main(int argc, char **argv)
   // get version info
   const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
   const GLubyte* version = glGetString (GL_VERSION); // version as a string
-  printf ("Renderer: %s\n", renderer);
-  printf ("OpenGL version supported %s\n", version);
+  log_info("Renderer: %s\n", renderer);
+  log_info("OpenGL version supported %s\n", version);
 
   glfwSwapInterval(1);
   glDisable(GL_DEPTH_TEST);
@@ -97,19 +100,13 @@ main(int argc, char **argv)
   glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 
-#if defined(__linux) || defined(_WIN32)
-  if(glxwInit() != 0) {
-    printf("Error: cannot initialize glxw.\n");
-    ::exit(EXIT_FAILURE);
-  }
-#endif
   init();
 
   struct timeval tv;
   gettimeofday(&tv, NULL);
   epochOffset = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
 
-  printf("Starting Rendering\n");
+  log_info("Starting Rendering\n");
 
   // ----------------------------------------------------------------
   // THIS IS WHERE YOU START CALLING OPENGL FUNCTIONS, NOT EARLIER!!
@@ -118,13 +115,11 @@ main(int argc, char **argv)
   initShaders();
 
   while(!glfwWindowShouldClose(win)) {
-    gettimeofday(&tv, NULL);
-    iGlobalTime = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0)) - epochOffset;
+    iGlobalTime = glfwGetTime();
 
     iResolution[0] = w;
     iResolution[1] = h;
 
-    //    glClearColor(0.0,0.0,0.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     for(int i = 0; i < MAXSHADERLAYERS; i++)
