@@ -8,12 +8,14 @@
 
 #include "dbg.h"
 
+#if defined(__linux)
+#include <epoxy/gl.h>
+#include <epoxy/glx.h>
+#endif
+
+#define GLFW_INCLUDE_GLEXT
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
-
-#if defined(__linux)
-#include <GL/glut.h>
-#endif
 
 #include <assert.h>
 
@@ -27,7 +29,10 @@ extern float iResolution[2];
 
 double epochOffset = 0;
 
+extern GLuint vbo;
 extern GLuint vao;
+
+extern int shading_lang_lvl;
 
 float points[] = {
   1.0, 1.0, 0.0f,
@@ -87,6 +92,7 @@ main(int argc, char **argv)
   /* } */
 
 
+
   glfwSetErrorCallback(error_callback);
 
   if(!glfwInit()) {
@@ -99,18 +105,32 @@ main(int argc, char **argv)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
   glfwWindowHint(GLFW_FLOATING, GL_TRUE);
   GLFWwindow* win = NULL;
   int w = 256;
   int h = 256;
 
+  shading_lang_lvl = 0;
 
   win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);
   if(!win) {
-    glfwTerminate();
-    exit(EXIT_FAILURE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_FALSE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+
+    log_info("Falling back to OpenGL 2.1\n");
+    shading_lang_lvl = 1;
+    win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);
+    if (!win) {
+      glfwTerminate();
+      exit(EXIT_FAILURE);
+    }
   }
+  else {
+    shading_lang_lvl = 3;
+  }
+
   glfwMakeContextCurrent(win);
 
   // get version info
@@ -119,22 +139,24 @@ main(int argc, char **argv)
   log_info("Renderer: %s\n", renderer);
   log_info("OpenGL version supported %s\n", version);
 
+  log_info("Shading Language Level: %d", shading_lang_lvl);
+
   glfwSwapInterval(1);
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  GLuint vbo = 0;
   glGenBuffers (1, &vbo);
   glBindBuffer (GL_ARRAY_BUFFER, vbo);
   glBufferData (GL_ARRAY_BUFFER, 12 * sizeof (float), points, GL_STATIC_DRAW);
 
-  glGenVertexArrays (1, &vao);
-  glBindVertexArray (vao);
-  glEnableVertexAttribArray (0);
-  glBindBuffer (GL_ARRAY_BUFFER, vbo);
-  glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
+  if (shading_lang_lvl >= 3) {
+    glGenVertexArrays (1, &vao);
+    glBindVertexArray (vao);
+    glEnableVertexAttribArray (0);
+    glBindBuffer (GL_ARRAY_BUFFER, vbo);
+    glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+  }
 
   init();
 
@@ -166,7 +188,6 @@ main(int argc, char **argv)
     removeDeadLayers();
     glfwSwapBuffers(win);
     glfwPollEvents();
-    //  glUseProgram(0);
   }
 
   glfwTerminate();

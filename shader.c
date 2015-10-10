@@ -7,16 +7,25 @@
 #include <string.h>
 #include <pthread.h>
 
+#if defined(__linux)
+#include <epoxy/gl.h>
+#include <epoxy/glx.h>
+#endif
+
+#define GLFW_INCLUDE_GLEXT
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
 #include <assert.h>
 
+#include "dbg.h"
 #include "shader.h"
 
 GLuint vShader;
 float iGlobalTime = 0;
 float iResolution[2];
+int shading_lang_lvl = 0;
+GLuint vbo;
 GLuint vao;
 
 int activeShaders = 0;
@@ -45,7 +54,6 @@ void loadFromCache(shader *s) {
     if (shaderLayerArray[i].state != UNUSED && strcmp(s->filename, shaderLayerArray[i].filename) == 0) {
       s->progId = shaderLayerArray[i].progId;
       s->shaderId = shaderLayerArray[i].shaderId;
-      //      printf("loaded %s from cache id: %d\n", s->filename, s->progId);
       break;
     }
   }
@@ -76,8 +84,6 @@ GLint loadShader( const char *filename, GLenum type )
   char* content;
 
   long size = readFile( file, &content );
-  //  printf("filesize: %i", size);
-  //  printf(" .. success\n");
 
   fclose(file);
 
@@ -105,12 +111,15 @@ initShaderLayer(shader* s)
 
     char filename[256];
 
-    sprintf(filename, "shaders/%s.frag", s->filename);
+    sprintf(filename, "shaders/%s-%dxx.frag",
+            s->filename,
+            shading_lang_lvl);
 
     s->shaderId = loadShader( filename, GL_FRAGMENT_SHADER );
     glAttachShader( s->progId, s->shaderId );
 
-    vShader = loadShader( "shaders/basic.vert", GL_VERTEX_SHADER );
+    sprintf(filename, "shaders/basic-%dxx.vert", shading_lang_lvl);
+    vShader = loadShader(filename , GL_VERTEX_SHADER );
     glAttachShader( s->progId, vShader );
 
     glLinkProgram( s->progId );
@@ -176,6 +185,7 @@ useShaderLayer(shader *s)
   if( s->state == UNINITIALIZED)
   {
     initShaderLayer(s);
+    debug("[shader:init] %s (%f)", s->filename, s->args.gain);
     s->state = INITIALIZED;
   }
   if( s->state == INITIALIZED )
@@ -189,7 +199,6 @@ useShaderLayer(shader *s)
 
     mapPlayArgs(s);
 
-    glBindVertexArray (vao);
 
     GLint blend_mode = GL_ONE_MINUS_SRC_ALPHA;
     switch(s->args.blend_mode) {
@@ -207,12 +216,17 @@ useShaderLayer(shader *s)
     }
     glBlendFunc(GL_SRC_ALPHA, blend_mode);
 
-    glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
-    debug("globaltime running: %f", iGlobalTime);
+    if (shading_lang_lvl >= 3) {
+      glBindVertexArray (vao);
     }
-    /* else { */
-    /*   debug("not yet playing: %f %f", iGlobalTime, s->when); */
-    /* } */
+    else {
+      glEnableVertexAttribArray(0);
+      glBindBuffer(GL_ARRAY_BUFFER, vbo);
+      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    }
+    glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
+
+    }
   }
 }
 

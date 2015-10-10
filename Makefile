@@ -9,7 +9,7 @@ ifeq ($(shell uname -s), Darwin)
 		LDFLAGS += -framework OpenGL -framework Cocoa
 		CFLAGS += -DMAC_OSX
 else
-	LDFLAGS += -lGL -lGLU -ldl -lX11 -lXxf86vm -lXcursor -lXinerama -lXrandr -lXi -lGLEW -lglut -lm
+	LDFLAGS += -lGL -ldl -lX11 -lXxf86vm -lXcursor -lXinerama -lXrandr -lXi -lepoxy -lm
 endif
 
 SOURCES=weltfrieden.c server.c shader.c
