@@ -17,7 +17,7 @@ brew install glfw3
 #### Linux
 
 ```shell
-apt-get install xorg-dev libglu1-mesa-dev libglew-dev cmake
+apt-get install xorg-dev libglu1-mesa-dev libglew-dev cmake automake xutils-dev libegl1-mesa-dev
 ```
 
 Install `glfw3` from source:
@@ -28,6 +28,16 @@ mkdir -p glfw/build
 cd glfw/build
 cmake ..
 sudo cmake install
+```
+
+Install `epoxy` from source:
+
+```shell
+git clone https://github.com/anholt/libepoxy
+cd libepoxy
+./autogen.sh
+make
+sudo make install
 ```
 
 ### Installation
@@ -70,7 +80,7 @@ Special handling occurs on `vowel` which is interpreted as blend mode for each f
 
 vowel accepts the following chars and maps them to the corresponding GL blend mode.
 
-* `c` SRC_COLOR 
+* `c` SRC_COLOR
 * `a` SRC_ALPHA
 * `C` DST_COLOR
 * `A` DST_ALPHA
@@ -82,20 +92,44 @@ vowel accepts the following chars and maps them to the corresponding GL blend mo
 * `X` ONE_MINUS_DST_ALPHA
 * `Y` ONE_MINUS_DST_COLOR
 
-Currently there are the following simple shaders to use:
+### Shaders
+
+Depending on your graphics card certain sets of shaders are available.
+When `weltfrieden` is started, it reports
+
+```shell
+...
+[INFO] (weltfrieden.c:142) Shading Language Level: 1xx
+...
+```
+
+Currently a few `1xx` shaders are implemented and a few more `3xx`. Below you'll find a listing of the two sets of shaders.
+
+
+#### 1xx
+
+##### Backgrounds
+
+- **basic** fading from white to black
+
+more to come soon...
+
+##### Overlays
+
+#### 3xx
 
 They implement at least the following method: `gain`
 
-## Backgrounds
+##### Backgrounds
 
 - **basic** fading from white to black
 - **white** plain white, opaque
 - **shift** rainbow, define horizontal extents via `begin` and `end`
 - **fall** rainbow, define vertical extent via `begin` and `end`
 
-## Overlays
+##### Overlays
 - **grid** white squares, evenly spaced, define size via `shape` and move via `offset`
-- **form** - product of tangent of x and y of frag coord visualized, alternate via `offset` which is added 
+- **form** - product of tangent of x and y of frag coord visualized, alternate via `offset` which is added
 before computing tangents and `shape` which is a threshold
 
 

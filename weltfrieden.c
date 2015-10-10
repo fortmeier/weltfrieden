@@ -139,7 +139,7 @@ main(int argc, char **argv)
   log_info("Renderer: %s\n", renderer);
   log_info("OpenGL version supported %s\n", version);
 
-  log_info("Shading Language Level: %d", shading_lang_lvl);
+  log_info("Shading Language Level: %dxx", shading_lang_lvl);
 
   glfwSwapInterval(1);
   glDisable(GL_DEPTH_TEST);
