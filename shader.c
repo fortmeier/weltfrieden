@@ -89,7 +89,7 @@ GLint loadShader( const char *filename, GLenum type )
   int infolength;
   char infolog[2048];
   glGetShaderInfoLog( shader, 2048, &infolength, infolog );
-  printf("shaderlog: %s\n", infolog);
+  debug("shaderlog: %s\n", infolog);
   free (content);
   return shader;
 }
@@ -208,7 +208,7 @@ useShaderLayer(shader *s)
     glBlendFunc(GL_SRC_ALPHA, blend_mode);
 
     glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
-    //  debug("playing at %f\n", iGlobalTime);
+    debug("globaltime running: %f", iGlobalTime);
     }
     /* else { */
     /*   debug("not yet playing: %f %f", iGlobalTime, s->when); */
