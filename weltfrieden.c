@@ -51,6 +51,42 @@ void error_callback(int err, const char* desc) {
 int
 main(int argc, char **argv)
 {
+  /* int c; */
+  /* static int cache_flag; */
+
+  /* while (1) { */
+  /*   static struct option long_options[] = */
+  /*     { */
+  /*       {"cache", no_argument, &cache_flag, 1}, */
+
+  /*       {"version", no_argument, 0, 'v'}, */
+  /*       {"help",    no_argument, 0, 'h'}, */
+  /*       {0,0,0,0} */
+  /*     }; */
+
+  /*   int option_index = 0; */
+
+  /*   c = getopt_long(argc, argv, "n:", long_options, &option_index); */
+
+  /*   if (c == -1) { */
+  /*     break; */
+  /*   } */
+
+  /*   switch (c) { */
+  /*   case 0: */
+  /*     if (long_options[option_index].flag != 0) break; */
+  /*   case 'v': */
+  /*     log_info("Version: 0.0.0, not yet implemented"); */
+  /*     break; */
+  /*   case 'h': */
+  /*     log_info("Usage: ./weltfrieden [--cache]"); */
+  /*     break; */
+  /*   default: */
+  /*     return 1; */
+  /*   } */
+  /* } */
+
+
   glfwSetErrorCallback(error_callback);
 
   if(!glfwInit()) {
