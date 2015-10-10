@@ -1,15 +1,15 @@
 CC=gcc
 
-DEBUG=-DNDEBUG
+NODEBUG=-DNDEBUG
 
-CFLAGS += -g -I/usr/local/include -Iinclude -Wall -std=gnu99 $(shell pkg-config --cflags glfw3) ${DEBUG}
-LDFLAGS += -lm -L/usr/local/lib -llo -lsndfile -lsamplerate -lpthread $(shell pkg-config --libs --cflags glfw3)
+CFLAGS += -g -I/usr/local/include -Iinclude -Wall -std=gnu99 $(shell pkg-config --cflags glfw3) ${NODEBUG}
+LDFLAGS += -lm -L/usr/local/lib -llo -lsndfile -lsamplerate -lpthread $(shell pkg-config --libs glfw3)
 
 ifeq ($(shell uname -s), Darwin)
 		LDFLAGS += -framework OpenGL -framework Cocoa
 		CFLAGS += -DMAC_OSX
 else
-	LDFLAGS += -lGL -lGLU -ldl -lX11 -lXxf86vm -lXcursor -lXinerama -lXrandr -lXi -lGLEW
+	LDFLAGS += -lGL -lGLU -ldl -lX11 -lXxf86vm -lXcursor -lXinerama -lXrandr -lXi -lGLEW -lglut -lm
 endif
 
 SOURCES=weltfrieden.c server.c shader.c
