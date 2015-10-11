@@ -17,7 +17,7 @@ brew install glfw3
 #### Linux
 
 ```shell
-apt-get install xorg-dev libglu1-mesa-dev libglew-dev cmake automake xutils-dev libegl1-mesa-dev libtool
+apt-get install xorg-dev libglu1-mesa-dev cmake automake xutils-dev libegl1-mesa-dev libtool
 ```
 
 Install `glfw3` from source:
