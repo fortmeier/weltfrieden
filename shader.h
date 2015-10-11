@@ -1,4 +1,4 @@
-#define MAXSHADERLAYERS 4
+#define MAXSHADERLAYERS 40
 #include "dbg.h"
 
 enum shaderstate {UNUSED, UNINITIALIZED, INITIALIZED};
@@ -48,7 +48,7 @@ typedef struct {
   int sample_loop;
 } t_play_args;
 
-typedef struct
+typedef struct shader_t
 {
   enum shaderstate state;
   t_play_args args;
@@ -59,6 +59,7 @@ typedef struct
 
   unsigned int progId;
   unsigned int shaderId;
+  struct shader_t *next, *prev;
 } shader;
 
 
@@ -66,7 +67,11 @@ void initShaders();
 void uninitShaders();
 
 void applyShaderLayer(unsigned int i);
-void addShaderLayer(shader s);
+void applyShaderLayers();
+void addShaderLayer(shader *s);
 void useShaderLayer(shader *s);
+
+shader *new_shader();
+
 
 void removeDeadLayers();

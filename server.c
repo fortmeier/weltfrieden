@@ -168,18 +168,30 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   };
 
 
-  shader s = {
-    UNINITIALIZED,
-    args,
-    NULL,
-    NULL,
-    (1./cps),
-    playTime,
-    0, // progId
-    0 // shaderId
-  };
-  s.filename = malloc(strlen(sample_name) + 1);
-  strcpy(s.filename, sample_name);
+  shader *s = new_shader();
+  if (s == NULL) {
+    log_info("hit max shaders (%d)", MAXSHADERLAYERS);
+    return(-1);
+  }
+
+  s->args = args;
+  s->duration = 1. / cps;
+  s->when = playTime;
+
+  /* = { */
+  /*   UNINITIALIZED, */
+  /*   args, */
+  /*   NULL, */
+  /*   NULL, */
+  /*   (1./cps), */
+  /*   playTime, */
+  /*   0, // progId */
+  /*   0, // shaderId */
+  /*   NULL, // next */
+  /*   NULL // prev */
+  /* }; */
+  s->filename = malloc(strlen(sample_name) + 1);
+  strcpy(s->filename, sample_name);
 
   addShaderLayer( s );
 

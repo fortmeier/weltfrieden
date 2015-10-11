@@ -180,10 +180,11 @@ main(int argc, char **argv)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    for(int i = 0; i < MAXSHADERLAYERS; i++)
-      {
-	applyShaderLayer(i);
-      }
+    applyShaderLayers();
+    /* for(int i = 0; i < MAXSHADERLAYERS; i++) */
+    /*   { */
+    /*     applyShaderLayer(i); */
+    /*   } */
 
     removeDeadLayers();
     glfwSwapBuffers(win);
