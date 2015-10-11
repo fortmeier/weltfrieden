@@ -1,6 +1,6 @@
 CC=gcc
 
-NODEBUG=-DNDEBUG
+#NODEBUG=-DNDEBUG
 
 CFLAGS += -g -I/usr/local/include -Iinclude -Wall -std=gnu99 $(shell pkg-config --cflags glfw3) ${NODEBUG}
 LDFLAGS += -lm -L/usr/local/lib -llo -lsndfile -lsamplerate -lpthread $(shell pkg-config --libs glfw3)

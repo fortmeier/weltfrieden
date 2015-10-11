@@ -1,4 +1,4 @@
-#define MAXSHADERLAYERS 40
+#define MAXSHADERLAYERS 4
 #include "dbg.h"
 
 enum shaderstate {UNUSED, UNINITIALIZED, INITIALIZED};
