@@ -47,17 +47,10 @@ void main(void) {
 	if(bailout == -1) {
 		r = g = b = 0.75f;
 	} else {
-          if(bailout%32 == int(iTime*32)) {
-          	r = 1.0f;
-                        	} else {
 			r = 0.0f;
-                        		}
 		g = 1.0f*bailout/shape;
 		b = 0.0f;
 	}
 
-
-        	FragmentColor = vec4(r, g, b, 1.0f);
-                FragmentColor = vec4(cross(vec3(gl_FragCoord.xy,0.7),FragmentColor.xyz), 1.0);
-       	// FragmentColor = vec4(0.0f, 0.0f, 1.0f, 1.0f);
+       	FragmentColor = vec4(r, g, b, 1.0f);
 }
