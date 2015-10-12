@@ -131,7 +131,7 @@ They implement at least the following method: `gain`
 - **grid** white squares, evenly spaced, define size via `shape` and move via `offset`
 - **form** - product of tangent of x and y of frag coord visualized, alternate via `offset` which is added
 before computing tangents and `shape` which is a threshold
-
+- **fractal** julia fractal, use `shape` for iterations and cutoff/hcutoff for zooming input values (0.1 - 0.00001 works good, also try to use sine1/saw1 to alter over time)
 
 ## Extending
 
