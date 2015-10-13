@@ -23,7 +23,7 @@
 
 extern int server_init(void);
 
-extern float iGlobalTime;
+extern double iGlobalTime;
 
 extern float iResolution[2];
 
@@ -160,10 +160,6 @@ main(int argc, char **argv)
 
   init();
 
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
-  epochOffset = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
-
   log_info("Starting Rendering\n");
 
   // ----------------------------------------------------------------
@@ -171,9 +167,14 @@ main(int argc, char **argv)
   // ----------------------------------------------------------------
 
   initShaders();
+  struct timeval tv;
+
+  gettimeofday(&tv, NULL);
+  double startTime = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
 
   while(!glfwWindowShouldClose(win)) {
-    iGlobalTime = glfwGetTime();
+    double now = glfwGetTime();
+    iGlobalTime = startTime + now;
 
     iResolution[0] = w;
     iResolution[1] = h;

@@ -13,7 +13,7 @@
 
 #include "shader.h"
 
-extern float iGlobalTime;
+extern double iGlobalTime;
 extern double epochOffset;
 
 extern float cube_angle;
@@ -135,7 +135,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
 
 
 
-  double playTime = iGlobalTime;
+  //  double playTime = iGlobalTime;
 
   t_play_args args = {
     when,
@@ -175,8 +175,8 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   }
 
   s->args = args;
-  s->duration = 1. / cps;
-  s->when = playTime;
+  s->duration = 1.; // / cps;
+  s->when = when;
 
   /* = { */
   /*   UNINITIALIZED, */

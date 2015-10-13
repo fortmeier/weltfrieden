@@ -22,7 +22,7 @@
 #include "shader.h"
 
 GLuint vShader;
-float iGlobalTime = 0;
+double iGlobalTime = 0;
 float iResolution[2];
 int shading_lang_lvl = 0;
 GLuint vbo;
@@ -130,9 +130,9 @@ void queue_remove(shader **queue, shader *old) {
   old->state = UNUSED;
 }
 
-shader *queue_next(shader **queue, float now) {
+shader *queue_next(shader **queue, double now) {
   shader *result = NULL;
-  //  printf("%f vs %f\n", *queue == NULL ? 0 : (*queue)->when, now);
+  //printf("%f vs %f\n", *queue == NULL ? 0 : (*queue)->when, now);
   if (*queue != NULL && (*queue)->when <= now) {
     result = *queue;
     *queue = (*queue)->next;
@@ -144,13 +144,13 @@ shader *queue_next(shader **queue, float now) {
   return(result);
 }
 
-void dequeue(float now) {
+void dequeue(double now) {
   shader *p;
   pthread_mutex_lock(&queue_waiting_lock);
   while ((p = queue_next(&waiting, now)) != NULL) {
-/* #ifdef DEBUG */
-/*     int s = queue_size(playing); */
-/* #endif */
+#ifndef NDEBUG
+    int s = queue_size(playing);
+#endif
 
 //    cut(p);
     p->prev = NULL;
@@ -159,9 +159,9 @@ void dequeue(float now) {
       playing->prev = p;
     }
     playing = p;
-/* #ifdef DEBUG */
-/*     assert(s == (queue_size(playing) - 1)); */
-/* #endif */
+#ifndef NDEBUG
+    assert(s == (queue_size(playing) - 1));
+#endif
 
     //printf("done.\n");
   }
@@ -308,7 +308,7 @@ useShaderLayer(shader *s)
   if( s->state == UNINITIALIZED)
   {
     initShaderLayer(s);
-    debug("[shader:init] %s (%f)", s->filename, s->args.gain);
+    debug("[shader:init] %s (%f vs %f)", s->filename, s->when, iGlobalTime);
     s->state = INITIALIZED;
   }
   if( s->state == INITIALIZED )
@@ -348,7 +348,6 @@ useShaderLayer(shader *s)
       glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     }
     glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
-
     }
   }
 }
@@ -357,7 +356,7 @@ useShaderLayer(shader *s)
 void applyShaderLayers() {
   dequeue(iGlobalTime);
 
-  //  log_info("waiting queue size: %d\n", queue_size(waiting));
+  //  log_info("waiting queue size: %d @ %f\n", queue_size(waiting), iGlobalTime);
   shader *p = playing;
 
   while (p != NULL) {
@@ -414,13 +413,13 @@ removeDeadLayers()
 
   while (p != NULL) {
     if ((p->when + p->duration) < iGlobalTime) {
-      //      debug("removing: %s\n, played at: %f", p->filename, p->when);
+      debug("removing: %s\n, played at: %f", p->filename, p->when);
       queue_remove(&playing, p);
     }
     p = p->next;
   }
 
-  //  log_info("playing queue size: %d\n", queue_size(playing));
+  // log_info("playing queue size: %d\n", queue_size(playing));
 
   /* // remove dead layers */
   /* for(int i = 0; i < MAXSHADERLAYERS; i++) */
