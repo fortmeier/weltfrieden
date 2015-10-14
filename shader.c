@@ -21,7 +21,7 @@
 
 #include "shader.h"
 
-GLuint vertex_shader;
+static GLuint vertex_shader = 0;
 GLuint vbo;
 GLuint vao;
 
@@ -47,7 +47,6 @@ size_t read_file (FILE* file, char** content) {
   fread(*content, fsize, 1, file);
 
   (*content)[fsize] = 0;
-
 
   return fsize;
 }
@@ -126,6 +125,18 @@ GLint shader_load( const char *filename, GLenum type ) {
   return shader;
 }
 
+static GLuint get_vertex_shader() {
+  if (vertex_shader == 0) {
+    char* filename = calloc(20, sizeof(char));
+    sprintf(filename, "shaders/basic-%dxx.vert", shader_lvl);
+
+    vertex_shader = shader_load(filename , GL_VERTEX_SHADER );
+
+    free(filename);
+  }
+  return vertex_shader;
+}
+
 // TODO: check for file's existance first before calling this
 // avoid fatal exit during performance (most of the time)
 
@@ -142,10 +153,7 @@ void shader_init(shader* s) {
     s->shaderid = shader_load( filename, GL_FRAGMENT_SHADER );
     glAttachShader( s->progid, s->shaderid );
 
-    sprintf(filename, "shaders/basic-%dxx.vert", shader_lvl);
-    // TODO: cache this
-    vertex_shader = shader_load(filename , GL_VERTEX_SHADER );
-    glAttachShader( s->progid, vertex_shader );
+    glAttachShader( s->progid, get_vertex_shader() );
 
     glLinkProgram( s->progid );
 
