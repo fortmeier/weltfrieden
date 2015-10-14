@@ -12,9 +12,8 @@ else
 	LDFLAGS += -lGL -ldl -lX11 -lXxf86vm -lXcursor -lXinerama -lXrandr -lXi -lepoxy -lm
 endif
 
-SOURCES=weltfrieden.c server.c shader.c
+SOURCES=weltfrieden.c queue.c server.c shader.c
 OBJECTS=$(SOURCES:.c=.o)
-
 
 all: weltfrieden
 
@@ -23,3 +22,6 @@ clean:
 
 weltfrieden: $(OBJECTS) Makefile
 	$(CC) $(OBJECTS) $(CFLAGS) $(LDFLAGS) -o $@
+
+indent:
+	find . \( -iname \*.[ch] -or -iname \*.frag  -or -iname \*.vert \) -exec emacs --batch -nw -q {} --eval "(progn (mark-whole-buffer) (indent-region (point-min) (point-max) nil) (save-buffer))" --kill \;

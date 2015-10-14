@@ -8,45 +8,30 @@
 #include <sys/time.h>
 #include <assert.h>
 
-#include "server.h"
-#include "config.h"
 
+#include "config.h"
+#include "server.h"
 #include "shader.h"
 
-extern double iGlobalTime;
-extern double epochOffset;
-
-extern float cube_angle;
-
-void error(int num, const char *m, const char *path);
-
-int trigger_handler(const char *path, const char *types, lo_arg **argv,
-                    int argc, void *data, void *user_data);
-
-int generic_handler(const char *path, const char *types, lo_arg **argv,
-		    int argc, void *data, void *user_data);
-
-/**/
+extern double now;
 
 void error(int num, const char *msg, const char *path) {
-    printf("liblo server error %d in path %s: %s\n", num, path, msg);
+  printf("liblo server error %d in path %s: %s\n", num, path, msg);
 }
-
-/**/
 
 int generic_handler(const char *path, const char *types, lo_arg **argv,
 		    int argc, void *data, void *user_data) {
-    int i;
+  int i;
 
-    printf("path: <%s>\n", path);
-    for (i=0; i<argc; i++) {
-      printf("arg %d '%c' ", i, types[i]);
-      lo_arg_pp(types[i], argv[i]);
-      printf("\n");
-    }
+  printf("path: <%s>\n", path);
+  for (i=0; i<argc; i++) {
+    printf("arg %d '%c' ", i, types[i]);
+    lo_arg_pp(types[i], argv[i]);
     printf("\n");
+  }
+  printf("\n");
 
-    return 1;
+  return 1;
 }
 
 
@@ -121,23 +106,23 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   case 'y': blend_mode =  NSC; break; // 1 - src color
   case 'X': blend_mode = NDA; break; // 1 - dst alpha
   case 'Y': blend_mode = NDC; break; // 1 - dst color
-};
+  };
 
   int unit = -1;
   switch(unit_name[0]) {
-     // rate
-     case 'r': case 'R': unit = 'r'; break;
-     // sec
-     case 's': case 'S': unit = 's'; break;
-     // cycle
-     case 'c': case 'C': unit = 'c'; break;
+    // rate
+  case 'r': case 'R': unit = 'r'; break;
+    // sec
+  case 's': case 'S': unit = 's'; break;
+    // cycle
+  case 'c': case 'C': unit = 'c'; break;
   }
 
 
 
-  //  double playTime = iGlobalTime;
+  //  double playTime = now;
 
-  t_play_args args = {
+  t_playargs args = {
     when,
     cps,
     sample_name,
@@ -168,7 +153,7 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   };
 
 
-  shader *s = new_shader();
+  shader *s = shader_new();
   if (s == NULL) {
     log_info("hit max shaders (%d)", MAXSHADERLAYERS);
     return(-1);
@@ -178,22 +163,10 @@ int play_handler(const char *path, const char *types, lo_arg **argv,
   s->duration = 1.; // / cps;
   s->when = when;
 
-  /* = { */
-  /*   UNINITIALIZED, */
-  /*   args, */
-  /*   NULL, */
-  /*   NULL, */
-  /*   (1./cps), */
-  /*   playTime, */
-  /*   0, // progId */
-  /*   0, // shaderId */
-  /*   NULL, // next */
-  /*   NULL // prev */
-  /* }; */
   s->filename = malloc(strlen(sample_name) + 1);
   strcpy(s->filename, sample_name);
 
-  addShaderLayer( s );
+  shader_add( s );
 
   //free(sample_name);
   return 0;
@@ -255,33 +228,33 @@ extern int server_init(void) {
   lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffifffffi",
                               play_handler,
                               NULL
-                             );
+			      );
 
   lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffifffff",
                               play_handler,
                               NULL
-                             );
+			      );
 
   lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffiffff",
                               play_handler,
                               NULL
-                             );
+			      );
 
   lo_server_thread_add_method(st, "/play", "iisffffffsffffififff",
                               play_handler,
                               NULL
-                             );
+			      );
 
   lo_server_thread_add_method(st, "/play", "iisffffffsffffifi",
                               play_handler,
                               NULL
-                             );
+			      );
 
   // last two optional, for backward compatibility
   lo_server_thread_add_method(st, "/play", "iisffffffsffffi",
                               play_handler,
                               NULL
-                             );
+			      );
 
   lo_server_thread_add_method(st, "/play", NULL, play_handler, NULL);
   lo_server_thread_add_method(st, NULL, NULL, generic_handler, NULL);

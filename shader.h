@@ -1,9 +1,12 @@
-#define MAXSHADERLAYERS 40
+#ifndef _WF_SHADER_H
+#define _WF_SHADER_H
+
+#include "config.h"
 #include "dbg.h"
 
 enum shaderstate {UNUSED, UNINITIALIZED, INITIALIZED};
 
-enum blend_modes {
+enum blendmodes {
   NSA, // 1 - src alpha
   NSC, // 1 - src color
   SC, // src color
@@ -27,7 +30,7 @@ typedef struct {
   float speed;
   float pan;
   float velocity;
-  int blend_mode;
+  int blendmode;
   float cutoff;
   float resonance;
   float accelerate;
@@ -45,33 +48,33 @@ typedef struct {
   float bandf;
   float bandq;
   char unit;
-  int sample_loop;
-} t_play_args;
+  int sampleloop;
+} t_playargs;
 
 typedef struct shader_t
 {
   enum shaderstate state;
-  t_play_args args;
+  t_playargs args;
   char *filename;
   char *filecontent;
   float duration;
   double when;
 
-  unsigned int progId;
-  unsigned int shaderId;
+  unsigned int progid;
+  unsigned int shaderid;
   struct shader_t *next, *prev;
 } shader;
 
-
-void initShaders();
-void uninitShaders();
-
-void applyShaderLayer(unsigned int i);
-void applyShaderLayers();
-void addShaderLayer(shader *s);
-void useShaderLayer(shader *s);
-
-shader *new_shader();
+#include "queue.h"
 
 
-void removeDeadLayers();
+void shaders_init();
+void shaders_destroy();
+void shaders_apply();
+void shaders_cleanup();
+
+void shader_add(shader *s);
+void shader_apply(shader *s);
+shader *shader_new();
+
+#endif

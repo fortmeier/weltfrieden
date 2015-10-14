@@ -1,12 +1,11 @@
-
 // header missing
-#include "config.h"
+
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <getopt.h>
 
-#include "dbg.h"
 
 #if defined(__linux)
 #include <epoxy/gl.h>
@@ -17,35 +16,29 @@
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
-#include <assert.h>
-
+#include "config.h"
+#include "dbg.h"
 #include "shader.h"
 
 extern int server_init(void);
 
-extern double iGlobalTime;
-
-extern float iResolution[2];
-
-double epochOffset = 0;
+extern double now;
+extern float res[2];
 
 extern GLuint vbo;
 extern GLuint vao;
 
-extern int shading_lang_lvl;
+extern int shader_lvl;
 
 float points[] = {
   1.0, 1.0, 0.0f,
- -1.0, 1.0, 0.0f,
+  -1.0, 1.0, 0.0f,
   1.0, -1.0, 0.0f,
- -1.0, -1.0, 0.0f,
+  -1.0, -1.0, 0.0f,
 };
 
-void
-init(void)
-{
+void init(void) {
   server_init();
-
 }
 
 void error_callback(int err, const char* desc) {
@@ -53,9 +46,7 @@ void error_callback(int err, const char* desc) {
 }
 
 
-int
-main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   /* int c; */
   /* static int cache_flag; */
 
@@ -96,7 +87,7 @@ main(int argc, char **argv)
   glfwSetErrorCallback(error_callback);
 
   if(!glfwInit()) {
-    printf("Error: cannot setup glfw.\n");
+    logErr("Error: cannot setup glfw.\n");
     return 1;
   }
 
@@ -110,7 +101,7 @@ main(int argc, char **argv)
   int w = 256;
   int h = 256;
 
-  shading_lang_lvl = 0;
+  shader_lvl = 0;
 
   win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);
   if(!win) {
@@ -120,7 +111,7 @@ main(int argc, char **argv)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
 
     log_info("Falling back to OpenGL 2.1\n");
-    shading_lang_lvl = 1;
+    shader_lvl = 1;
     win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);
     if (!win) {
       glfwTerminate();
@@ -128,7 +119,7 @@ main(int argc, char **argv)
     }
   }
   else {
-    shading_lang_lvl = 3;
+    shader_lvl = 3;
   }
 
   glfwMakeContextCurrent(win);
@@ -139,7 +130,7 @@ main(int argc, char **argv)
   log_info("Renderer: %s\n", renderer);
   log_info("OpenGL version supported %s\n", version);
 
-  log_info("Shading Language Level: %dxx", shading_lang_lvl);
+  log_info("Shading Language Level: %dxx", shader_lvl);
 
   glfwSwapInterval(1);
   glDisable(GL_DEPTH_TEST);
@@ -150,7 +141,7 @@ main(int argc, char **argv)
   glBindBuffer (GL_ARRAY_BUFFER, vbo);
   glBufferData (GL_ARRAY_BUFFER, 12 * sizeof (float), points, GL_STATIC_DRAW);
 
-  if (shading_lang_lvl >= 3) {
+  if (shader_lvl >= 3) {
     glGenVertexArrays (1, &vao);
     glBindVertexArray (vao);
     glEnableVertexAttribArray (0);
@@ -166,33 +157,29 @@ main(int argc, char **argv)
   // THIS IS WHERE YOU START CALLING OPENGL FUNCTIONS, NOT EARLIER!!
   // ----------------------------------------------------------------
 
-  initShaders();
+  shaders_init();
   struct timeval tv;
 
   gettimeofday(&tv, NULL);
-  double startTime = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
+  double start_time = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
 
   while(!glfwWindowShouldClose(win)) {
-    double now = glfwGetTime();
-    iGlobalTime = startTime + now;
+    double n = glfwGetTime();
+    now = start_time + n;
 
-    iResolution[0] = w;
-    iResolution[1] = h;
+    res[0] = w;
+    res[1] = h;
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    applyShaderLayers();
-    /* for(int i = 0; i < MAXSHADERLAYERS; i++) */
-    /*   { */
-    /*     applyShaderLayer(i); */
-    /*   } */
+    shaders_apply();
 
-    removeDeadLayers();
+    shaders_cleanup();
     glfwSwapBuffers(win);
     glfwPollEvents();
   }
 
   glfwTerminate();
-  uninitShaders();
+  shaders_destroy();
   return 0;             /* ANSI C requires main to return int. */
 }
