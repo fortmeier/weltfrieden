@@ -22,6 +22,7 @@
 
 extern int server_init(void);
 
+static double start_time;
 extern double now;
 extern float res[2];
 
@@ -43,6 +44,18 @@ void init(void) {
 
 void error_callback(int err, const char* desc) {
   printf("GLFW error: %s (%d)\n", desc, err);
+}
+
+void render_callback(GLFWwindow* win) {
+    double n = glfwGetTime();
+    now = start_time + n;
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    shaders_apply();
+    shaders_cleanup();
+
+    glfwSwapBuffers(win);
 }
 
 
@@ -100,6 +113,8 @@ int main(int argc, char **argv) {
   GLFWwindow* win = NULL;
   int w = 256;
   int h = 256;
+  res[0] = w;
+  res[1] = h;
 
   shader_lvl = 0;
 
@@ -123,7 +138,6 @@ int main(int argc, char **argv) {
   }
 
   glfwMakeContextCurrent(win);
-
   // get version info
   const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
   const GLubyte* version = glGetString (GL_VERSION); // version as a string
@@ -133,6 +147,8 @@ int main(int argc, char **argv) {
   log_info("Shading Language Level: %dxx", shader_lvl);
 
   glfwSwapInterval(1);
+  glfwSetWindowRefreshCallback(win, render_callback);
+
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -161,21 +177,10 @@ int main(int argc, char **argv) {
   struct timeval tv;
 
   gettimeofday(&tv, NULL);
-  double start_time = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
+  start_time = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
 
   while(!glfwWindowShouldClose(win)) {
-    double n = glfwGetTime();
-    now = start_time + n;
-
-    res[0] = w;
-    res[1] = h;
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    shaders_apply();
-
-    shaders_cleanup();
-    glfwSwapBuffers(win);
+    render_callback(win);
     glfwPollEvents();
   }
 
