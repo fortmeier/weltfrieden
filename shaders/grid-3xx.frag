@@ -1,13 +1,21 @@
 #version 330
 
 uniform float now;
+uniform float dur;
+uniform float cps;
+uniform float elapsed;
 uniform vec2 res;
 uniform float gain;
-uniform float shape;
+uniform float scale;
 uniform float speed;
-uniform float offset;
+uniform vec4 color;
+uniform vec4 position;
+
+uniform sampler2D fbotex;
 
 in vec4 gl_FragCoord;
+in vec2 texcoord;
+
 layout(location = 0) out vec4 frag_color;
 
 mat4 rotation_matrix(vec3 axis, float angle) {
@@ -23,15 +31,16 @@ mat4 rotation_matrix(vec3 axis, float angle) {
 }
 
 void main() {
-  mat4 rot = rotation_matrix(vec3(0.5,0.5,0.5), shape);
-  vec4 color = vec4(0.2, 0.8,0.5 + 0.5 * sin(now)*shape, gain);
-  ivec4 m = (ivec4(gl_FragCoord) + ivec4(offset,offset,offset, 0)) % (4*ivec4(shape, shape, shape, shape));
+  vec4 fbo = texture(fbotex, vec2(texcoord.x, 1 - texcoord.y));
+  mat4 rot = rotation_matrix(vec3(0.5,0.5,0.5), scale);
+  ivec4 m = (ivec4(gl_FragCoord) + ivec4(position)) % (4*ivec4(scale, scale, scale, scale));
 
-  if (m.x > shape && m.y > shape) {
-    float c = gl_FragCoord.x;
-    frag_color = vec4(0.95,0.95,0.95,1);
+  float n = elapsed/(dur/cps);
+
+  if (m.x > scale && m.y > scale) {
+    frag_color = mix(color, fbo, n);
   }
   else {
-    frag_color = 1 - color;
+    frag_color = mix(1 - color, fbo, 1);
   }
 }

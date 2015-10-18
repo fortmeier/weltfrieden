@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int queue_size(shader *queue) {
+int queue_size(layer *queue) {
   int result = 0;
   while (queue != NULL) {
     result++;
@@ -17,14 +17,14 @@ int queue_size(shader *queue) {
   return(result);
 }
 
-void queue_add(shader **queue, shader *new) {
+void queue_add(layer **queue, layer *new) {
   int added = 0;
   if (*queue == NULL) {
     *queue = new;
     added++;
   }
   else {
-    shader *tmp = *queue;
+    layer *tmp = *queue;
     assert(tmp->prev == NULL);
 
     int i =0;
@@ -61,7 +61,7 @@ void queue_add(shader **queue, shader *new) {
 }
 
 
-void queue_remove(shader **queue, shader *old) {
+void queue_remove(layer **queue, layer *old) {
   if (old->prev == NULL) {
     *queue = old->next;
     if (*queue  != NULL) {
@@ -78,8 +78,8 @@ void queue_remove(shader **queue, shader *old) {
   old->state = UNUSED;
 }
 
-shader *queue_next(shader **queue, double now) {
-  shader *result = NULL;
+layer *queue_next(layer **queue, double now) {
+  layer *result = NULL;
 
   if (*queue != NULL && (*queue)->when <= now) {
     result = *queue;

@@ -11,7 +11,9 @@
 
 #include "config.h"
 #include "server.h"
+#include "layer.h"
 #include "shader.h"
+#include "text.h"
 
 extern double now;
 
@@ -34,229 +36,118 @@ int generic_handler(const char *path, const char *types, lo_arg **argv,
   return 1;
 }
 
-
-int play_handler(const char *path, const char *types, lo_arg **argv,
-                 int argc, void *data, void *user_data) {
-
-  /* lo_timetag ts = lo_message_get_timestamp(data); */
+void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
+  int blendmode = NSA;  // default is GL_ONE_MINUS_SRC_ALPHA
 
   double when = (double) argv[0]->i + ((double) argv[1]->i / 1000000.0);
 #ifdef SUBLATENCY
   when -= SUBLATENCY;
 #endif
-  int poffset = 2;
+  int poffset = 3;
 
   float cps = argv[2]->f;
-  poffset = 3;
-  //printf("timing info: when, cps = %f\t%f\n", when, cps);
+  float dur = argv[3]->f;
+  poffset = 4;
+  debug("timing info: when, cps = %f\t%f\n", when, cps);
 
-  char *sample_name = (char *) argv[0+poffset];
+  char *words = (char *) argv[0+poffset];
 
-  float offset = argv[1+poffset]->f;
-  float start = argv[2+poffset]->f;
-  float end  = argv[3+poffset]->f;
-  float speed  = argv[4+poffset]->f;
-  float pan  = argv[5+poffset]->f;
-  float velocity  = argv[6+poffset]->f;
-  char *vowel_s = (char *) argv[7+poffset];
-  float cutoff = argv[8+poffset]->f;
-  float resonance = argv[9+poffset]->f;
-  float accelerate = argv[10+poffset]->f;
-  float shape = argv[11+poffset]->f;
-  int kriole_chunk = argv[12+poffset]->i;
+  float r = argv[1+poffset]->f;
+  float g = argv[2+poffset]->f;
+  float b = argv[3+poffset]->f;
+  float a = argv[4+poffset]->f;
+  float x = argv[5+poffset]->f;
+  float y = argv[6+poffset]->f;
+  float z = argv[7+poffset]->f;
+  float w = argv[8+poffset]->f;
+  float scale = argv[9+poffset]->f;
+  float speed = argv[10+poffset]->f;
+  char *blendmode_s = (char *) argv[11+poffset];
 
-  float gain = argc > (13+poffset) ? argv[13+poffset]->f : 0;
-  int cutgroup = argc > (14+poffset) ? argv[14+poffset]->i : 0;
-
-  float delay = argc > (15+poffset) ? argv[15+poffset]->f : 0;
-  float delaytime = argc > (16+poffset) ? argv[16+poffset]->f : 0;
-  float delayfeedback = argc > (17+poffset) ? argv[17+poffset]->f : 0;
-
-  float crush = argc > (18+poffset) ? argv[18+poffset]->f : 0;
-  int coarse = argc > (19+poffset) ? argv[19+poffset]->i : 0;
-  float hcutoff = argc > (20+poffset) ? argv[20+poffset]->f : 0;
-  float hresonance = argc > (21+poffset) ? argv[21+poffset]->f : 0;
-  float bandf = argc > (22+poffset) ? argv[22+poffset]->f : 0;
-  float bandq = argc > (23+poffset) ? argv[23+poffset]->f : 0;
-
-  char *unit_name = argc > (24+poffset) ? (char *) argv[24+poffset] : "r";
-  //  int sample_loop = argc >  (25+poffset) ? argv[25+poffset]->i : 0;
-
-  if (argc > 26+poffset) {
-    printf("play server unexpectedly received extra parameters, maybe update Dirt?\n");
+  if (argc > 15+poffset) {
+    printf("show server unexpectedly received extra parameters, maybe update Dirt?\n");
   }
 
-
-
-  // default is GL_ONE_MINUS_SRC_ALPHA
-
-  int blend_mode = NSA;
-
-
-
-  switch(vowel_s[0]) {
-  case 'c':  blend_mode = SC; break; // src color
-  case 'a':  blend_mode = SA; break; // src alpha
-  case 'C': blend_mode = DC; break; // dst color
-  case 'A': blend_mode = DA; break; // dst alpha
-  case 'l': blend_mode = CA; break; // const alpha -- mnemonic lightness?
-  case 't': blend_mode = CC; break; // const color -- mnemonic tint
-  case 's': blend_mode = SS; break; // src saturate
-  case 'x': blend_mode = NSA; break; // 1 - src alpha
-  case 'y': blend_mode =  NSC; break; // 1 - src color
-  case 'X': blend_mode = NDA; break; // 1 - dst alpha
-  case 'Y': blend_mode = NDC; break; // 1 - dst color
+  switch(blendmode_s[0]) {
+  case 'c':  blendmode = SC; break; // src color
+  case 'a':  blendmode = SA; break; // src alpha
+  case 'C': blendmode = DC; break; // dst color
+  case 'A': blendmode = DA; break; // dst alpha
+  case 'l': blendmode = CA; break; // const alpha -- mnemonic lightness?
+  case 't': blendmode = CC; break; // const color -- mnemonic tint
+  case 's': blendmode = SS; break; // src saturate
+  case 'x': blendmode = NSA; break; // 1 - src alpha
+  case 'y': blendmode =  NSC; break; // 1 - src color
+  case 'X': blendmode = NDA; break; // 1 - dst alpha
+  case 'Y': blendmode = NDC; break; // 1 - dst color
   };
 
-  int unit = -1;
-  switch(unit_name[0]) {
-    // rate
-  case 'r': case 'R': unit = 'r'; break;
-    // sec
-  case 's': case 'S': unit = 's'; break;
-    // cycle
-  case 'c': case 'C': unit = 'c'; break;
+  args->when = when;
+  args->cps = cps;
+  args->dur = dur;
+  args->words = words;
+  args->r = r;
+  args->g = g;
+  args->b = b;
+  args->a = a;
+  args->x = x;
+  args->y = y;
+  args->z = z;
+  args->w = w;
+  args->scale = scale;
+  args->speed = speed;
+  args->blendmode = blendmode;
+
+  return;
+}
+
+int shader_handler(const char *path, const char *types, lo_arg **argv,
+                 int argc, void *data, void *user_data) {
+  t_showargs args;
+
+  parse_showargs(argv, argc, &args);
+
+  if (strlen(args.words) > 0) {
+    shaderlayer_add(args);
   }
-
-
-
-  //  double playTime = now;
-
-  t_playargs args = {
-    when,
-    cps,
-    sample_name,
-    offset,
-    start,
-    end,
-    speed,
-    pan,
-    velocity,
-    blend_mode,
-    cutoff,
-    resonance,
-    accelerate,
-    shape,
-    kriole_chunk,
-    gain,
-    cutgroup,
-    delay,
-    delaytime,
-    delayfeedback,
-    crush,
-    coarse,
-    hcutoff,
-    hresonance,
-    bandf,
-    bandq,
-    unit
-  };
-
-
-  shader *s = shader_new();
-  if (s == NULL) {
-    log_info("hit max shaders (%d)", MAXSHADERLAYERS);
-    return(-1);
+  else {
+    log_info("[server:shader] no name given\n");
   }
-
-  s->args = args;
-  s->duration = 1.; // / cps;
-  s->when = when;
-
-  s->filename = malloc(strlen(sample_name) + 1);
-  strcpy(s->filename, sample_name);
-
-  shader_add( s );
-
-  //free(sample_name);
   return 0;
 }
 
+int text_handler(const char *path, const char *types, lo_arg **argv,
+                 int argc, void *data, void *user_data) {
+  t_showargs args;
 
-/**/
+  parse_showargs(argv, argc, &args);
 
-#ifdef ZEROMQ
-void *zmqthread(void *data){
-  void *context = zmq_ctx_new ();
-  void *subscriber = zmq_socket (context, ZMQ_SUB);
-  void *buffer = (void *) malloc(MAXOSCSZ);
-
-  int rc = zmq_connect (subscriber, ZEROMQ);
-  lo_server s = lo_server_new("7772", error);
-
-  lo_server_add_method(s, "/play", "iisffffffsffffififfffiffff",
-		       play_handler,
-		       NULL
-		       );
-
-  lo_server_add_method(s, "/play", "iisffffffsffffififfffifff",
-		       play_handler,
-		       NULL
-		       );
-
-  lo_server_add_method(s, "/play", "iisffffffsffffififff",
-		       play_handler,
-		       NULL
-		       );
-
-  lo_server_add_method(s, NULL, NULL, generic_handler, NULL);
-
-  assert(rc == 0);
-  //  Subscribe to all
-  rc = zmq_setsockopt(subscriber, ZMQ_SUBSCRIBE,
-		      NULL, 0);
-  assert (rc == 0);
-  while(1) {
-    int size = zmq_recv(subscriber, buffer, MAXOSCSZ, 0);
-    if (size > 0) {
-      lo_server_dispatch_data(s, buffer, size);
-    }
-    else {
-      printf("oops.\n");
-    }
+  if (strlen(args.words) > 0) {
+    textlayer_add(args);
   }
-  return(NULL);
-}
-#endif
+  else {
+    log_info("[server:text] no text given\n");
+  }
 
-/**/
+  return 0;
+}
+
 
 extern int server_init(void) {
 
   lo_server_thread st = lo_server_thread_new(OSC_PORT, error);
 
-  lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffifffffi",
-                              play_handler,
+  lo_server_thread_add_method(st, "/shader", "iiffsffffffffffs",
+                              shader_handler,
                               NULL
 			      );
 
-  lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffifffff",
-                              play_handler,
+  lo_server_thread_add_method(st, "/text", "iiffsffffffffffs",
+                              text_handler,
                               NULL
 			      );
 
-  lo_server_thread_add_method(st, "/play", "iisffffffsffffififfffiffff",
-                              play_handler,
-                              NULL
-			      );
 
-  lo_server_thread_add_method(st, "/play", "iisffffffsffffififff",
-                              play_handler,
-                              NULL
-			      );
-
-  lo_server_thread_add_method(st, "/play", "iisffffffsffffifi",
-                              play_handler,
-                              NULL
-			      );
-
-  // last two optional, for backward compatibility
-  lo_server_thread_add_method(st, "/play", "iisffffffsffffi",
-                              play_handler,
-                              NULL
-			      );
-
-  lo_server_thread_add_method(st, "/play", NULL, play_handler, NULL);
   lo_server_thread_add_method(st, NULL, NULL, generic_handler, NULL);
   lo_server_thread_start(st);
 

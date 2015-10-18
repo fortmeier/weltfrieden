@@ -3,6 +3,6 @@
 
 #define OSC_PORT "7772"
 
-#define MAXSHADERLAYERS 256
+#define MAXSHADERLAYERS 1024
 
 #endif

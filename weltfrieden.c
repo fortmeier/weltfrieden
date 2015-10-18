@@ -7,18 +7,13 @@
 #include <getopt.h>
 
 
-#if defined(__linux)
-#include <epoxy/gl.h>
-#include <epoxy/glx.h>
-#endif
-
-#define GLFW_INCLUDE_GLEXT
-#define GLFW_INCLUDE_GLCOREARB
-#include <GLFW/glfw3.h>
 
 #include "config.h"
+#include "gl_env.h"
 #include "dbg.h"
+#include "layers.h"
 #include "shader.h"
+#include "text.h"
 
 extern int server_init(void);
 
@@ -26,16 +21,19 @@ static double start_time;
 extern double now;
 extern float res[2];
 
+extern GLuint vao_texcoord;
 extern GLuint vbo;
 extern GLuint vao;
 
 extern int shader_lvl;
 
+int cache;
+
 float points[] = {
-  1.0, 1.0, 0.0f,
-  -1.0, 1.0, 0.0f,
-  1.0, -1.0, 0.0f,
-  -1.0, -1.0, 0.0f,
+  1.0, 1.0, 0.0, 1.0, 0.0,
+  -1.0, 1.0, 0.0, 0.0, 0.0,
+  1.0, -1.0, 0.0, 1.0, 1.0,
+  -1.0, -1.0, 0.0, 0.0, 1.0
 };
 
 void init(void) {
@@ -46,79 +44,87 @@ void error_callback(int err, const char* desc) {
   printf("GLFW error: %s (%d)\n", desc, err);
 }
 
-void render_callback(GLFWwindow* win) {
-    double n = glfwGetTime();
-    now = start_time + n;
+void reshape( GLFWwindow* window, int width, int height )
+{
+  glViewport(0, 0, width, height);
+  /* mat4_set_orthographic( &projection, 0, width, 0, height, -1, 1); */
+}
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void render(GLFWwindow* win) {
+  double n = glfwGetTime();
+  now = start_time + n;
 
-    shaders_apply();
-    shaders_cleanup();
+  /* glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); */
 
-    glfwSwapBuffers(win);
+  layers_apply();
+  layers_cleanup();
+
+  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+  glfwSwapBuffers(win);
 }
 
 
 int main(int argc, char **argv) {
-  /* int c; */
-  /* static int cache_flag; */
+  int c;
 
-  /* while (1) { */
-  /*   static struct option long_options[] = */
-  /*     { */
-  /*       {"cache", no_argument, &cache_flag, 1}, */
+  cache = 0;
 
-  /*       {"version", no_argument, 0, 'v'}, */
-  /*       {"help",    no_argument, 0, 'h'}, */
-  /*       {0,0,0,0} */
-  /*     }; */
+  while (1) {
+    static struct option long_options[] =
+      {
+        {"cache", no_argument, &cache, 1},
+        {"width", required_argument, 0, 'w'},
+        {"height", required_argument, 0, 'h'},
+        {"version", no_argument, 0, 'v'},
+        {0,0,0,0}
+      };
 
-  /*   int option_index = 0; */
+    int option_index = 0;
 
-  /*   c = getopt_long(argc, argv, "n:", long_options, &option_index); */
+    c = getopt_long(argc, argv, "w:h:", long_options, &option_index);
 
-  /*   if (c == -1) { */
-  /*     break; */
-  /*   } */
+    if (c == -1) {
+      break;
+    }
 
-  /*   switch (c) { */
-  /*   case 0: */
-  /*     if (long_options[option_index].flag != 0) break; */
-  /*   case 'v': */
-  /*     log_info("Version: 0.0.0, not yet implemented"); */
-  /*     break; */
-  /*   case 'h': */
-  /*     log_info("Usage: ./weltfrieden [--cache]"); */
-  /*     break; */
-  /*   default: */
-  /*     return 1; */
-  /*   } */
-  /* } */
+    switch (c) {
+    case 0:
+      if (long_options[option_index].flag != 0) break;
+    case 'w':
+      res[0] = atoi(optarg);
+      break;
+    case 'h':
+      res[1] = atoi(optarg);
+      break;
+    case 'v':
+      log_info("Version: 0.0.0, not yet implemented");
+      break;
+    default:
+      return 1;
+    }
+  }
 
 
 
   glfwSetErrorCallback(error_callback);
 
   if(!glfwInit()) {
-    logErr("Error: cannot setup glfw.\n");
+    log_err("Error: cannot setup glfw.\n");
     return 1;
   }
 
-  //glfwWindowHint(GLFW_SAMPLES, 4);
+  /* glfwWindowHint(GLFW_SAMPLES, 4); */
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_FLOATING, GL_TRUE);
   GLFWwindow* win = NULL;
-  int w = 256;
-  int h = 256;
-  res[0] = w;
-  res[1] = h;
 
   shader_lvl = 0;
 
-  win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);
+  win = glfwCreateWindow(1, 1, "GLFW", NULL, NULL);
   if(!win) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -127,7 +133,7 @@ int main(int argc, char **argv) {
 
     log_info("Falling back to OpenGL 2.1\n");
     shader_lvl = 1;
-    win = glfwCreateWindow(w, h, "GLFW", NULL, NULL);
+    win = glfwCreateWindow(1, 1, "GLFW", NULL, NULL);
     if (!win) {
       glfwTerminate();
       exit(EXIT_FAILURE);
@@ -136,6 +142,10 @@ int main(int argc, char **argv) {
   else {
     shader_lvl = 3;
   }
+
+  /* mat4_set_identity( &projection ); */
+  /* mat4_set_identity( &model ); */
+  /* mat4_set_identity( &view ); */
 
   glfwMakeContextCurrent(win);
   // get version info
@@ -146,26 +156,35 @@ int main(int argc, char **argv) {
 
   log_info("Shading Language Level: %dxx", shader_lvl);
 
+  /* glViewport(0, 0, w, h); */
   glfwSwapInterval(1);
-  glfwSetWindowRefreshCallback(win, render_callback);
-
+  glfwSetFramebufferSizeCallback( win, reshape );
   glDisable(GL_DEPTH_TEST);
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ /* glEnable(GL_BLEND); */
+  glDisable(GL_BLEND);
+  /* glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); */
 
   glGenBuffers (1, &vbo);
   glBindBuffer (GL_ARRAY_BUFFER, vbo);
-  glBufferData (GL_ARRAY_BUFFER, 12 * sizeof (float), points, GL_STATIC_DRAW);
+  glBufferData (GL_ARRAY_BUFFER, 20 * sizeof (float), points, GL_STATIC_DRAW);
 
   if (shader_lvl >= 3) {
     glGenVertexArrays (1, &vao);
     glBindVertexArray (vao);
     glEnableVertexAttribArray (0);
     glBindBuffer (GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float) ,(void *) ( 0 * sizeof(float) ) );
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) ( 3 * sizeof(float) ) );
   }
 
   init();
+  layers_init();
+  glfwSetWindowRefreshCallback(win, render);
+  glfwSetWindowSize( win, res[0], res[1] );
+  glfwShowWindow( win );
+
 
   log_info("Starting Rendering\n");
 
@@ -173,18 +192,17 @@ int main(int argc, char **argv) {
   // THIS IS WHERE YOU START CALLING OPENGL FUNCTIONS, NOT EARLIER!!
   // ----------------------------------------------------------------
 
-  shaders_init();
   struct timeval tv;
 
   gettimeofday(&tv, NULL);
   start_time = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
 
   while(!glfwWindowShouldClose(win)) {
-    render_callback(win);
+    render(win);
     glfwPollEvents();
   }
 
   glfwTerminate();
-  shaders_destroy();
+  layers_destroy();
   return 0;             /* ANSI C requires main to return int. */
 }
