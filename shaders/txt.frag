@@ -24,6 +24,13 @@ void main()
 
   vec3 c = a * text_color;
 
-  frag_color = mix(vec4(((1 -
-                          a) * (fbo.rgb )) + c, 1), fbo, n);
+  if (a > 0) {
+  frag_color = vec4(c, 1);
+  }
+  else {
+    discard;
+  }
+
+  /* frag_color = mix(vec4(((1 - */
+  /*                         a) * (fbo.rgb )) + c, 1), fbo, n); */
 }

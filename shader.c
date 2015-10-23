@@ -87,25 +87,9 @@ void shaderlayer_add(t_showargs args) {
 
 
 void shaderlayer_apply(layer *l, int even) {
-  GLint blendmode = GL_ONE_MINUS_SRC_ALPHA;
-  switch(l->blendmode) {
-  case NSA: blendmode = GL_ONE_MINUS_SRC_ALPHA; break;
-  case NSC: blendmode = GL_ONE_MINUS_SRC_COLOR; break;
-  case NDA: blendmode = GL_ONE_MINUS_DST_ALPHA; break;
-  case NDC: blendmode = GL_ONE_MINUS_DST_COLOR; break;
-  case SA: blendmode = GL_SRC_ALPHA; break;
-  case SC: blendmode = GL_SRC_COLOR; break;
-  case DA: blendmode = GL_DST_ALPHA; break;
-  case DC: blendmode = GL_DST_COLOR; break;
-  case SS: blendmode = GL_SRC_ALPHA_SATURATE; break;
-  case CC: blendmode = GL_CONSTANT_COLOR; break;
-  case CA: blendmode = GL_CONSTANT_ALPHA; break;
-  }
-
-
-  glActiveTexture(GL_TEXTURE1);
-  glBindTexture(GL_TEXTURE_2D, texfbo[even]);
-  glBindSampler(0, sampler);
+  /* glActiveTexture(GL_TEXTURE1); */
+  /* glBindTexture(GL_TEXTURE_2D, texfbo[even]); */
+  /* glBindSampler(0, sampler); */
 
   uarg(l, "now", now);
   uarg(l, "elapsed", now - l->when);

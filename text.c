@@ -82,8 +82,8 @@ void textlayer_init(layer* l) {
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
   l->shaderid = texture;
   l->text->res[0] = face->glyph->bitmap.width;
@@ -154,10 +154,10 @@ void textlayer_apply(layer* l, int even) {
   uarg(l, "cps", l->cps);
   uarg(l, "dur", l->duration);
 
-  glBindSampler(1, sampler);
-  glUniform1i( glGetUniformLocation(l->progid, "fbotex"), 1);
-  glActiveTexture(GL_TEXTURE1);
-  glBindTexture(GL_TEXTURE_2D, texfbo[even]);
+  /* glBindSampler(1, sampler); */
+  /* glUniform1i( glGetUniformLocation(l->progid, "fbotex"), 1); */
+  /* glActiveTexture(GL_TEXTURE1); */
+  /* glBindTexture(GL_TEXTURE_2D, texfbo[even]); */
 
   glActiveTexture(GL_TEXTURE0);
   glBindVertexArray(l->vao);

@@ -48,6 +48,7 @@ typedef struct {
   float speed;
 
   int blendmode;
+  int depth;
 } t_showargs;
 
 typedef struct layer_t
@@ -67,7 +68,7 @@ typedef struct layer_t
 
   int is_text;
   enum blendmode blendmode;
-
+  int depth;
   union {
     shaderlayer *shader;
     textlayer *text;

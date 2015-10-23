@@ -38,9 +38,9 @@ void main() {
   float n = elapsed/(dur/cps);
 
   if (m.x > scale && m.y > scale) {
-    frag_color = mix(color, fbo, n);
+    frag_color = mix(color, fbo, 0);
   }
   else {
-    frag_color = mix(1 - color, fbo, 1);
+    frag_color = mix(1 - color, fbo, 0);
   }
 }

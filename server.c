@@ -63,6 +63,7 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   float scale = argv[9+poffset]->f;
   float speed = argv[10+poffset]->f;
   char *blendmode_s = (char *) argv[11+poffset];
+  int depth = argv[12+poffset]->i;
 
   if (argc > 15+poffset) {
     printf("show server unexpectedly received extra parameters, maybe update Dirt?\n");
@@ -97,6 +98,7 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   args->scale = scale;
   args->speed = speed;
   args->blendmode = blendmode;
+  args->depth = depth;
 
   return;
 }
@@ -137,12 +139,12 @@ extern int server_init(void) {
 
   lo_server_thread st = lo_server_thread_new(OSC_PORT, error);
 
-  lo_server_thread_add_method(st, "/shader", "iiffsffffffffffs",
+  lo_server_thread_add_method(st, "/shader", "iiffsffffffffffsi",
                               shader_handler,
                               NULL
 			      );
 
-  lo_server_thread_add_method(st, "/text", "iiffsffffffffffs",
+  lo_server_thread_add_method(st, "/text", "iiffsffffffffffsi",
                               text_handler,
                               NULL
 			      );

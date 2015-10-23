@@ -38,16 +38,17 @@ void dequeue(double now) {
   layer *p;
   pthread_mutex_lock(&queuelock);
   while ((p = queue_next(&waiting, now)) != NULL) {
-#ifndef NDEBUG
+#ifndef NODEBUG
     int s = queue_size(showing);
 #endif
     p->prev = NULL;
     p->next = showing;
     if (showing != NULL) {
+      assert(showing->depth < p->depth);
       showing->prev = p;
     }
     showing = p;
-#ifndef NDEBUG
+#ifndef NODEBUG
     assert(s == (queue_size(showing) - 1));
 #endif
   }

@@ -54,7 +54,7 @@ void render(GLFWwindow* win) {
   double n = glfwGetTime();
   now = start_time + n;
 
-  /* glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); */
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   layers_apply();
   layers_cleanup();
@@ -160,9 +160,9 @@ int main(int argc, char **argv) {
   glfwSwapInterval(1);
   glfwSetFramebufferSizeCallback( win, reshape );
   glDisable(GL_DEPTH_TEST);
- /* glEnable(GL_BLEND); */
-  glDisable(GL_BLEND);
-  /* glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); */
+  glEnable(GL_BLEND);
+  /* glDisable(GL_BLEND); */
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   glGenBuffers (1, &vbo);
   glBindBuffer (GL_ARRAY_BUFFER, vbo);

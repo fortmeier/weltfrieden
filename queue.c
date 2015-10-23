@@ -19,7 +19,9 @@ int queue_size(layer *queue) {
 
 void queue_add(layer **queue, layer *new) {
   int added = 0;
+
   if (*queue == NULL) {
+    log_info("[queue:new] %f %d\n", new->when, new->depth);
     *queue = new;
     added++;
   }
@@ -29,7 +31,9 @@ void queue_add(layer **queue, layer *new) {
 
     int i =0;
     while (1) {
-      if (tmp->when > new->when) {
+      log_info("[queue:add] %f > %f ? %d > %d ?\n", tmp->when, new->when, tmp->depth, new->depth);
+
+      if (tmp->when >= new->when && tmp->depth > new->depth) {
         // insert in front of later event
         new->next = tmp;
         new->prev = tmp->prev;
@@ -82,6 +86,7 @@ layer *queue_next(layer **queue, double now) {
   layer *result = NULL;
 
   if (*queue != NULL && (*queue)->when <= now) {
+    log_info("[queue:next] %f %d\n", (*queue)->when, (*queue)->depth);
     result = *queue;
     *queue = (*queue)->next;
     if ((*queue) != NULL) {

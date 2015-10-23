@@ -150,6 +150,8 @@ void layer_init(layer* l, t_showargs *args) {
   l->pos[3] = args->w;
   l->scale = args->scale;
   l->speed = args->speed;
+  l->blendmode = args->blendmode;
+  l->depth = args->depth;
 }
 
 void layer_add(layer *l) {
@@ -157,6 +159,25 @@ void layer_add(layer *l) {
   debug("[shader:add]\n");
   queue_add(&waiting, l);
   pthread_mutex_unlock(&queuelock);
+}
+
+void layer_blend(layer *l) {
+  GLint blendmode = GL_ONE_MINUS_SRC_ALPHA;
+  switch(l->blendmode) {
+  case NSA: blendmode = GL_ONE_MINUS_SRC_ALPHA; break;
+  case NSC: blendmode = GL_ONE_MINUS_SRC_COLOR; break;
+  case NDA: blendmode = GL_ONE_MINUS_DST_ALPHA; break;
+  case NDC: blendmode = GL_ONE_MINUS_DST_COLOR; break;
+  case SA: blendmode = GL_SRC_ALPHA; break;
+  case SC: blendmode = GL_SRC_COLOR; break;
+  case DA: blendmode = GL_DST_ALPHA; break;
+  case DC: blendmode = GL_DST_COLOR; break;
+  case SS: blendmode = GL_SRC_ALPHA_SATURATE; break;
+  case CC: blendmode = GL_CONSTANT_COLOR; break;
+  case CA: blendmode = GL_CONSTANT_ALPHA; break;
+  }
+
+  glBlendFunc(GL_SRC_ALPHA, blendmode);
 }
 
 void layer_apply(layer *l, int even) {
@@ -171,9 +192,10 @@ void layer_apply(layer *l, int even) {
   }
   if ( l->state == INITIALIZED) {
     if (l->when <= now) {
-      glActiveTexture(GL_TEXTURE0);
-      glBindFramebuffer(GL_FRAMEBUFFER, fbo[even]);
-      glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[even], 0);
+      layer_blend(l);
+      /* glActiveTexture(GL_TEXTURE0); */
+      /* glBindFramebuffer(GL_FRAMEBUFFER, fbo[even]); */
+      /* glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[even], 0); */
 
       glUseProgram(l->progid);
       if (l->is_text == 1) {
@@ -182,12 +204,12 @@ void layer_apply(layer *l, int even) {
           text_shader = _shader_load( "shaders/txt.frag", GL_FRAGMENT_SHADER);
         }
         textlayer_apply(l, even);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        /* glBindFramebuffer(GL_FRAMEBUFFER, 0); */
         textlayer_finish(l);
       }
       else {
         shaderlayer_apply(l, even);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        /* glBindFramebuffer(GL_FRAMEBUFFER, 0); */
         shaderlayer_finish(l);
       }
     }
