@@ -106,7 +106,6 @@ void shaderlayer_apply(layer *l, int even) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
   }
   glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
-  printf("s");
 }
 
 void shaderlayer_finish(layer *l) {

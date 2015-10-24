@@ -151,7 +151,7 @@ void layer_init(layer* l, t_showargs *args) {
   l->scale = args->scale;
   l->speed = args->speed;
   l->blendmode = args->blendmode;
-  l->depth = args->depth;
+  l->level = args->level;
 }
 
 void layer_add(layer *l) {

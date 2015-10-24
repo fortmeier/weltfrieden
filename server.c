@@ -63,7 +63,7 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   float scale = argv[9+poffset]->f;
   float speed = argv[10+poffset]->f;
   char *blendmode_s = (char *) argv[11+poffset];
-  int depth = argv[12+poffset]->i;
+  int level = argv[12+poffset]->i;
 
   if (argc > 15+poffset) {
     printf("show server unexpectedly received extra parameters, maybe update Dirt?\n");
@@ -98,7 +98,7 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   args->scale = scale;
   args->speed = speed;
   args->blendmode = blendmode;
-  args->depth = depth;
+  args->level = level;
 
   return;
 }

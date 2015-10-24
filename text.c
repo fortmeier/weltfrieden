@@ -166,7 +166,6 @@ void textlayer_apply(layer* l, int even) {
   glDrawArrays(GL_TRIANGLES, 0, 6);
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
-  printf("t");
 }
 
 void textlayer_finish(layer* l) {

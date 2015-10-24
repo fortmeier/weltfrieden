@@ -37,17 +37,55 @@ GLuint vao;
 void dequeue(double now) {
   layer *p;
   pthread_mutex_lock(&queuelock);
+  if (showing == NULL) {
+    p = queue_next(&waiting, now);
+
+    if (p == NULL) {
+      pthread_mutex_unlock(&queuelock);
+      return;
+    }
+    else {
+      p->next = NULL;
+      p->prev = NULL;
+
+      showing = p;
+    }
+  }
   while ((p = queue_next(&waiting, now)) != NULL) {
 #ifndef NODEBUG
     int s = queue_size(showing);
 #endif
-    p->prev = NULL;
-    p->next = showing;
-    if (showing != NULL) {
-      assert(showing->depth < p->depth);
-      showing->prev = p;
+    if (showing->level >= p->level) {
+      p->prev = NULL;
+      p->next = showing;
+      if (showing != NULL) {
+        showing->prev = p;
+      }
+      showing = p;
     }
-    showing = p;
+    else {
+      layer *tmp = showing;
+
+      while (1) {
+        if (tmp->level >= p->level) {
+          // insert p in between prev/next
+          p->prev = tmp->prev;
+          p->next = tmp;
+
+          tmp->prev = p;
+          break;
+        }
+
+        if (tmp->next == NULL) {
+          p->next = NULL;
+          tmp->next = p;
+          p->prev = tmp;
+          break;
+        }
+
+        tmp = tmp->next;
+      }
+    }
 #ifndef NODEBUG
     assert(s == (queue_size(showing) - 1));
 #endif
@@ -122,7 +160,6 @@ void layers_apply() {
 
     layers_finish(pass);
     pass = (pass == 0) ? 1 : 0;
-    printf("\n");
 
   }
 }
