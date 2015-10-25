@@ -72,6 +72,13 @@ void dequeue(double now) {
           p->prev = tmp->prev;
           p->next = tmp;
 
+          if (p->prev != NULL) {
+            p->prev->next = p;
+          }
+          else {
+            showing = p;
+          }
+
           tmp->prev = p;
           break;
         }
