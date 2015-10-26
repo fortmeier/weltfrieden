@@ -28,6 +28,7 @@ extern GLuint* texfbo;
 extern GLuint sampler;
 extern double now;
 extern GLuint vao;
+extern int cache;
 
 typedef struct {
   float x, y, z;    // position
@@ -40,6 +41,7 @@ GLuint text_shader = 0;
 
 
 void textlayer_init(layer* l) {
+  textlayer *t = (textlayer*)l->layer_data;
   FT_Library ft;
 
   if (FT_Init_FreeType(&ft)) {
@@ -57,7 +59,7 @@ void textlayer_init(layer* l) {
 
   FT_Set_Pixel_Sizes(face, 0, fontsize);
 
-  if (FT_Load_Char(face, l->text->text[0], FT_LOAD_RENDER)) {
+  if (FT_Load_Char(face, t->text[0], FT_LOAD_RENDER)) {
     log_err("[text:init] failed loading char\n");
     exit(1);
   }
@@ -86,18 +88,18 @@ void textlayer_init(layer* l) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
   l->shaderid = texture;
-  l->text->res[0] = face->glyph->bitmap.width;
-  l->text->res[1] = face->glyph->bitmap.rows;
-  l->text->bearing[0] = face->glyph->bitmap_left;
-  l->text->bearing[1] = face->glyph->bitmap_top;
-  l->text->advance = face->glyph->advance.x;
+  t->res[0] = face->glyph->bitmap.width;
+  t->res[1] = face->glyph->bitmap.rows;
+  t->bearing[0] = face->glyph->bitmap_left;
+  t->bearing[1] = face->glyph->bitmap_top;
+  t->advance = face->glyph->advance.x;
 
 
-  GLfloat w = l->text->res[0] / res[0];
-  GLfloat h = l->text->res[1] / res[0];
+  GLfloat w = t->res[0] / res[0];
+  GLfloat h = t->res[1] / res[0];
 
-  GLfloat xpos = ( (l->text->bearing[0]) / fontsize ) + l->pos[0] - (w/2);
-  GLfloat ypos = ((l->pos[1] - (l->text->res[1] - l->text->bearing[1])) / fontsize) + (l->pos[1]) - (h/2);
+  GLfloat xpos = ( (t->bearing[0]) / fontsize ) + l->pos[0] - (w/2);
+  GLfloat ypos = ((l->pos[1] - (t->res[1] - t->bearing[1])) / fontsize) + (l->pos[1]) - (h/2);
 
   GLfloat vertices[6][4] = {
     { xpos, ypos + h, 0.0, 0.0 },
@@ -129,24 +131,31 @@ void textlayer_init(layer* l) {
   glAttachShader(l->progid, text_vshader);
   glAttachShader(l->progid, text_shader);
   glLinkProgram(l->progid);
+
 }
 
 void textlayer_add(t_showargs args) {
   layer* l = textlayer_new();
+  textlayer* t = (textlayer*)l->layer_data;
 
   if (l == NULL) {
     log_err("[text:new] hit max (%d)\n", MAXSHADERLAYERS);
     return;
   }
 
-  l->text->text = strdup(args.words);
+  t->text = strdup(args.words);
 
   layer_init(l, &args);
   layer_add(l);
 }
 
 
-void textlayer_apply(layer* l, int even) {
+void textlayer_apply(layer* l) {
+  if (cache == 0) {
+    text_vshader = _shader_load( "shaders/txt.vert", GL_VERTEX_SHADER);
+    text_shader = _shader_load( "shaders/txt.frag", GL_FRAGMENT_SHADER);
+  }
+
   glUseProgram(l->progid);
   glUniform3f( glGetUniformLocation(l->progid, "text_color"), l->color[0], l->color[1], l->color[2] );
   glUniform2fv( glGetUniformLocation(l->progid, "res"), 1, res);
@@ -171,14 +180,31 @@ void textlayer_apply(layer* l, int even) {
 void textlayer_finish(layer* l) {
 }
 
+
+
+void textlayer_read_cache(layer *cached, layer *uncached) {
+  textlayer *s_uncached = (textlayer*)uncached->layer_data;
+  textlayer *s_cached = (textlayer*)cached->layer_data;
+
+  // this could be better, since text is not really cached up to now, just reuse the shader program
+  if (strcmp(s_cached->text, s_uncached->text) != -1) {
+    layer_copy_program(cached, uncached);
+  }
+}
+
+
 layer *textlayer_new() {
   layer *l = layer_new();
   if (l == NULL) {
     return(NULL);
   }
 
-  l->text = malloc(sizeof(textlayer));
+  l->layer_data = (void*)malloc(sizeof(textlayer));
   l->is_text = 1;
-
+  l->is_scribble = 0;
+  l->type_flag = TEXTLAYER_TYPE_FLAG;
+  l->f_apply = textlayer_apply;
+  l->f_init = textlayer_init;
+  l->f_read_cache = textlayer_read_cache;
   return(l);
 }

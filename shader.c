@@ -7,10 +7,6 @@
 
 #include "shader.h"
 
-#define uarg(s, key, value) glUniform1f( glGetUniformLocation(s->progid, key), value )
-#define uarg4(s, key, num, value) glUniform4fv( glGetUniformLocation(s->progid, key), num, value)
-#define uarg2fv(s, key, num, value) glUniform2fv( glGetUniformLocation(s->progid, key), num, value )
-
 
 extern GLuint *texfbo;
 extern GLuint sampler;
@@ -18,18 +14,11 @@ extern GLuint vao;
 extern GLuint vbo;
 extern int cache;
 
+int scribble = 0;
+float cursor[2];
 double now = 0;
 float res[2];
 int shader_lvl = 0;
-
-void map_show_args(layer* l) {
-  uarg(l, "cps", l->cps);
-  uarg(l, "dur", l->duration);
-  uarg4(l, "color", 1, l->color);
-  uarg4(l, "position", 1, l->pos);
-  uarg(l, "scale", l->scale);
-  uarg(l, "speed", l->speed);
-}
 
 layer *shaderlayer_new() {
   layer *l = layer_new();
@@ -37,20 +26,35 @@ layer *shaderlayer_new() {
     return(NULL);
   }
 
-  l->shader = malloc(sizeof(shaderlayer));
+  l->layer_data = (void*)malloc(sizeof(shaderlayer));
   l->is_text = 0;
+  l->type_flag = SHADERLAYER_TYPE_FLAG;
+  l->f_apply = shaderlayer_apply;
+  l->f_init = shaderlayer_init;
+  l->f_read_cache = shaderlayer_read_cache;
 
   return(l);
 }
 
+void shaderlayer_read_cache(layer *cached, layer *uncached) {
+  shaderlayer *s_uncached = (shaderlayer*)uncached->layer_data;
+  shaderlayer *s_cached = (shaderlayer*)cached->layer_data;
+
+  if (strcmp(s_cached->filename, s_uncached->filename) != -1) {
+    layer_copy_program(cached, uncached);
+  }
+}
+
 void shaderlayer_init(layer* l) {
-  debug("[shader:cache:miss] %s\n", l->shader->filename);
+  /* debug("[shader:cache:miss] %s\n", l->shader->filename); */
   l->progid = glCreateProgram();
 
   char filename[256];
 
+  shaderlayer *s = (shaderlayer*)l->layer_data;
+
   sprintf(filename, "shaders/%s-%dxx.frag",
-          l->shader->filename,
+          s->filename,
           shader_lvl);
 
   l->shaderid = _shader_load( filename, GL_FRAGMENT_SHADER );
@@ -67,6 +71,7 @@ void shaderlayer_init(layer* l) {
   if (infolength > 0) {
     log_err("[shader:link] %s\n%s\n", filename, infolog);
   }
+
 }
 
 
@@ -77,7 +82,13 @@ void shaderlayer_add(t_showargs args) {
     return;
   }
 
-  l->shader->filename = strdup(args.words);
+  shaderlayer *s = (shaderlayer*)l->layer_data;
+
+  s->filename = strdup(args.words);
+
+  if (strcmp(s->filename, "scribble") != -1) {
+    l->is_scribble = 1;
+  }
 
   l->is_text = 0;
 
@@ -86,7 +97,8 @@ void shaderlayer_add(t_showargs args) {
 }
 
 
-void shaderlayer_apply(layer *l, int even) {
+void shaderlayer_apply(layer *l) {
+  /* glUniform1i( glGetUniformLocation(l->progid, "fbotex"), 0); */
   /* glActiveTexture(GL_TEXTURE1); */
   /* glBindTexture(GL_TEXTURE_2D, texfbo[even]); */
   /* glBindSampler(0, sampler); */
@@ -94,6 +106,7 @@ void shaderlayer_apply(layer *l, int even) {
   uarg(l, "now", now);
   uarg(l, "elapsed", now - l->when);
   uarg2fv(l, "res", 1, res);
+  uarg2fv(l, "cursor", 1, cursor);
 
   map_show_args(l);
 

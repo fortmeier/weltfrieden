@@ -5,9 +5,9 @@
 #include "dbg.h"
 
 #include "gl_env.h"
-#include "t_shader.h"
-#include "t_text.h"
-
+/* #include "t_shader.h" */
+/* #include "t_text.h" */
+/* #include "t_scribble.h" */
 #define uarg(s, key, value) glUniform1f( glGetUniformLocation(s->progid, key), value )
 #define uarg4(s, key, num, value) glUniform4fv( glGetUniformLocation(s->progid, key), num, value)
 #define uarg2fv(s, key, num, value) glUniform2fv( glGetUniformLocation(s->progid, key), num, value )
@@ -51,9 +51,18 @@ typedef struct {
   int level;
 } t_showargs;
 
+struct layer_t;
+
+typedef void (*f_layer_apply)(struct layer_t *l);
+typedef void (*f_layer_init)(struct layer_t *l);
+typedef void (*f_layer_read_cache)(struct layer_t *cached, struct layer_t *uncached);
+
+
 typedef struct layer_t
 {
   enum layerstate state;
+
+  int type_flag;
 
   double when;
   float cps;
@@ -67,12 +76,21 @@ typedef struct layer_t
   float speed;
 
   int is_text;
+  int is_scribble;
+
   enum blendmode blendmode;
   int level;
-  union {
-    shaderlayer *shader;
-    textlayer *text;
-  };
+
+  void *layer_data;
+
+  f_layer_apply f_apply;
+  f_layer_init f_init;
+  f_layer_read_cache f_read_cache;
+  /* union { */
+  /*   shaderlayer *shader; */
+  /*   textlayer *text; */
+  /*   scribblelayer *scribble; */
+  /* }; */
 
   unsigned int progid;
   unsigned int shaderid;
@@ -85,11 +103,18 @@ typedef struct layer_t
 
 #include "queue.h"
 
+
+
+
 struct layer_t* layer_new();
+
+void map_show_args(layer *l);
 
 void layer_init(layer *l, t_showargs *args);
 void layer_add(layer *l);
 void layer_apply(layer *l, int even);
+
+void layer_copy_program(layer *cached, layer *uncached);
 
 GLint _shader_load(const char* filename, GLenum type);
 

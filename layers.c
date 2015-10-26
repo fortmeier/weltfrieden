@@ -144,8 +144,6 @@ void layers_finish(int even) {
 
   glBindVertexArray(vao);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  glBindFramebuffer(GL_FRAMEBUFFER, fbo[even]);
-  glClear(GL_COLOR_BUFFER_BIT);
 }
 
 
@@ -171,6 +169,14 @@ void layers_apply() {
   }
 }
 
+void layers_redraw_scribble() {
+  glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
+  glClear(GL_COLOR_BUFFER_BIT);
+  glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
+  glClear(GL_COLOR_BUFFER_BIT);
+  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 void layers_cleanup() {
   layer* p = showing;
 
@@ -179,6 +185,7 @@ void layers_cleanup() {
       queue_remove(&showing, p);
       if (p->is_text == 1) {
         glDeleteTextures(1, &p->shaderid);
+
       }
     }
     p = p->next;

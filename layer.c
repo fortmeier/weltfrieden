@@ -22,6 +22,7 @@ extern pthread_mutex_t queuelock;
 extern layer layers[MAXSHADERLAYERS];
 extern int cache;
 extern int shader_lvl;
+extern int scribble;
 
 extern layer* waiting;
 extern layer* showing;
@@ -37,6 +38,15 @@ static void layer_reset(layer* s) {
   s->shaderid = 0;
   s->next = NULL;
   s->prev = NULL;
+}
+
+void map_show_args(layer* l) {
+  uarg(l, "cps", l->cps);
+  uarg(l, "dur", l->duration);
+  uarg4(l, "color", 1, l->color);
+  uarg4(l, "position", 1, l->pos);
+  uarg(l, "scale", l->scale);
+  uarg(l, "speed", l->speed);
 }
 
 GLuint get_vertex_shader() {
@@ -101,14 +111,22 @@ GLint _shader_load( const char *filename, GLenum type ) {
 }
 
 
+
+void layer_copy_program(layer *cached, layer *uncached) {
+  uncached->progid = cached->progid;
+  uncached->shaderid = cached->shaderid;
+  debug("[cache:hit]\n");
+}
+
+
+
 void layer_from_cache(layer *l) {
   if (l->is_text == 0) {
     for (int i = 0; i < MAXSHADERLAYERS; i++) {
-      if (layers[i].state != UNUSED && layers[i].is_text == 0 && strcmp(l->shader->filename, layers[i].shader->filename) == 0)
+      // TODO: implement a standard way to load _any_ layer from cache, maybe this needs a type flag in layer_T
+      if (layers[i].state != UNUSED && layers[i].type_flag == l->type_flag) // layers[i].is_text == 0 && strcmp(l->shader->filename, layers[i].shader->filename) == 0)
       {
-        l->progid = layers[i].progid;
-        l->shaderid = layers[i].shaderid;
-        debug("[cache:hit]\n");
+        l->f_read_cache(&layers[i], l);
         break;
       }
     }
@@ -182,36 +200,43 @@ void layer_blend(layer *l) {
 
 void layer_apply(layer *l, int even) {
   if ( l->state == UNINITIALIZED) {
-    if (l->is_text == 1) {
-      textlayer_init(l);
-    }
-    else {
-      shaderlayer_init(l);
-    }
+    l->f_init(l);
+    /* if (l->is_text == 1) { */
+    /*    //textlayer_init(l); */
+    /* } */
+    /* else { */
+    /*   shaderlayer_init(l); */
+    /* } */
     l->state = INITIALIZED;
   }
   if ( l->state == INITIALIZED) {
     if (l->when <= now) {
       layer_blend(l);
-      /* glActiveTexture(GL_TEXTURE0); */
-      /* glBindFramebuffer(GL_FRAMEBUFFER, fbo[even]); */
-      /* glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[even], 0); */
+
+
+      /* if (scribble && l->is_scribble == 1) { */
+      /*   glActiveTexture(GL_TEXTURE0); */
+      /*   glBindFramebuffer(GL_FRAMEBUFFER, fbo[even]); */
+      /*   glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[even], 0); */
+      /* } */
 
       glUseProgram(l->progid);
-      if (l->is_text == 1) {
-        if (cache == 0) {
-          text_vshader = _shader_load( "shaders/txt.vert", GL_VERTEX_SHADER);
-          text_shader = _shader_load( "shaders/txt.frag", GL_FRAGMENT_SHADER);
-        }
-        textlayer_apply(l, even);
-        /* glBindFramebuffer(GL_FRAMEBUFFER, 0); */
-        textlayer_finish(l);
-      }
-      else {
-        shaderlayer_apply(l, even);
-        /* glBindFramebuffer(GL_FRAMEBUFFER, 0); */
-        shaderlayer_finish(l);
-      }
+
+      l->f_apply(l);
+
+      /* if (l->is_text == 1) { */
+      /*   textlayer_apply(l, even); */
+      /*   glBindFramebuffer(GL_FRAMEBUFFER, 0); */
+      /*   textlayer_finish(l); */
+      /* } */
+      /* else { */
+      /*   if (scribble == 1) { */
+      /*     shaderlayer_apply(l, even); */
+
+      /*     glBindFramebuffer(GL_FRAMEBUFFER, 0); */
+      /*     shaderlayer_finish(l); */
+      /*   } */
+      /* } */
     }
   }
 }

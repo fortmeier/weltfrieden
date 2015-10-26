@@ -6,11 +6,15 @@
 #include "gl_env.h"
 
 #include "layer.h"
+#include "t_text.h"
+
+#define TEXTLAYER_TYPE_FLAG 2
 
 void textlayer_add(t_showargs args);
-void textlayer_apply(layer* l, int even);
+void textlayer_apply(layer* l);
 void textlayer_finish(layer* l);
 void textlayer_init(layer* l);
+void textlayer_read_cache(layer *cached, layer *uncached);
 
 layer *textlayer_new();
 #endif
