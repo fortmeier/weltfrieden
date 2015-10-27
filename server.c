@@ -64,9 +64,11 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   float speed = argv[10+poffset]->f;
   char *blendmode_s = (char *) argv[11+poffset];
   int level = argv[12+poffset]->i;
+  char *text = (char *) argv[13+poffset];
+  float fontsize = argv[14+poffset]->f;
 
   if (argc > 15+poffset) {
-    printf("show server unexpectedly received extra parameters, maybe update Dirt?\n");
+    printf("show server unexpectedly received extra parameters, maybe update weltfrieden?\n");
   }
 
   switch(blendmode_s[0]) {
@@ -99,6 +101,8 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   args->speed = speed;
   args->blendmode = blendmode;
   args->level = level;
+  args->text = text;
+  args->fontsize = fontsize;
 
   return;
 }
@@ -139,15 +143,15 @@ extern int server_init(void) {
 
   lo_server_thread st = lo_server_thread_new(OSC_PORT, error);
 
-  lo_server_thread_add_method(st, "/shader", "iiffsffffffffffsi",
+  lo_server_thread_add_method(st, "/shader", "iiffsffffffffffsisf",
                               shader_handler,
                               NULL
 			      );
 
-  lo_server_thread_add_method(st, "/text", "iiffsffffffffffsi",
-                              text_handler,
-                              NULL
-			      );
+  /* lo_server_thread_add_method(st, "/text", "iiffsffffffffffsisi", */
+  /*                             text_handler, */
+  /*                             NULL */
+  /*       		      ); */
 
 
   lo_server_thread_add_method(st, NULL, NULL, generic_handler, NULL);

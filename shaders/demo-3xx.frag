@@ -3,17 +3,20 @@
 uniform float now;
 uniform float elapsed;
 uniform vec2 res;
-uniform float gain;
-uniform float shape;
 uniform float speed;
-uniform float begin;
-uniform float end;
-uniform float offset;
 uniform float cps;
+uniform float dur;
+uniform vec4 position;
+uniform vec4 color;
+uniform float scale;
 
+uniform sampler2D fbotex;
+
+in vec2 texcoord;
 in vec4 gl_FragCoord;
-uniform sampler2D tex;
+
 layout(location = 0) out vec4 frag_color;
+layout(location = 1) out vec4 fbo_color;
 
 
 float random_noise(vec2 p) {
@@ -51,16 +54,16 @@ float interpolated_noise(vec2 p) {
 }
 
 void main() {
-  vec2 position = gl_FragCoord.xy/res.xy;
+  vec2 position = gl_FragCoord.xy / res.xy;
 // if ((position.x>1.) || (position.y>1.)) {
 //   discard;
 // }
 
 // float tiles = 4.;
 // position *= tiles;
-  position /= gain;
-  position += now * cps;
+  position /= scale;
+  position += elapsed / (dur / cps);
   float n = interpolated_noise(position);
 
-  frag_color = vec4(vec3(n*3.141592), 1.);
+  frag_color = color*vec4(vec3(n*3.141592), 1.);
 }

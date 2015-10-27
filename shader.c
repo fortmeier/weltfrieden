@@ -90,7 +90,11 @@ void shaderlayer_add(t_showargs args) {
     l->is_scribble = 1;
   }
 
-  l->is_text = 0;
+  if (strlen(args.text) > 0) {
+    l->is_text = 1;
+    l->text = strdup(args.text);
+    debug("[text:add] %s %f\n", l->text, args.fontsize);
+  }
 
   layer_init(l, &args);
   layer_add(l);
@@ -102,6 +106,7 @@ void shaderlayer_apply(layer *l) {
   /* glActiveTexture(GL_TEXTURE1); */
   /* glBindTexture(GL_TEXTURE_2D, texfbo[even]); */
   /* glBindSampler(0, sampler); */
+      glUseProgram(l->progid);
 
   uarg(l, "now", now);
   uarg(l, "elapsed", now - l->when);

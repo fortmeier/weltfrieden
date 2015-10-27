@@ -10,6 +10,8 @@
 
 #include "text.h"
 
+#define TEXT_SIZE_F 10000
+
 typedef struct t_character {
   GLuint texid;
   GLuint res[2];
@@ -41,7 +43,7 @@ GLuint text_shader = 0;
 
 
 void textlayer_init(layer* l) {
-  textlayer *t = (textlayer*)l->layer_data;
+  /* textlayer *t = (textlayer*)l->layer_data; */
   FT_Library ft;
 
   if (FT_Init_FreeType(&ft)) {
@@ -55,11 +57,11 @@ void textlayer_init(layer* l) {
     exit(1);
   }
 
-  float fontsize = fmin(l->scale, 400);
+  float fontsize = fmin(l->fontsize, 40) * TEXT_SIZE_F / res[1];
 
   FT_Set_Pixel_Sizes(face, 0, fontsize);
 
-  if (FT_Load_Char(face, t->text[0], FT_LOAD_RENDER)) {
+  if (FT_Load_Char(face, l->text[0], FT_LOAD_RENDER)) {
     log_err("[text:init] failed loading char\n");
     exit(1);
   }
@@ -87,19 +89,26 @@ void textlayer_init(layer* l) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-  l->shaderid = texture;
-  t->res[0] = face->glyph->bitmap.width;
-  t->res[1] = face->glyph->bitmap.rows;
-  t->bearing[0] = face->glyph->bitmap_left;
-  t->bearing[1] = face->glyph->bitmap_top;
-  t->advance = face->glyph->advance.x;
+  l->textid = texture;
+  GLuint text_res[2] = {
+    face->glyph->bitmap.width,
+    face->glyph->bitmap.rows
+  };
 
+  GLuint text_bearing[2] = {
+    face->glyph->bitmap_left,
+    face->glyph->bitmap_top
+  };
 
-  GLfloat w = t->res[0] / res[0];
-  GLfloat h = t->res[1] / res[0];
+  debug("[text:params] %d,%d %d,%d %f\n", text_res[0], text_res[1], text_bearing[0], text_bearing[1], fontsize);
 
-  GLfloat xpos = ( (t->bearing[0]) / fontsize ) + l->pos[0] - (w/2);
-  GLfloat ypos = ((l->pos[1] - (t->res[1] - t->bearing[1])) / fontsize) + (l->pos[1]) - (h/2);
+  GLuint text_advance = face->glyph->advance.x;
+
+  GLfloat w = text_res[0] / res[0];
+  GLfloat h = text_res[1] / res[0];
+
+  GLfloat xpos = ( (text_bearing[0]) / fontsize ) + l->pos[0] - (w/2);
+  GLfloat ypos = ((l->pos[1] - (text_res[1] - text_bearing[1])) / fontsize) + (l->pos[1]) - (h/2);
 
   GLfloat vertices[6][4] = {
     { xpos, ypos + h, 0.0, 0.0 },
@@ -115,10 +124,10 @@ void textlayer_init(layer* l) {
   FT_Done_Face(face);
   FT_Done_FreeType(ft);
 
-  glGenVertexArrays(1, &l->vao);
-  glGenBuffers(1, &l->vbo);
-  glBindVertexArray(l->vao);
-  glBindBuffer(GL_ARRAY_BUFFER, l->vbo);
+  glGenVertexArrays(1, &l->text_vao);
+  glGenBuffers(1, &l->text_vbo);
+  glBindVertexArray(l->text_vao);
+  glBindBuffer(GL_ARRAY_BUFFER, l->text_vbo);
 
   glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, vertices, GL_STATIC_DRAW);
   glEnableVertexAttribArray(0);
@@ -127,10 +136,10 @@ void textlayer_init(layer* l) {
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
-  l->progid = glCreateProgram();
-  glAttachShader(l->progid, text_vshader);
-  glAttachShader(l->progid, text_shader);
-  glLinkProgram(l->progid);
+  l->text_progid = glCreateProgram();
+  glAttachShader(l->text_progid, text_vshader);
+  glAttachShader(l->text_progid, text_shader);
+  glLinkProgram(l->text_progid);
 
 }
 
@@ -156,21 +165,21 @@ void textlayer_apply(layer* l) {
     text_shader = _shader_load( "shaders/txt.frag", GL_FRAGMENT_SHADER);
   }
 
-  glUseProgram(l->progid);
-  glUniform3f( glGetUniformLocation(l->progid, "text_color"), l->color[0], l->color[1], l->color[2] );
-  glUniform2fv( glGetUniformLocation(l->progid, "res"), 1, res);
+  glUseProgram(l->text_progid);
+  glUniform3f( glGetUniformLocation(l->text_progid, "text_color"), l->color[0], l->color[1], l->color[2] );
+  glUniform2fv( glGetUniformLocation(l->text_progid, "res"), 1, res);
   uarg(l, "elapsed", now - l->when);
   uarg(l, "cps", l->cps);
   uarg(l, "dur", l->duration);
 
   /* glBindSampler(1, sampler); */
-  /* glUniform1i( glGetUniformLocation(l->progid, "fbotex"), 1); */
+  /* glUniform1i( glGetUniformLocation(l->text_progid, "fbotex"), 1); */
   /* glActiveTexture(GL_TEXTURE1); */
   /* glBindTexture(GL_TEXTURE_2D, texfbo[even]); */
 
   glActiveTexture(GL_TEXTURE0);
-  glBindVertexArray(l->vao);
-  glBindTexture(GL_TEXTURE_2D, l->shaderid);
+  glBindVertexArray(l->text_vao);
+  glBindTexture(GL_TEXTURE_2D, l->textid);
 
   glDrawArrays(GL_TRIANGLES, 0, 6);
   glBindVertexArray(0);

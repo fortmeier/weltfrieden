@@ -47,6 +47,13 @@ typedef struct {
   float scale;
   float speed;
 
+  float fontsize;
+  char *text;
+//  char *font;
+
+  int scribble;
+
+//  int drawmode;
   int blendmode;
   int level;
 } t_showargs;
@@ -75,8 +82,12 @@ typedef struct layer_t
   float scale;
   float speed;
 
+
   int is_text;
   int is_scribble;
+
+  char *text;
+  float fontsize;
 
   enum blendmode blendmode;
   int level;
@@ -94,9 +105,14 @@ typedef struct layer_t
 
   unsigned int progid;
   unsigned int shaderid;
+  unsigned int textid;
+  unsigned int text_progid;
 
   GLuint vao;
   GLuint vbo;
+
+  GLuint text_vao;
+  GLuint text_vbo;
 
   struct layer_t *next, *prev;
 } layer;

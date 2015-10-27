@@ -184,8 +184,7 @@ void layers_cleanup() {
     if ((p->when + (p->duration/p->cps)) < now) {
       queue_remove(&showing, p);
       if (p->is_text == 1) {
-        glDeleteTextures(1, &p->shaderid);
-
+        glDeleteTextures(1, &p->textid);
       }
     }
     p = p->next;

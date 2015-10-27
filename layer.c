@@ -170,6 +170,8 @@ void layer_init(layer* l, t_showargs *args) {
   l->speed = args->speed;
   l->blendmode = args->blendmode;
   l->level = args->level;
+
+  l->fontsize = args->fontsize;
 }
 
 void layer_add(layer *l) {
@@ -200,13 +202,13 @@ void layer_blend(layer *l) {
 
 void layer_apply(layer *l, int even) {
   if ( l->state == UNINITIALIZED) {
-    l->f_init(l);
-    /* if (l->is_text == 1) { */
-    /*    //textlayer_init(l); */
-    /* } */
-    /* else { */
-    /*   shaderlayer_init(l); */
-    /* } */
+    /* l->f_init(l); */
+    if (l->is_text == 1) {
+       textlayer_init(l);
+    }
+
+    shaderlayer_init(l);
+
     l->state = INITIALIZED;
   }
   if ( l->state == INITIALIZED) {
@@ -220,18 +222,18 @@ void layer_apply(layer *l, int even) {
       /*   glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[even], 0); */
       /* } */
 
-      glUseProgram(l->progid);
 
-      l->f_apply(l);
+      /* l->f_apply(l); */
 
-      /* if (l->is_text == 1) { */
-      /*   textlayer_apply(l, even); */
       /*   glBindFramebuffer(GL_FRAMEBUFFER, 0); */
       /*   textlayer_finish(l); */
       /* } */
       /* else { */
       /*   if (scribble == 1) { */
-      /*     shaderlayer_apply(l, even); */
+      shaderlayer_apply(l);
+      if (l->is_text == 1) {
+        textlayer_apply(l);
+      }
 
       /*     glBindFramebuffer(GL_FRAMEBUFFER, 0); */
       /*     shaderlayer_finish(l); */
