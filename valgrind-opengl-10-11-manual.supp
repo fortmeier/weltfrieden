@@ -1,0 +1,51 @@
+{
+   osx_el_capitan_opengl_supp_manual_1
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:_NSPlaceholderValueOrNumber
+   fun:_class_initialize
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[DDDynamicSource registerDynamicSourceClass:forSourceKind:]
+}
+{
+   osx_el_capitan_opengl_supp_manual_2
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_manual_3
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:____FoundationPresent_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:CFArrayCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+}

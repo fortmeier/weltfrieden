@@ -1,0 +1,3192 @@
+{
+   osx_el_capitan_opengl_supp_2
+   Memcheck:Cond
+   fun:bcmp
+   fun:_ZN16ImageLoaderMachO18validateFirstPagesEPK21linkedit_data_commandiPKhmxRKN11ImageLoader11LinkContextE
+   fun:_ZN26ImageLoaderMachOCompressed19instantiateFromFileEPKciPKhmyyRK4statjjPK21linkedit_data_commandPK23encryption_info_commandRKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO19instantiateFromFileEPKciPKhyyRK4statRKN11ImageLoader11LinkContextE
+   fun:_ZN4dyldL10loadPhase6EiRK4statPKcRKNS_11LoadContextE
+   fun:_ZN4dyldL10loadPhase5EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase4EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase3EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase1EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase0EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyld4loadEPKcRKNS_11LoadContextE
+   fun:_ZN4dyldL14libraryLocatorEPKcbS1_PKN11ImageLoader10RPathChainE
+}
+{
+   osx_el_capitan_opengl_supp_18
+   Memcheck:Value8
+   fun:bcmp
+   fun:_ZN16ImageLoaderMachO18validateFirstPagesEPK21linkedit_data_commandiPKhmxRKN11ImageLoader11LinkContextE
+   fun:_ZN26ImageLoaderMachOCompressed19instantiateFromFileEPKciPKhmyyRK4statjjPK21linkedit_data_commandPK23encryption_info_commandRKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO19instantiateFromFileEPKciPKhyyRK4statRKN11ImageLoader11LinkContextE
+   fun:_ZN4dyldL10loadPhase6EiRK4statPKcRKNS_11LoadContextE
+   fun:_ZN4dyldL10loadPhase5EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase4EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase3EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase1EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase0EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyld4loadEPKcRKNS_11LoadContextE
+   fun:_ZN4dyldL14libraryLocatorEPKcbS1_PKN11ImageLoader10RPathChainE
+}
+{
+   osx_el_capitan_opengl_supp_34
+   Memcheck:Value8
+   fun:bcmp
+   fun:_ZN16ImageLoaderMachO18validateFirstPagesEPK21linkedit_data_commandiPKhmxRKN11ImageLoader11LinkContextE
+   fun:_ZN26ImageLoaderMachOCompressed19instantiateFromFileEPKciPKhmyyRK4statjjPK21linkedit_data_commandPK23encryption_info_commandRKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO19instantiateFromFileEPKciPKhyyRK4statRKN11ImageLoader11LinkContextE
+   fun:_ZN4dyldL10loadPhase6EiRK4statPKcRKNS_11LoadContextE
+   fun:_ZN4dyldL10loadPhase5EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase4EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase3EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase1EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase0EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyld4loadEPKcRKNS_11LoadContextE
+   fun:_ZN4dyldL14libraryLocatorEPKcbS1_PKN11ImageLoader10RPathChainE
+}
+{
+   osx_el_capitan_opengl_supp_50
+   Memcheck:Cond
+   fun:_ZN16ImageLoaderMachO18validateFirstPagesEPK21linkedit_data_commandiPKhmxRKN11ImageLoader11LinkContextE
+   fun:_ZN26ImageLoaderMachOCompressed19instantiateFromFileEPKciPKhmyyRK4statjjPK21linkedit_data_commandPK23encryption_info_commandRKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO19instantiateFromFileEPKciPKhyyRK4statRKN11ImageLoader11LinkContextE
+   fun:_ZN4dyldL10loadPhase6EiRK4statPKcRKNS_11LoadContextE
+   fun:_ZN4dyldL10loadPhase5EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase4EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase3EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase1EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyldL10loadPhase0EPKcS1_RKNS_11LoadContextEPNSt3__16vectorIS1_NS5_9allocatorIS1_EEEE
+   fun:_ZN4dyld4loadEPKcRKNS_11LoadContextE
+   fun:_ZN4dyldL14libraryLocatorEPKcbS1_PKN11ImageLoader10RPathChainE
+   fun:_ZN11ImageLoader22recursiveLoadLibrariesERKNS_11LinkContextEbRKNS_10RPathChainE
+}
+{
+   osx_el_capitan_opengl_supp_67
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:__CFAllocateObject2
+   fun:__34+[__NSPlaceholderArray initialize]_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:CFArrayCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+}
+{
+   osx_el_capitan_opengl_supp_84
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:__CFAllocateObject2
+   fun:__34+[__NSPlaceholderArray initialize]_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:CFArrayCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+}
+{
+   osx_el_capitan_opengl_supp_101
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:__CFAllocateObject2
+   fun:__39+[__NSPlaceholderDictionary initialize]_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[NSObject new]
+   fun:-[NSThread init]
+   fun:____NSThreads_block_invoke
+}
+{
+   osx_el_capitan_opengl_supp_118
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:__CFAllocateObject2
+   fun:__39+[__NSPlaceholderDictionary initialize]_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[NSObject new]
+   fun:-[NSThread init]
+   fun:____NSThreads_block_invoke
+}
+{
+   osx_el_capitan_opengl_supp_135
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:+[NSObject new]
+   fun:__29+[__NSDictionaryM initialize]_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:-[__NSPlaceholderDictionary initWithCapacity:]
+   fun:-[NSThread init]
+   fun:____NSThreads_block_invoke
+}
+{
+   osx_el_capitan_opengl_supp_152
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:_Znwm
+   fun:_ZL18getElapsedWallTimev
+   fun:_GLOBAL__sub_I_Process.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_169
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:_NSPlaceholderValueOrNumber
+   fun:_class_initialize
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[DDDynamicSource registerDynamicSourceClass:forSourceKind:]
+   fun:+[DDGeoSource load]
+   fun:call_load_methods
+   fun:load_images
+}
+{
+   osx_el_capitan_opengl_supp_186
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:_NSPlaceholderValueOrNumber
+   fun:_class_initialize
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[DDDynamicSource registerDynamicSourceClass:forSourceKind:]
+   fun:+[DDGeoSource load]
+   fun:call_load_methods
+   fun:load_images
+}
+{
+   osx_el_capitan_opengl_supp_203
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:+[NSString initialize]
+   fun:_class_initialize
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[NSMutableString initialize]
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+}
+{
+   osx_el_capitan_opengl_supp_220
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:+[NSMutableString initialize]
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[NSMutableString initialize]
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[__NSDictionaryI __new:::::]
+}
+{
+   osx_el_capitan_opengl_supp_237
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:__CFUniCharLoadDecompositionTable
+   fun:CFUniCharDecompose
+   fun:CFStringGetFileSystemRepresentation
+   fun:_CFURLCreateWithFileSystemPath
+   fun:_CFBundleCopyBundleURLForExecutableURL
+   fun:_CFBundleGetMainBundleAlreadyLocked
+   fun:CFBundleGetMainBundle
+   fun:___bundleInfo_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_CFAppVersionCheckLessThan
+}
+{
+   osx_el_capitan_opengl_supp_254
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_271
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttIm15protocol_list_tE11attachListsEPKPS0_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_288
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttIm15protocol_list_tE11attachListsEPKPS0_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_305
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_322
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_339
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_356
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_373
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_390
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttIm15protocol_list_tE11attachListsEPKPS0_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_407
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttIm15protocol_list_tE11attachListsEPKPS0_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_424
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_441
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_458
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_475
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_492
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_509
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_526
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_543
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_560
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_577
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_594
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+}
+{
+   osx_el_capitan_opengl_supp_611
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_628
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_645
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_662
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_679
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:objc_registerClassPair
+   fun:__CFMakeNSBlockClasses
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_696
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:objc_registerClassPair
+   fun:__CFMakeNSBlockClasses
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_713
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_730
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_747
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttIm15protocol_list_tE11attachListsEPKPS0_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+}
+{
+   osx_el_capitan_opengl_supp_764
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI10property_t15property_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_781
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttIm15protocol_list_tE11attachListsEPKPS0_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_798
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_815
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_832
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI10property_t15property_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_849
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_866
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_883
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_900
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_917
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_934
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_951
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_968
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_985
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1002
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:___NSSetupDispatchDataBridge_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1019
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:-[__NSPlaceholderDictionary initWithObjects:forKeys:count:]
+   fun:+[NSDictionary dictionaryWithObjects:forKeys:count:]
+   fun:__31+[DDGeoSource tableNameMapping]_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:+[DDGeoSource tableNameMapping]
+}
+{
+   osx_el_capitan_opengl_supp_1036
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:+[NSString initialize]
+   fun:_class_initialize
+   fun:_class_initialize
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[NSMutableString initialize]
+   fun:_class_initialize
+}
+{
+   osx_el_capitan_opengl_supp_1053
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:+[NSBinder load]
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1070
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+}
+{
+   osx_el_capitan_opengl_supp_1087
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1104
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1121
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+}
+{
+   osx_el_capitan_opengl_supp_1138
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1155
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1172
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI10property_t15property_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1189
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1206
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttIm15protocol_list_tE11attachListsEPKPS0_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+}
+{
+   osx_el_capitan_opengl_supp_1223
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI10property_t15property_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1240
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttIm15protocol_list_tE11attachListsEPKPS0_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1257
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1274
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1291
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+}
+{
+   osx_el_capitan_opengl_supp_1308
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+}
+{
+   osx_el_capitan_opengl_supp_1325
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_calloc
+   fun:NXHashInsert
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1342
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+}
+{
+   osx_el_capitan_opengl_supp_1359
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1376
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1393
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1410
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:_objc_rootAlloc
+   fun:+[NSBinder load]
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader19processInitializersERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1427
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:_objc_rootAlloc
+   fun:+[NSBinder load]
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader19processInitializersERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1444
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:_objc_rootAlloc
+   fun:+[NSBinder load]
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader19processInitializersERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1461
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:_objc_rootAlloc
+   fun:+[NSBinder load]
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader19processInitializersERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1478
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:strdup
+   fun:_CFProcessPath
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1495
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:CFUniCharGetMappingData
+   fun:__CFUniCharLoadDecompositionTable
+   fun:CFUniCharDecompose
+   fun:CFStringGetFileSystemRepresentation
+   fun:_CFURLCreateWithFileSystemPath
+   fun:_CFBundleCopyBundleURLForExecutableURL
+   fun:_CFBundleGetMainBundleAlreadyLocked
+   fun:CFBundleGetMainBundle
+   fun:___bundleInfo_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+}
+{
+   osx_el_capitan_opengl_supp_1512
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1529
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1546
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1563
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1580
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1597
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1614
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:CFArrayCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1631
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1648
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1665
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+}
+{
+   osx_el_capitan_opengl_supp_1682
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+}
+{
+   osx_el_capitan_opengl_supp_1699
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1716
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1733
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1750
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1767
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1784
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1801
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:-[NSThread init]
+   fun:____NSThreads_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_NSThreadGet0
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+}
+{
+   osx_el_capitan_opengl_supp_1818
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:-[__NSPlaceholderDictionary initWithCapacity:]
+   fun:-[NSThread init]
+   fun:____NSThreads_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_NSThreadGet0
+   fun:_NSInitializePlatform
+}
+{
+   osx_el_capitan_opengl_supp_1835
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:_ZL12realizeClassP10objc_class
+   fun:_class_getNonMetaClass
+   fun:lookUpImpOrForward
+   fun:objc_msgSend
+   fun:-[__NSPlaceholderDictionary initWithObjects:forKeys:count:]
+   fun:+[NSDictionary dictionaryWithObjects:forKeys:count:]
+   fun:__31+[DDGeoSource tableNameMapping]_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:+[DDGeoSource tableNameMapping]
+   fun:+[DDGeoSource tableNames]
+}
+{
+   osx_el_capitan_opengl_supp_1852
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:realloc
+   fun:_ZN13list_array_ttI10property_t15property_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL16remethodizeClassP10objc_class
+   fun:_read_images
+   fun:map_images_nolock
+   fun:map_2_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoE
+   fun:_ZN4dyld36registerImageStateBatchChangeHandlerE17dyld_image_statesPFPKcS0_jPK15dyld_image_infoE
+   fun:dyld_register_image_state_change_handler
+   fun:_objc_init
+   fun:_os_object_init
+}
+{
+   osx_el_capitan_opengl_supp_1869
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1886
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1903
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1920
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SPDYConnectionCache.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1937
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SPDYStream.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1954
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SHTTPConnectionCache.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1971
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLConnectionClient.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_1988
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLConnectionLoader.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2005
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLCredentialClientCertificate.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2022
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLCredentialInternetPassword.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2039
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLCredentialKerberosTicket.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2056
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SHTTP2Stream.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2073
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLCredentialServerTrust.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2090
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_Throttler.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2107
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SHTTP2Connection.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2124
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_HTTPConnection.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2141
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SSPDYConnection.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2158
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SSPDYConnectionCacheEntry.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2175
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SHTTP2Callbacks.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2192
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_LocalStreamTask.mm
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2209
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SHTTPConnectionCacheEntry.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2226
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_NetworkProxy.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2243
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_HTTPEngine.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2260
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_AuthBrokerClient.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2277
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLCredentialXMobileMeAuthToken.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2294
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_CFNetworkInternalExternal.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2311
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_HTTPTransaction.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2328
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_AwaitingTube.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2345
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_Serializable.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2362
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SerializableArchive.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2379
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SAwaitingTube.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2396
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_CFURLConnectionSession.mm
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2413
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SSPDYStream.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2430
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLCredentialOAuth1.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2447
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_HTTP2ConnectionCache.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2464
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_STubeManager.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2481
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_URLCredentialOAuth2.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2498
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_STube.cpp
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2515
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_SessionTask.mm
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2532
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFSetCreateGeneric
+   fun:CFSetCreate
+   fun:_GLOBAL__sub_I_CFURLSessionConfiguration.mm
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2549
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2566
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2583
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2600
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:_objc_fetch_pthread_data
+   fun:_ZL27_fetchInitializingClassLista
+   fun:_class_initialize
+   fun:_class_initialize
+   fun:object_setClass
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2617
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:+[NSObject new]
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2634
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:+[NSObject new]
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2651
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:+[NSObject new]
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2668
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:+[NSObject new]
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2685
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2702
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2719
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:+[NSObject new]
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2736
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:NSAllocateObject
+   fun:+[NSObject new]
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2753
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFDictionaryCreateGeneric
+   fun:CFDictionaryCreateMutable
+   fun:____NSThreads_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_NSThreadGet0
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+}
+{
+   osx_el_capitan_opengl_supp_2770
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFDictionaryCreateGeneric
+   fun:CFDictionaryCreateMutable
+   fun:_CFBundleCreate
+   fun:_CFBundleGetMainBundleAlreadyLocked
+   fun:CFBundleGetMainBundle
+   fun:___bundleInfo_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_CFAppVersionCheckLessThan
+}
+{
+   osx_el_capitan_opengl_supp_2787
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:____CFCharacterSetInitialize_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2804
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2821
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:_NSToDoAtProcessStart
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2838
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:__CFUniCharGetUnicodePropertyDataForPlane_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:CFUniCharGetNumberOfPlanesForUnicodePropertyData
+   fun:__CFUniCharLoadDecompositionTable
+   fun:CFUniCharDecompose
+   fun:CFStringGetFileSystemRepresentation
+   fun:_CFURLCreateWithFileSystemPath
+   fun:_CFBundleCopyBundleURLForExecutableURL
+   fun:_CFBundleGetMainBundleAlreadyLocked
+   fun:CFBundleGetMainBundle
+}
+{
+   osx_el_capitan_opengl_supp_2855
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:realloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL16remethodizeClassP10objc_class
+   fun:_read_images
+   fun:map_images_nolock
+   fun:map_2_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoE
+   fun:_ZN4dyld36registerImageStateBatchChangeHandlerE17dyld_image_statesPFPKcS0_jPK15dyld_image_infoE
+   fun:dyld_register_image_state_change_handler
+   fun:_objc_init
+   fun:_os_object_init
+}
+{
+   osx_el_capitan_opengl_supp_2872
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:_ZL12realizeClassP10objc_class
+   fun:look_up_class
+   fun:objc_getFutureClass
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2889
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:class_createInstance
+   fun:__CFAllocateObject2
+   fun:+[__NSArrayI __new:::]
+   fun:CFArrayCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2906
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:realloc
+   fun:_ZL29addUnattachedCategoryForClassP10category_tP10objc_classP11header_info
+   fun:_read_images
+   fun:map_images_nolock
+   fun:map_2_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoE
+   fun:_ZN4dyld36registerImageStateBatchChangeHandlerE17dyld_image_statesPFPKcS0_jPK15dyld_image_infoE
+   fun:dyld_register_image_state_change_handler
+   fun:_objc_init
+   fun:_os_object_init
+   fun:libdispatch_init
+   fun:libSystem_initializer
+}
+{
+   osx_el_capitan_opengl_supp_2923
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:__CFGetConverter
+   fun:CFStringEncodingGetConverter
+   fun:CFStringGetSystemEncoding
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2940
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:realloc
+   fun:_ZN13list_array_ttI8method_t13method_list_tE11attachListsEPKPS1_j
+   fun:_ZL16attachCategoriesP10objc_classP26locstamped_category_list_tb
+   fun:_ZL16remethodizeClassP10objc_class
+   fun:_read_images
+   fun:map_images_nolock
+   fun:map_2_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoE
+   fun:_ZN4dyld36registerImageStateBatchChangeHandlerE17dyld_image_statesPFPKcS0_jPK15dyld_image_infoE
+   fun:dyld_register_image_state_change_handler
+   fun:_objc_init
+   fun:_os_object_init
+}
+{
+   osx_el_capitan_opengl_supp_2957
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:__NSSetCStringCharToUnichar
+   fun:_NSInitializePlatform
+   fun:call_load_methods
+   fun:load_images
+   fun:_ZN4dyldL12notifySingleE17dyld_image_statesPK11ImageLoader
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2974
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_2991
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_3008
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_3025
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_3042
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_3059
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_3076
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_3093
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:CFBasicHashCreate
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_3110
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:_CFRuntimeCreateInstance
+   fun:__CFArrayInit
+   fun:_CFBundleCreate
+   fun:_CFBundleGetMainBundleAlreadyLocked
+   fun:CFBundleGetMainBundle
+   fun:___bundleInfo_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:_CFAppVersionCheckLessThan
+   fun:__25+[NSArray allocWithZone:]_block_invoke
+   fun:_dispatch_client_callout
+}
+{
+   osx_el_capitan_opengl_supp_3127
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:_CFGetTSD
+   fun:____CFCharacterSetInitialize_block_invoke
+   fun:_dispatch_client_callout
+   fun:dispatch_once_f
+   fun:__CFInitialize
+   fun:_ZN16ImageLoaderMachO11doImageInitERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+}
+{
+   osx_el_capitan_opengl_supp_3144
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc_zone_malloc
+   fun:__CFUniCharLoadBitmapData
+   fun:CFUniCharGetBitmapPtrForPlane
+   fun:__CFUniCharLoadDecompositionTable
+   fun:CFUniCharDecompose
+   fun:CFStringGetFileSystemRepresentation
+   fun:_CFURLCreateWithFileSystemPath
+   fun:_CFBundleCopyBundleURLForExecutableURL
+   fun:_CFBundleGetMainBundleAlreadyLocked
+   fun:CFBundleGetMainBundle
+   fun:___bundleInfo_block_invoke
+   fun:_dispatch_client_callout
+}
+{
+   osx_el_capitan_opengl_supp_3161
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:realloc
+   fun:_ZL29addUnattachedCategoryForClassP10category_tP10objc_classP11header_info
+   fun:_read_images
+   fun:map_images_nolock
+   fun:map_2_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoE
+   fun:_ZN4dyld36registerImageStateBatchChangeHandlerE17dyld_image_statesPFPKcS0_jPK15dyld_image_infoE
+   fun:dyld_register_image_state_change_handler
+   fun:_objc_init
+   fun:_os_object_init
+   fun:libdispatch_init
+   fun:libSystem_initializer
+}
+{
+   osx_el_capitan_opengl_supp_3178
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:map_images_nolock
+   fun:map_2_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoE
+   fun:_ZN4dyld36registerImageStateBatchChangeHandlerE17dyld_image_statesPFPKcS0_jPK15dyld_image_infoE
+   fun:dyld_register_image_state_change_handler
+   fun:_objc_init
+   fun:_os_object_init
+   fun:libdispatch_init
+   fun:libSystem_initializer
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+}
