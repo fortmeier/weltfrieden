@@ -12,7 +12,7 @@ uniform float scale;
 
 uniform sampler2D fbotex;
 
-in vec2 texcoord;
+/* in vec2 texcoord; */
 in vec4 gl_FragCoord;
 
 layout(location = 0) out vec4 frag_color;
