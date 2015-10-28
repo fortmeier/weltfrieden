@@ -28,15 +28,20 @@ mat4 rotation_matrix(vec3 axis, float angle)
 void main() {
   mat4 rot = rotation_matrix(vec3(0.5,0.5,0.5), scale);
   vec4 c = vec4(0.2, 0.8,0.5 + 0.5 * sin(elapsed)*scale, color.a);
-  //  ivec4 m = mod((ivec4(gl_FragCoord) + ivec4(color.x,color.y,color.z, 0)), (4*ivec4(scale, scale, scale, scale)));
+  int min_scale = 4;
+  vec4 ifrag = vec4(gl_FragCoord);
+  vec4 icol = vec4(vec3(color.rgb), 0);
+  vec4 iscale = min_scale * vec4(scale);
+    //  ivec4 m = mod((ifrag + ivec4(color.x,color.y,color.z, 0)), (4*ivec4(scale, scale, scale, scale)));
 
-// if (m.x > shape && m.y > shape) {
-//   float c = gl_FragCoord.x;
-//   gl_FragColor = vec4(0.95,0.95,0.95,1);
-// }
-// else {
-//   gl_FragColor = 1 - color;
-// }
+  vec4 m = mod(ifrag + icol, iscale);
+  if (m.x > scale && m.y > scale) {
+    float c = gl_FragCoord.x;
+    gl_FragColor = vec4(0.95,0.95,0.95,1);
+  }
+  else {
+    gl_FragColor = 1 - color;
+  }
 
-  gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+  // gl_FragColor = vec4(vec3(icol).rgb,0.5);
 }
