@@ -11,7 +11,7 @@
 const GLenum draw_buffer = GL_COLOR_ATTACHMENT0;
 
 GLuint* texfbo = 0;
-static GLuint vertex_shader = 0;
+GLuint vertex_shader = 0;
 
 extern double now;
 extern GLuint* fbo;
@@ -51,13 +51,11 @@ void map_show_args(layer* l) {
 
 GLuint get_vertex_shader() {
   if (vertex_shader == 0) {
-    char* filename = calloc(20, sizeof(char));
+    char filename[256];
     sprintf(filename, "shaders/basic-%dxx.vert", shader_lvl);
 
     vertex_shader = _shader_load(filename , GL_VERTEX_SHADER );
 
-    free(filename);
-    filename = NULL;
   }
   return vertex_shader;
 }

@@ -1,5 +1,4 @@
 #version 330
-uniform vec2 res;
 
 layout(location = 0 ) in vec4 vertex;
 

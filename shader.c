@@ -46,12 +46,12 @@ void shaderlayer_read_cache(layer *cached, layer *uncached) {
 }
 
 void shaderlayer_init(layer* l) {
-  /* debug("[shader:cache:miss] %s\n", l->shader->filename); */
   l->progid = glCreateProgram();
 
   char filename[256];
 
   shaderlayer *s = (shaderlayer*)l->layer_data;
+  debug("[shader:cache:miss] %s\n", s->filename);
 
   sprintf(filename, "shaders/%s-%dxx.frag",
           s->filename,
@@ -60,6 +60,7 @@ void shaderlayer_init(layer* l) {
   l->shaderid = _shader_load( filename, GL_FRAGMENT_SHADER );
   glAttachShader( l->progid, l->shaderid );
 
+  
   glAttachShader( l->progid, get_vertex_shader() );
 
   glLinkProgram( l->progid );
@@ -121,7 +122,7 @@ void shaderlayer_apply(layer *l) {
   else {
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float) ,(void *) ( 0 * sizeof(float) ));
   }
   glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
 }

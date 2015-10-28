@@ -5,6 +5,7 @@
 #include <pthread.h>
 
 #include "layers.h"
+#include "text.h"
 
 GLuint sampler = 0;
 GLuint* fbo = 0;
@@ -107,7 +108,7 @@ void layers_destroy() {
 }
 
 void layers_finish(int even) {
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  /*  glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 
   if (cache == 0 || fbo_shader == 0) {
@@ -139,11 +140,12 @@ void layers_finish(int even) {
   glUniform2fv( glGetUniformLocation( fbo_progid, "res"), 1, res );
 
   glActiveTexture(GL_TEXTURE0);
-  glBindSampler(0, sampler);
+  //  glBindSampler(0, sampler);
   glBindTexture(GL_TEXTURE_2D, texfbo[even]);
 
   glBindVertexArray(vao);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  */
 }
 
 
@@ -199,24 +201,23 @@ void layers_init() {
   pthread_mutex_init(&layerlock, NULL);
   pthread_mutex_init(&queuelock, NULL);
 
-  text_vshader = _shader_load( "shaders/txt.vert", GL_VERTEX_SHADER);
-  text_shader = _shader_load( "shaders/txt.frag", GL_FRAGMENT_SHADER);
+  textlayer_load_shaders();
 
-  glGenSamplers(1, &sampler);
-  glSamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  /* glGenSamplers(1, &sampler); */
+  /* glSamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR); */
+  /* glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR); */
 
   glActiveTexture(GL_TEXTURE0);
   glGenTextures(1, &texfbo[0]);
   glBindTexture(GL_TEXTURE_2D, texfbo[0]);
-  glBindSampler(0, sampler);
+  /* glBindSampler(0, sampler); */
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, res[0], res[1], 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
   glBindTexture(GL_TEXTURE_2D, 0);
 
   glActiveTexture(GL_TEXTURE1);
   glGenTextures(1, &texfbo[1]);
   glBindTexture(GL_TEXTURE_2D, texfbo[1]);
-  glBindSampler(0, sampler);
+  /* glBindSampler(0, sampler); */
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, res[0], res[1], 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
   glBindTexture(GL_TEXTURE_2D, 0);
 

@@ -31,6 +31,7 @@ extern GLuint sampler;
 extern double now;
 extern GLuint vao;
 extern int cache;
+extern int shader_lvl;
 
 typedef struct {
   float x, y, z;    // position
@@ -40,6 +41,7 @@ typedef struct {
 
 GLuint text_vshader = 0;
 GLuint text_shader = 0;
+
 
 
 void textlayer_init(layer* l) {
@@ -159,10 +161,24 @@ void textlayer_add(t_showargs args) {
 }
 
 
+void textlayer_load_shaders() {
+  char filename[256];
+
+  sprintf(filename, "shaders/txt-%dxx.vert",
+          shader_lvl);
+
+  text_vshader = _shader_load( filename, GL_VERTEX_SHADER);
+  
+  sprintf(filename, "shaders/txt-%dxx.frag",
+          shader_lvl);
+
+  text_shader = _shader_load( filename, GL_FRAGMENT_SHADER);
+
+}
+
 void textlayer_apply(layer* l) {
   if (cache == 0) {
-    text_vshader = _shader_load( "shaders/txt.vert", GL_VERTEX_SHADER);
-    text_shader = _shader_load( "shaders/txt.frag", GL_FRAGMENT_SHADER);
+    textlayer_load_shaders();
   }
 
   glUseProgram(l->text_progid);

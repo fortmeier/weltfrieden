@@ -1,11 +1,16 @@
 #version 120
 
 uniform float now;
+uniform float dur;
+uniform float cps;
+uniform float elapsed;
 uniform vec2 res;
 uniform float gain;
-uniform float shape;
+uniform float scale;
 uniform float speed;
-uniform float offset;
+uniform vec4 color;
+uniform vec4 position;
+
 
 mat4 rotation_matrix(vec3 axis, float angle)
 {
@@ -21,9 +26,9 @@ mat4 rotation_matrix(vec3 axis, float angle)
 }
 
 void main() {
-  mat4 rot = rotation_matrix(vec3(0.5,0.5,0.5), shape);
-  vec4 color = vec4(0.2, 0.8,0.5 + 0.5 * sin(now)*shape, gain);
-  ivec4 m = mod((ivec4(gl_FragCoord) + ivec4(offset,offset,offset, 0)), (4*ivec4(shape, shape, shape, shape)));
+  mat4 rot = rotation_matrix(vec3(0.5,0.5,0.5), scale);
+  vec4 c = vec4(0.2, 0.8,0.5 + 0.5 * sin(elapsed)*scale, color.a);
+  //  ivec4 m = mod((ivec4(gl_FragCoord) + ivec4(color.x,color.y,color.z, 0)), (4*ivec4(scale, scale, scale, scale)));
 
 // if (m.x > shape && m.y > shape) {
 //   float c = gl_FragCoord.x;

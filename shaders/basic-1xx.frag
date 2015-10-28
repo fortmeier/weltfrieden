@@ -1,17 +1,20 @@
 #version 120
 
-uniform float now;
+uniform float dur;
+uniform float cps;
 uniform float elapsed;
 uniform vec2 res;
-uniform float gain;
-uniform float shape;
+uniform vec4 color;
+uniform vec4 pos;
+uniform float scale;
 uniform float speed;
 
-uniform sampler2D tex;
+//uniform sampler2D tex;
 
 void main()
 {
-vec2 uv = gl_FragCoord.xy / res.xy;
+  //vec2 uv = gl_FragCoord.xy / res.xy;
 
-gl_FragColor =  vec4(1.0, 1.0 , 1.0, max((1. - elapsed)*gain, 0.));
+  float n = elapsed / (dur/cps) * speed;
+  gl_FragColor =  vec4(color.rgb, n);
 }
