@@ -140,6 +140,9 @@ int main(int argc, char **argv) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+  #ifdef EGL_RPI2
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+  #endif
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_FLOATING, GL_TRUE);
   GLFWwindow* win = NULL;
@@ -190,6 +193,7 @@ int main(int argc, char **argv) {
   glBindBuffer (GL_ARRAY_BUFFER, vbo);
   glBufferData (GL_ARRAY_BUFFER, 20 * sizeof (float), points, GL_STATIC_DRAW);
 
+  #ifndef EGL_RPI2
   if (shader_lvl >= 3) {
     glGenVertexArrays (1, &vao);
     glBindVertexArray (vao);
@@ -200,7 +204,8 @@ int main(int argc, char **argv) {
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) ( 3 * sizeof(float) ) );
   }
-
+  #endif
+  
   init();
   layers_init();
   glfwSetWindowRefreshCallback(win, render);

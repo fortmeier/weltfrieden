@@ -233,5 +233,7 @@ void layers_init() {
   glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[1], 0);
   glClear(GL_COLOR_BUFFER_BIT);
 
+  #ifndef EGL_RPI2
   glDrawBuffers(1, &draw_buffer);
+  #endif
 }

@@ -116,14 +116,18 @@ void shaderlayer_apply(layer *l) {
 
   map_show_args(l);
 
+  #ifndef EGL_RPI2
   if (shader_lvl >= 3) {
     glBindVertexArray(vao);
   }
   else {
+  #endif
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float) ,(void *) ( 0 * sizeof(float) ));
+  #ifndef EGL_RPI2
   }
+  #endif
   glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
 }
 

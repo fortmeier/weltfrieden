@@ -77,11 +77,11 @@ void textlayer_init(layer* l) {
   glTexImage2D(
     GL_TEXTURE_2D,
     0,
-    GL_RED,
+    GL_LUMINANCE,
     face->glyph->bitmap.width,
     face->glyph->bitmap.rows,
     0,
-    GL_RED,
+    GL_LUMINANCE,
     GL_UNSIGNED_BYTE,
     face->glyph->bitmap.buffer
     );
@@ -125,10 +125,13 @@ void textlayer_init(layer* l) {
 
   FT_Done_Face(face);
   FT_Done_FreeType(ft);
-
-  glGenVertexArrays(1, &l->text_vao);
+  
   glGenBuffers(1, &l->text_vbo);
+  
+  #ifndef EGL_RPI2
+  glGenVertexArrays(1, &l->text_vao);
   glBindVertexArray(l->text_vao);
+  #endif
   glBindBuffer(GL_ARRAY_BUFFER, l->text_vbo);
 
   glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, vertices, GL_STATIC_DRAW);
@@ -136,7 +139,9 @@ void textlayer_init(layer* l) {
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
+  #ifndef EGL_RPI2
   glBindVertexArray(0);
+  #endif
   glBindTexture(GL_TEXTURE_2D, 0);
   l->text_progid = glCreateProgram();
   glAttachShader(l->text_progid, text_vshader);
@@ -194,11 +199,15 @@ void textlayer_apply(layer* l) {
   /* glBindTexture(GL_TEXTURE_2D, texfbo[even]); */
 
   glActiveTexture(GL_TEXTURE0);
+  #ifndef EGL_RPI2
   glBindVertexArray(l->text_vao);
+  #endif
   glBindTexture(GL_TEXTURE_2D, l->textid);
 
   glDrawArrays(GL_TRIANGLES, 0, 6);
+  #ifndef EGL_RPI2
   glBindVertexArray(0);
+  #endif
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
