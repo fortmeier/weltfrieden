@@ -5,8 +5,12 @@
 #include <wchar.h>
 #include <pthread.h>
 #include <math.h>
+
+#ifdef EGL_RPI2
+#else
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#endif
 
 #include "text.h"
 
@@ -46,6 +50,8 @@ GLuint text_shader = 0;
 
 void textlayer_init(layer* l) {
   /* textlayer *t = (textlayer*)l->layer_data; */
+  #ifdef EGL_RPI2
+  #else
   FT_Library ft;
 
   if (FT_Init_FreeType(&ft)) {
@@ -147,7 +153,7 @@ void textlayer_init(layer* l) {
   glAttachShader(l->text_progid, text_vshader);
   glAttachShader(l->text_progid, text_shader);
   glLinkProgram(l->text_progid);
-
+  #endif
 }
 
 void textlayer_add(t_showargs args) {

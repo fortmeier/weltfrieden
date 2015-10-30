@@ -2,17 +2,17 @@ CC=gcc
 
 #NODEBUG=-DNDEBUG
 
-CFLAGS += -g -Wall -std=gnu99 $(shell pkg-config --cflags glfw3 freetype2) ${NODEBUG}
+CFLAGS += -g -Wall -std=gnu99 ${NODEBUG}
 
 
 ifeq ($(shell uname -s), Darwin)
 		LDFLAGS += -L/usr/local/lib -framework OpenGL -framework Cocoa
-		CFLAGS += -I/usr/local/include -DMAC_OSX
+		CFLAGS += $(shell pkg-config --cflags glfw3 freetype2) -I/usr/local/include -DMAC_OSX
 else
 #  ifeq ($(shell uname -m), armv71) # e.g.: rasperry pi 2
 	CFLAGS += -DEGL_RPI2 -I/opt/vc/include -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux
 	LDFLAGS += -L/opt/vc/lib -lGLESv2 -lEGL -lm -lbcm_host -ldl
-	LDFLAGS += -llo -lpthread $(shell pkg-config --libs glfw3) $(shell pkg-config --libs freetype2)
+	LDFLAGS += -llo -lpthread # $(shell pkg-config --libs glfw3) $(shell pkg-config --libs freetype2)
 
 #  else
 #	LDFLAGS += -lGL -ldl -lX11 -lXxf86vm -lXcursor -lXinerama -lXrandr -lXi -lepoxy -lm
@@ -21,6 +21,8 @@ endif
 
 SOURCES=weltfrieden.c queue.c server.c layer.c shader.c text.c layers.c
 OBJECTS=$(SOURCES:.c=.o)
+
+include lib/Makefile.include
 
 all: weltfrieden
 

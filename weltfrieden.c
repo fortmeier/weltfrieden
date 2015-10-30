@@ -46,9 +46,11 @@ void init(void) {
 }
 
 void error_callback(int err, const char* desc) {
-  printf("GLFW error: %s (%d)\n", desc, err);
+  printf("GL error: %s (%d)\n", desc, err);
 }
 
+#ifdef EGL_RPI2
+#else
 void cursor_pos_callback(GLFWwindow *window, double xpos, double ypos) {
   if (scribble == 1) {
     cursor[0] = (float)xpos;
@@ -66,12 +68,17 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
   }
 }
 
+
 void reshape( GLFWwindow* window, int width, int height )
 {
   glViewport(0, 0, width, height);
   /* mat4_set_orthographic( &projection, 0, width, 0, height, -1, 1); */
 }
+#endif
 
+
+#ifdef EGL_RPI2
+#else
 void render(GLFWwindow* win) {
   double n = glfwGetTime();
   now = start_time + n;
@@ -85,6 +92,7 @@ void render(GLFWwindow* win) {
 
   glfwSwapBuffers(win);
 }
+#endif
 
 
 int main(int argc, char **argv) {
@@ -128,7 +136,8 @@ int main(int argc, char **argv) {
   }
 
 
-
+  #ifdef EGL_RPI2
+  #else
   glfwSetErrorCallback(error_callback);
 
   if(!glfwInit()) {
@@ -140,15 +149,16 @@ int main(int argc, char **argv) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  #ifdef EGL_RPI2
   glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
-  #endif
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_FLOATING, GL_TRUE);
   GLFWwindow* win = NULL;
-
+  #endif
+  
   shader_lvl = 0;
 
+  #ifdef EGL_RPI2
+  #else
   win = glfwCreateWindow(1, 1, "GLFW", NULL, NULL);
   if(!win) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
@@ -167,13 +177,17 @@ int main(int argc, char **argv) {
   else {
     shader_lvl = 3;
   }
+  #endif
 
   /* mat4_set_identity( &projection ); */
   /* mat4_set_identity( &model ); */
   /* mat4_set_identity( &view ); */
 
+  #ifdef EGL_RPI2
+  #else
   glfwMakeContextCurrent(win);
   // get version info
+  #endif
   const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
   const GLubyte* version = glGetString (GL_VERSION); // version as a string
   log_info("Renderer: %s\n", renderer);
@@ -181,9 +195,13 @@ int main(int argc, char **argv) {
 
   log_info("Shading Language Level: %dxx", shader_lvl);
 
+  #ifdef EGL_RPI2
+  #else
   /* glViewport(0, 0, w, h); */
   glfwSwapInterval(1);
   glfwSetFramebufferSizeCallback( win, reshape );
+  #endif
+  
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
   /* glDisable(GL_BLEND); */
@@ -193,7 +211,8 @@ int main(int argc, char **argv) {
   glBindBuffer (GL_ARRAY_BUFFER, vbo);
   glBufferData (GL_ARRAY_BUFFER, 20 * sizeof (float), points, GL_STATIC_DRAW);
 
-  #ifndef EGL_RPI2
+  #ifdef EGL_RPI2
+  #else
   if (shader_lvl >= 3) {
     glGenVertexArrays (1, &vao);
     glBindVertexArray (vao);
@@ -208,11 +227,15 @@ int main(int argc, char **argv) {
   
   init();
   layers_init();
+
+  #ifdef EGL_RPI2
+  #else
   glfwSetWindowRefreshCallback(win, render);
   glfwSetCursorPosCallback(win, cursor_pos_callback);
   glfwSetMouseButtonCallback(win, mouse_button_callback);
   glfwSetWindowSize( win, res[0], res[1] );
   glfwShowWindow( win );
+  #endif
 
 
   log_info("Starting Rendering\n");
@@ -226,12 +249,15 @@ int main(int argc, char **argv) {
   gettimeofday(&tv, NULL);
   start_time = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
 
+  #ifdef EGL_RPI2
+  #else
   while(!glfwWindowShouldClose(win)) {
     render(win);
     glfwPollEvents();
   }
 
   glfwTerminate();
+  #endif
   layers_destroy();
   return 0;             /* ANSI C requires main to return int. */
 }
