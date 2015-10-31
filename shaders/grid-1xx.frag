@@ -1,4 +1,3 @@
-#version 120
 
 uniform float now;
 uniform float dur;
@@ -31,17 +30,18 @@ void main() {
   int min_scale = 4;
   vec4 ifrag = vec4(gl_FragCoord);
   vec4 icol = vec4(vec3(color.rgb), 0);
-  vec4 iscale = min_scale * vec4(scale);
+  vec4 iscale = vec4(min_scale, min_scale, min_scale, min_scale) * vec4(scale);
     //  ivec4 m = mod((ifrag + ivec4(color.x,color.y,color.z, 0)), (4*ivec4(scale, scale, scale, scale)));
 
+  float n = elapsed / (dur/cps) * speed;
+
   vec4 m = mod(ifrag + icol, iscale);
-  if (m.x > scale && m.y > scale) {
+  if (m.x > scale && m.y > scale*0.5) {
     float c = gl_FragCoord.x;
-    gl_FragColor = vec4(0.95,0.95,0.95,1);
+    gl_FragColor = vec4(color.rgb, color.a * n);
   }
   else {
-    gl_FragColor = 1 - color;
+    gl_FragColor = vec4(1, 1, 1 , 1) - color;
   }
 
-  // gl_FragColor = vec4(vec3(icol).rgb,0.5);
 }

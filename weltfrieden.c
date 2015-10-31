@@ -29,6 +29,7 @@ extern float cursor[2];
 extern int scribble;
 
 int last_scribble = 0;
+struct timeval tv;
 
 extern int shader_lvl;
 
@@ -40,6 +41,14 @@ float points[] = {
   1.0, -1.0, 0.0, 1.0, 1.0,
   -1.0, -1.0, 0.0, 0.0, 1.0
 };
+
+#ifdef EGL_RPI2
+EGLDisplay display;
+EGLSurface surface;
+EGLContext context;
+static volatile int terminate;
+
+#endif
 
 void init(void) {
   server_init();
@@ -76,8 +85,18 @@ void reshape( GLFWwindow* window, int width, int height )
 }
 #endif
 
-
 #ifdef EGL_RPI2
+void render() {
+  gettimeofday(&tv, NULL);
+  now = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
+
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+layers_apply();
+layers_cleanup();
+
+glBindFramebuffer(GL_FRAMEBUFFER, 0);
+   eglSwapBuffers(display, surface);
+}
 #else
 void render(GLFWwindow* win) {
   double n = glfwGetTime();
@@ -122,10 +141,10 @@ int main(int argc, char **argv) {
     case 0:
       if (long_options[option_index].flag != 0) break;
     case 'w':
-      res[0] = atoi(optarg);
+      /* res[0] = atoi(optarg); */
       break;
     case 'h':
-      res[1] = atoi(optarg);
+      /* res[1] = atoi(optarg); */
       break;
     case 'v':
       log_info("Version: 0.0.0, not yet implemented");
@@ -135,10 +154,101 @@ int main(int argc, char **argv) {
     }
   }
 
+  shader_lvl = 0;
+
 
   #ifdef EGL_RPI2
-  #else
-  glfwSetErrorCallback(error_callback);
+   static EGL_DISPMANX_WINDOW_T nativewindow;
+
+   DISPMANX_ELEMENT_HANDLE_T dispman_element;
+   DISPMANX_DISPLAY_HANDLE_T dispman_display;
+   DISPMANX_UPDATE_HANDLE_T dispman_update;
+   VC_RECT_T dst_rect;
+   VC_RECT_T src_rect;
+
+   EGLConfig config;
+EGLint num_config;
+
+int32_t success = 0;
+
+static const EGLint attributes[] =
+  {
+EGL_RED_SIZE, 8,
+  EGL_GREEN_SIZE, 8,
+  EGL_BLUE_SIZE, 8,
+  EGL_ALPHA_SIZE, 8,
+  EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+  EGL_NONE
+};
+
+
+static const EGLint context_attrs[] = {
+EGL_CONTEXT_CLIENT_VERSION, 2,
+  EGL_NONE
+};
+
+EGLBoolean result;
+
+bcm_host_init();
+
+display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+assert(display!=EGL_NO_DISPLAY);
+
+result = eglInitialize(display, NULL, NULL);
+assert(EGL_FALSE != result);
+
+result = eglChooseConfig(display, attributes, &config, 1, &num_config);
+assert(EGL_FALSE != result);
+
+context = eglCreateContext(display, config, EGL_NO_CONTEXT, context_attrs);
+assert(context != EGL_NO_CONTEXT);
+
+
+uint32_t width;
+uint32_t height;
+
+success = graphics_get_display_size(0 /* DEFAULT SCREEN */, &width, &height);
+assert( success >= 0 );
+
+
+dst_rect.x = 0;
+dst_rect.y = 0;
+dst_rect.width = width;
+dst_rect.height = height;
+
+src_rect.x = 0;
+src_rect.y = 0;
+src_rect.width = width << 16;
+src_rect.height = height << 16;
+
+dispman_display = vc_dispmanx_display_open( 0 /* DEFAULT SCREEN */);
+dispman_update = vc_dispmanx_update_start( 0 );
+
+dispman_element = vc_dispmanx_element_add( dispman_update, dispman_display,
+					   0 /* LAYER */, &dst_rect, 0 /* SOURCE */,
+					   &src_rect, DISPMANX_PROTECTION_NONE, 0 /* ALPHA */, 0 /* CLAMP */, 0 /* TRANSFORM */);
+
+nativewindow.element = dispman_element;
+nativewindow.width = width;
+nativewindow.height = height;
+
+vc_dispmanx_update_submit_sync( dispman_update );
+
+surface = eglCreateWindowSurface( display, config, &nativewindow, NULL );
+assert(surface != EGL_NO_SURFACE);
+
+result = eglMakeCurrent(display, surface, surface, context);
+assert(EGL_FALSE != result);
+
+res[0] = (float)width;
+res[1] = (float)height;
+debug("[res] %fx%f", res[0], res[1]);
+
+log_info("context initialized\n");
+shader_lvl = 1;
+#else
+
+glfwSetErrorCallback(error_callback);
 
   if(!glfwInit()) {
     log_err("Error: cannot setup glfw.\n");
@@ -155,7 +265,6 @@ int main(int argc, char **argv) {
   GLFWwindow* win = NULL;
   #endif
   
-  shader_lvl = 0;
 
   #ifdef EGL_RPI2
   #else
@@ -244,12 +353,29 @@ int main(int argc, char **argv) {
   // THIS IS WHERE YOU START CALLING OPENGL FUNCTIONS, NOT EARLIER!!
   // ----------------------------------------------------------------
 
-  struct timeval tv;
 
   gettimeofday(&tv, NULL);
   start_time = ((double) tv.tv_sec + ((double) tv.tv_usec / 1000000.0));
 
   #ifdef EGL_RPI2
+
+// render loop
+
+while(!terminate) {
+  render();
+ }
+
+
+// termination
+   eglSwapBuffers(display, surface);
+
+   // Release OpenGL resources
+   eglMakeCurrent( display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT );
+   eglDestroySurface( display, surface );
+   eglDestroyContext( display, context );
+   eglTerminate( display );
+
+
   #else
   while(!glfwWindowShouldClose(win)) {
     render(win);

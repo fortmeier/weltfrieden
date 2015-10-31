@@ -70,7 +70,13 @@ void shaderlayer_init(layer* l) {
   glGetProgramInfoLog( l->progid, 2048, &infolength, infolog );
 
   if (infolength > 0) {
-    log_err("[shader:link] %s\n%s\n", filename, infolog);
+    #ifdef EGL_RPI2
+    if (infolength != 9) { // Compiled
+    #endif
+  log_err("[shader:link] %s\n%s (%d)\n", filename, infolog, infolength);
+    #ifdef EGL_RPI2
+    }
+    #endif
   }
 
 }

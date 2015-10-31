@@ -1,13 +1,14 @@
-#version 120
+// #version 120
 
-uniform float now;
+uniform float elapsed;
+uniform float cps;
+uniform float dur;
 uniform vec2 res;
-uniform float gain;
-uniform float shape;
+
+uniform vec4 color;
+uniform vec4 position;
+uniform float scale;
 uniform float speed;
-uniform float start;
-uniform float end;
-uniform float pan;
 
 mat4 rotation_matrix(vec3 axis, float angle)
 {
@@ -26,16 +27,17 @@ void main()
 {
   vec2 uv = gl_FragCoord.xy / res.xy;
   float pi = 3.141592;
-  mat4 rot = rotation_matrix(vec3(0.5,0.5,0.0), pan*pi);
+  mat4 rot = rotation_matrix(vec3(0.5,0.5,0.0), position.z*pi);
 
   uv = vec2((rot*vec4(uv.x, uv.y, 0.0, 0.0)).xy);
 
-  float c = uv.x + (0.5 + 0.5 * ( sin(now)));
-  vec3 chroma = vec3(uv.x, uv.y, .5 + .5 * sin(now)); //, c, 1.0);
+  float n = elapsed / (dur / cps);
+  float c = uv.x + (0.5 + 0.5 * ( sin(n)));
+  vec3 chroma = color.rgb;
 
-  if ((uv.x >= start) && (uv.x <= end)) {
+  if ((uv.x >= position.x) && (uv.x <= position.y)) {
     vec4 color = vec4(c, c, c, 1.0);
-    gl_FragColor =  vec4(vec3(mix(vec3(c), chroma, shape)), 1.0);
+    gl_FragColor =  vec4(vec3(mix(vec3(c), chroma, scale)), 1.0);
   }
   else {
     gl_FragColor = vec4(0,0,0,0);

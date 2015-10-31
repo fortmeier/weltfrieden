@@ -99,7 +99,13 @@ GLint _shader_load( const char *filename, GLenum type ) {
   glGetShaderInfoLog( shader, 2048, &infolength, infolog );
 
   if (infolength > 0) {
-    log_err("[shader:compile] %s:\n%s\n", filename, infolog);
+    #ifdef EGL_RPI2
+    if (infolength != 8) { // Compiled
+    #endif
+  log_err("[shader:compile] %s\n%s (%d)\n", filename, infolog, infolength);
+    #ifdef EGL_RPI2
+    }
+    #endif
   }
 
   free (content);
