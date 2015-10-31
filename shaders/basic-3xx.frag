@@ -15,7 +15,7 @@ uniform sampler2D fbotex;
 
 in vec4 gl_FragCoord;
 layout(location = 0) out vec4 frag_color;
-layout(location = 1) out vec4 fbo_color;
+
 void main()
 {
   float pi = 3.141592;
