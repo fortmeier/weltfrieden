@@ -60,14 +60,20 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   float y = argv[6+poffset]->f;
   float z = argv[7+poffset]->f;
   float w = argv[8+poffset]->f;
-  float scale = argv[9+poffset]->f;
-  float speed = argv[10+poffset]->f;
-  char *blendmode_s = (char *) argv[11+poffset];
-  int level = argv[12+poffset]->i;
-  char *text = (char *) argv[13+poffset];
-  float fontsize = argv[14+poffset]->f;
+  float rot_x = argv[9+poffset]->f;
+  float rot_y = argv[10+poffset]->f;
+  float rot_z = argv[11+poffset]->f;
+  float width = argv[12+poffset]->f;
+  float height = argv[13+poffset]->f;
+  float speed = argv[13+poffset]->f;
+  char *blendmode_s = (char *) argv[14+poffset];
+  int level = argv[15+poffset]->i;
+  char *text = (char *) argv[16+poffset];
+  float fontsize = argv[17+poffset]->f;
+  int charcode = argv[18+poffset]->i;
 
-  if (argc > 15+poffset) {
+  debug("[charcode] %d", charcode);
+  if (argc > 19+poffset) {
     printf("show server unexpectedly received extra parameters, maybe update weltfrieden?\n");
   }
 
@@ -97,13 +103,17 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   args->y = y;
   args->z = z;
   args->w = w;
-  args->scale = scale;
+  args->width = width;
+  args->height = height;
   args->speed = speed;
   args->blendmode = blendmode;
   args->level = level;
   args->text = text;
   args->fontsize = fontsize;
-
+  args->charcode = charcode;
+  args->rot_x = rot_x;
+  args->rot_y = rot_y;
+  args->rot_z = rot_z;
   return;
 }
 
@@ -143,7 +153,7 @@ extern int server_init(void) {
 
   lo_server_thread st = lo_server_thread_new(OSC_PORT, error);
 
-  lo_server_thread_add_method(st, "/shader", "iiffsffffffffffsisf",
+  lo_server_thread_add_method(st, "/shader", "iiffsffffffffffffffsisfi",
                               shader_handler,
                               NULL
 			      );

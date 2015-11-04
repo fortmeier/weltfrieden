@@ -54,18 +54,39 @@ void textlayer_init(layer* l) {
   }
 
   FT_Face face;
-  if (FT_New_Face(ft, "fonts/VeraMono.ttf", 0, &face)) {
-    log_err("[text:init] could not be loaded\n");
-    exit(1);
+  debug("[text:chr] %d", l->charcode);
+  if (l->charcode != -1) {
+    if (FT_New_Face(ft, "fonts/fontawesome.ttf", 0, &face)) {
+      log_err("[text:init] could not be loaded\n");
+      exit(1);
+    }
+  }
+  else {
+    if (FT_New_Face(ft, "fonts/VeraMono.ttf", 0, &face)) {
+      log_err("[text:init] could not be loaded\n");
+      exit(1);
+    }
   }
 
-  float fontsize = fmin(l->fontsize, 40) * TEXT_SIZE_F / res[1];
+  float fontsize = fmin(l->fontsize, 40) * (float)TEXT_SIZE_F / (float)res[1];
 
   FT_Set_Pixel_Sizes(face, 0, fontsize);
 
-  if (FT_Load_Char(face, l->text[0], FT_LOAD_RENDER)) {
-    log_err("[text:init] failed loading char\n");
-    exit(1);
+
+  if (l->charcode != -1) {
+    FT_UInt glyph_index = FT_Get_Char_Index(face, l->charcode);
+
+    log_info("[text:glyph:index] %d", glyph_index);
+    if (FT_Load_Glyph(face, glyph_index, FT_LOAD_RENDER)) {
+      log_err("[text:init] failed loading glyph\n");
+      exit(1);
+    }
+  }
+  else {
+    if (FT_Load_Char(face, l->text[0], FT_LOAD_RENDER)) {
+      log_err("[text:init] failed loading char\n");
+      exit(1);
+    }
   }
 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // 8-bit gray scale bitmap coming up!
@@ -92,12 +113,13 @@ void textlayer_init(layer* l) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
   l->textid = texture;
+
   GLuint text_res[2] = {
     face->glyph->bitmap.width,
     face->glyph->bitmap.rows
   };
 
-  GLuint text_bearing[2] = {
+  GLint text_bearing[2] = {
     face->glyph->bitmap_left,
     face->glyph->bitmap_top
   };
@@ -106,10 +128,10 @@ void textlayer_init(layer* l) {
 
   GLuint text_advance = face->glyph->advance.x;
 
-  GLfloat w = text_res[0] / res[0];
-  GLfloat h = text_res[1] / res[0];
+  GLfloat w = (float)text_res[0] / (float)res[0];
+  GLfloat h = (float)text_res[1] / (float)res[0];
 
-  GLfloat xpos = ( (text_bearing[0]) / fontsize ) + l->pos[0] - (w/2);
+  GLfloat xpos = ( ((float)text_bearing[0]) / fontsize ) + l->pos[0] - (w/2);
   GLfloat ypos = ((l->pos[1] - (text_res[1] - text_bearing[1])) / fontsize) + (l->pos[1]) - (h/2);
 
   GLfloat vertices[6][4] = {
@@ -168,7 +190,7 @@ void textlayer_load_shaders() {
           shader_lvl);
 
   text_vshader = _shader_load( filename, GL_VERTEX_SHADER);
-  
+
   sprintf(filename, "shaders/txt-%dxx.frag",
           shader_lvl);
 

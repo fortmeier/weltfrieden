@@ -45,7 +45,9 @@ void map_show_args(layer* l) {
   uarg(l, "dur", l->duration);
   uarg4(l, "color", 1, l->color);
   uarg4(l, "position", 1, l->pos);
-  uarg(l, "scale", l->scale);
+  uarg3(l, "rotation", 1, l->rot);
+  uarg(l, "width", l->width);
+  uarg(l, "height", l->height);
   uarg(l, "speed", l->speed);
 }
 
@@ -164,12 +166,19 @@ void layer_init(layer* l, t_showargs *args) {
   l->pos[1] = args->y;
   l->pos[2] = args->z;
   l->pos[3] = args->w;
-  l->scale = args->scale;
+
+  l->rot[0] = args->rot_x;
+  l->rot[1] = args->rot_y;
+  l->rot[2] = args->rot_z;
+
+  l->width = args->width;
+  l->height = args->height;
   l->speed = args->speed;
   l->blendmode = args->blendmode;
   l->level = args->level;
 
   l->fontsize = args->fontsize;
+  l->charcode = args->charcode;
 }
 
 void layer_add(layer *l) {
@@ -205,7 +214,9 @@ void layer_apply(layer *l, int even) {
        textlayer_init(l);
     }
 
-    shaderlayer_init(l);
+    if (l->progid == 0) {
+      shaderlayer_init(l);
+    }
 
     l->state = INITIALIZED;
   }

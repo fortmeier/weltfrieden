@@ -10,6 +10,8 @@
 /* #include "t_scribble.h" */
 #define uarg(s, key, value) glUniform1f( glGetUniformLocation(s->progid, key), value )
 #define uarg4(s, key, num, value) glUniform4fv( glGetUniformLocation(s->progid, key), num, value)
+#define uarg3(s, key, num, value) glUniform3fv( glGetUniformLocation(s->progid, key), num, value)
+
 #define uarg2fv(s, key, num, value) glUniform2fv( glGetUniformLocation(s->progid, key), num, value )
 
 enum layerstate {UNUSED, UNINITIALIZED, INITIALIZED};
@@ -44,12 +46,18 @@ typedef struct {
   float z;
   float w;
 
-  float scale;
+  float rot_x;
+  float rot_y;
+  float rot_z;
+
+  float width;
+  float height;
   float speed;
 
   float fontsize;
   char *text;
 //  char *font;
+  int charcode;
 
   int scribble;
 
@@ -77,9 +85,10 @@ typedef struct layer_t
 
   float color[4];
   float pos[4];
-  /* float rot[4]; quaternions?! */
+  float rot[3]; /* quaternions?! */
 
-  float scale;
+  float width;
+  float height;
   float speed;
 
 
@@ -88,6 +97,7 @@ typedef struct layer_t
 
   char *text;
   float fontsize;
+  int charcode;
 
   enum blendmode blendmode;
   int level;

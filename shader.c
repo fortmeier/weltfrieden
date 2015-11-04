@@ -60,7 +60,7 @@ void shaderlayer_init(layer* l) {
   l->shaderid = _shader_load( filename, GL_FRAGMENT_SHADER );
   glAttachShader( l->progid, l->shaderid );
 
-  
+
   glAttachShader( l->progid, get_vertex_shader() );
 
   glLinkProgram( l->progid );
@@ -91,7 +91,7 @@ void shaderlayer_add(t_showargs args) {
     l->is_scribble = 1;
   }
 
-  if (strlen(args.text) > 0) {
+  if (strlen(args.text) > 0 || args.charcode != -1) {
     l->is_text = 1;
     l->text = strdup(args.text);
     debug("[text:add] %s %f\n", l->text, args.fontsize);
