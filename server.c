@@ -65,15 +65,15 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   float rot_z = argv[11+poffset]->f;
   float width = argv[12+poffset]->f;
   float height = argv[13+poffset]->f;
-  float speed = argv[13+poffset]->f;
-  char *blendmode_s = (char *) argv[14+poffset];
-  int level = argv[15+poffset]->i;
-  char *text = (char *) argv[16+poffset];
-  float fontsize = argv[17+poffset]->f;
-  int charcode = argv[18+poffset]->i;
+  float speed = argv[14+poffset]->f;
+  char *blendmode_s = (char *) argv[15+poffset];
+  int level = argv[16+poffset]->i;
+  char *text = (char *) argv[17+poffset];
+  float fontsize = argv[18+poffset]->f;
+  int charcode = argv[19+poffset]->i;
 
   debug("[charcode] %d", charcode);
-  if (argc > 19+poffset) {
+  if (argc > 20+poffset) {
     printf("show server unexpectedly received extra parameters, maybe update weltfrieden?\n");
   }
 
