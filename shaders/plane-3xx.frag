@@ -32,10 +32,10 @@ void main() {
 
 //  float angle = 0.0*pi;
 //  float s = scale / 2;
- vec2 top_left = vec2(-width,height);
+ vec2 top_left = vec2(-width/2,-height/2);
 //  vec2 top_right = rotate( vec2(s, -s), angle);
 //  vec2 bottom_left = rotate( vec2(-s, s), angle);
- vec2 bottom_right = vec2(width, height);
+ vec2 bottom_right = vec2(width/2, height/2);
 
 
   top_left += pos.xy;
