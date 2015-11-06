@@ -5,7 +5,8 @@ uniform float dur;
 uniform float cps;
 uniform float elapsed;
 uniform vec2 res;
-uniform float gain;
+uniform vec2 offset;
+
 uniform float width;
 uniform float height;
 uniform float speed;
@@ -24,7 +25,7 @@ vec2 rotate(vec2 p, float angle) {
 }
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / res.xy;
+  vec2 uv = (gl_FragCoord.xy - offset) / res.xy;
 //  float pi = 3.141592;
 
   // mat4 rot = rotation_matrix(vec3(0,0,1.0), 0.09*pi); // distance field?

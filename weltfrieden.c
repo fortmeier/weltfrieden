@@ -20,6 +20,7 @@ extern int server_init(void);
 static double start_time;
 extern double now;
 extern float res[2];
+extern float offset[2];
 
 extern GLuint vao_texcoord;
 extern GLuint vbo;
@@ -68,8 +69,21 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
 
 void reshape( GLFWwindow* window, int width, int height )
 {
-  glViewport(0, 0, width, height);
-  /* mat4_set_orthographic( &projection, 0, width, 0, height, -1, 1); */
+  // maintain 1:1 aspect ratio
+  if (width > height) {
+    offset[0] = (width - height) / 2;
+    offset[1] = 0;
+    res[0] = height;
+    res[1] = height;
+  }
+  else {
+    offset[0] = 0;
+    offset[1] = (height - width) / 2;
+    res[0] = width;
+    res[1] = width;
+  }
+
+  glViewport(offset[0], offset[1], res[0], res[1]);
 }
 
 void render(GLFWwindow* win) {

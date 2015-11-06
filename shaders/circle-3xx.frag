@@ -11,6 +11,7 @@ uniform float height;
 uniform float speed;
 uniform vec4 color;
 uniform vec4 position;
+uniform vec2 offset;
 /* uniform vec3 rotation; */
 
 out vec4 frag_color;
@@ -24,7 +25,8 @@ vec2 rotate(vec2 p, float angle) {
 }
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / res.xy;
+  vec2 uv = (gl_FragCoord.xy - offset) / res.xy;
+
   float radius = width / 2;
   float n = 1 - min(elapsed / (dur/cps) * speed, 1);
 

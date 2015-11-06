@@ -18,6 +18,7 @@ int scribble = 0;
 float cursor[2];
 double now = 0;
 float res[2];
+float offset[2];
 int shader_lvl = 0;
 
 layer *shaderlayer_new() {
@@ -144,6 +145,7 @@ void shaderlayer_apply(layer *l) {
   uarg(l, "now", now);
   uarg(l, "elapsed", now - l->when);
   uarg2fv(l, "res", 1, res);
+  uarg2fv(l, "offset", 1, offset);
   uarg2fv(l, "cursor", 1, cursor);
 
   map_show_args(l);
