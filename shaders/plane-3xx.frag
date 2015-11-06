@@ -12,7 +12,9 @@ uniform float height;
 uniform float speed;
 uniform vec4 color;
 uniform vec4 position;
-/* uniform vec3 rotation; */
+uniform vec3 rotation;
+
+#define M_PI 3.1415926535897932384626433832795
 
 out vec4 frag_color;
 
@@ -24,39 +26,54 @@ vec2 rotate(vec2 p, float angle) {
   return rot;
 }
 
+// algorithm from http://stackoverflow.com/a/1968345
+int get_line_intersection(float p0_x, float p0_y, float p1_x, float p1_y, float p2_x, float p2_y, float p3_x, float p3_y)
+{
+    float s1_x, s1_y, s2_x, s2_y;
+    s1_x = p1_x - p0_x;     s1_y = p1_y - p0_y;
+    s2_x = p3_x - p2_x;     s2_y = p3_y - p2_y;
+
+    float s, t;
+    s = (-s1_y * (p0_x - p2_x) + s1_x * (p0_y - p2_y)) / (-s2_x * s1_y + s1_x * s2_y);
+    t = ( s2_x * (p0_y - p2_y) - s2_y * (p0_x - p2_x)) / (-s2_x * s1_y + s1_x * s2_y);
+
+    if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
+    {
+        return 1;
+    }
+
+    return 0; // No collision
+}
+
 void main() {
   vec2 uv = (gl_FragCoord.xy - offset) / res.xy;
-//  float pi = 3.141592;
-
-  // mat4 rot = rotation_matrix(vec3(0,0,1.0), 0.09*pi); // distance field?
   vec4 pos = vec4(position.xy, 0, 0);
 
-//  float angle = 0.0*pi;
-//  float s = scale / 2;
- vec2 top_left = vec2(-width/2,-height/2);
-//  vec2 top_right = rotate( vec2(s, -s), angle);
-//  vec2 bottom_left = rotate( vec2(-s, s), angle);
- vec2 bottom_right = vec2(width/2, height/2);
+  float angle = rotation.x*M_PI/2;
 
+  vec2 top_left = rotate(vec2(-width/2,-height/2), angle);
+  vec2 top_right = rotate(vec2(width/2, -height/2), angle);
+  vec2 bottom_left = rotate(vec2(-width/2, height/2), angle);
+  vec2 bottom_right = rotate(vec2(width/2, height/2), angle);
 
   top_left += pos.xy;
   bottom_right += pos.xy;
+  top_right += pos.xy;
+  bottom_left += pos.xy;
 
   float n = 1 - min(elapsed / (dur/cps) * speed, 1);
 
-//  bvec4 xy_plane = bvec4(greaterThan(uv, top_left), lessThan(uv, bottom_right));
+  int hits_up = get_line_intersection(0,0,uv.x,uv.y,top_left.x, top_left.y, top_right.x, top_right.y);
+  int hits_right = get_line_intersection(0,0,uv.x,uv.y,top_right.x, top_right.y, bottom_right.x, bottom_right.y);
+  int hits_bottom = get_line_intersection(0,0,uv.x,uv.y,bottom_right.x, bottom_right.y, bottom_left.x, bottom_left.y);
+  int hits_left = get_line_intersection(0,0,uv.x,uv.y,bottom_left.x, bottom_left.y, top_left.x, top_left.y);
 
-  //edges
-  /* vec2 up = top_right - top_left; */
-  /* vec2 left = bottom_left - top_left; */
-  /* vec2 right = bottom_right - top_right; */
-  /* vec2 bottom = bottom_right - bottom_left; */
+  int hits = hits_up + hits_right + hits_bottom + hits_left;
 
-  /* bvec4 hits = dot(uv, up); */
-
-
-  vec2 box = step(top_left, uv) * step(uv, bottom_right);
-
-  float is_plane = box.x * box.y;
-  frag_color = mix(vec4(0,0,0,0), color, is_plane);
+  if (hits == 1) {
+    frag_color = color;
+  }
+  else {
+    frag_color = vec4(0,0,0,0);
+  }
 }
