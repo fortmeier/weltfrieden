@@ -10,6 +10,10 @@
 
 #define SHADERLAYER_TYPE_FLAG 1
 
+static const char shader_noise_name[] =  "noise";
+static int shader_noise_id;
+
+void shaderlayer_init_noise();
 void shaderlayer_add(t_showargs args);
 void shaderlayer_apply(layer *l);
 void shaderlayer_finish(layer *l);

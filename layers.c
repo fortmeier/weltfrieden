@@ -6,6 +6,7 @@
 
 #include "layers.h"
 #include "text.h"
+#include "shader.h"
 
 GLuint sampler = 0;
 GLuint* fbo = 0;
@@ -202,7 +203,7 @@ void layers_init() {
   pthread_mutex_init(&queuelock, NULL);
 
   textlayer_load_shaders();
-
+  shaderlayer_init_noise();
   /* glGenSamplers(1, &sampler); */
   /* glSamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR); */
   /* glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR); */

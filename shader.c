@@ -45,6 +45,37 @@ void shaderlayer_read_cache(layer *cached, layer *uncached) {
   }
 }
 
+void shaderlayer_init_noise() {
+  /* if (shader_noise_id == 0) { */
+    shader_noise_id = glCreateProgram();
+
+    char filename[256];
+
+    sprintf(filename, "shaders/%s-%dxx.frag",
+            shader_noise_name,
+            shader_lvl);
+
+    GLuint shaderid;
+    shaderid = _shader_load( filename, GL_FRAGMENT_SHADER );
+    glAttachShader( shader_noise_id, shaderid );
+
+
+    glAttachShader( shader_noise_id, get_vertex_shader() );
+
+    glLinkProgram( shader_noise_id );
+
+    int infolength;
+    char infolog[2048];
+    glGetProgramInfoLog( shader_noise_id, 2048, &infolength, infolog );
+
+    if (infolength > 0) {
+      log_err("[shader:link] %s\n%s\n", filename, infolog);
+    }
+    debug("[shader:noise:init]");
+  /* } */
+
+}
+
 void shaderlayer_init(layer* l) {
   l->progid = glCreateProgram();
 
@@ -73,6 +104,7 @@ void shaderlayer_init(layer* l) {
     log_err("[shader:link] %s\n%s\n", filename, infolog);
   }
 
+//  shaderlayer_init_noise();
 }
 
 
@@ -107,7 +139,7 @@ void shaderlayer_apply(layer *l) {
   /* glActiveTexture(GL_TEXTURE1); */
   /* glBindTexture(GL_TEXTURE_2D, texfbo[even]); */
   /* glBindSampler(0, sampler); */
-      glUseProgram(l->progid);
+  glUseProgram(l->progid);
 
   uarg(l, "now", now);
   uarg(l, "elapsed", now - l->when);
@@ -125,6 +157,27 @@ void shaderlayer_apply(layer *l) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float) ,(void *) ( 0 * sizeof(float) ));
   }
   glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
+
+  /* glUseProgram(shader_noise_id); */
+
+  /* uarg(l, "now", now); */
+  /* uarg(l, "elapsed", now - l->when); */
+  /* uarg2fv(l, "res", 1, res); */
+  /* uarg2fv(l, "cursor", 1, cursor); */
+
+  /* map_show_args(l); */
+
+  /* if (shader_lvl >= 3) { */
+  /*   glBindVertexArray(vao); */
+  /* } */
+  /* else { */
+  /*   glEnableVertexAttribArray(0); */
+  /*   glBindBuffer(GL_ARRAY_BUFFER, vbo); */
+  /*   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float) ,(void *) ( 0 * sizeof(float) )); */
+  /* } */
+
+  /* glDrawArrays (GL_TRIANGLE_STRIP, 0, 4); */
+
 }
 
 void shaderlayer_finish(layer *l) {
