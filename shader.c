@@ -37,12 +37,17 @@ layer *shaderlayer_new() {
   return(l);
 }
 
-void shaderlayer_read_cache(layer *cached, layer *uncached) {
+int shaderlayer_read_cache(layer *cached, layer *uncached) {
   shaderlayer *s_uncached = (shaderlayer*)uncached->layer_data;
   shaderlayer *s_cached = (shaderlayer*)cached->layer_data;
 
-  if (strcmp(s_cached->filename, s_uncached->filename) != -1) {
+  if (strcmp(s_cached->filename, s_uncached->filename) == 0) {
     layer_copy_program(cached, uncached);
+    debug("LAYER PROGRAM COPIED %d -> %d for %s", cached->progid, uncached->progid, s_uncached->filename);
+    return 1;
+  }
+  else {
+    return 0;
   }
 }
 
@@ -179,7 +184,7 @@ void shaderlayer_apply(layer *l) {
   /* } */
 
   /* glDrawArrays (GL_TRIANGLE_STRIP, 0, 4); */
-
+  glUseProgram(0);
 }
 
 void shaderlayer_finish(layer *l) {

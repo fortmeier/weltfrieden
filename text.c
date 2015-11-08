@@ -229,7 +229,7 @@ void textlayer_finish(layer* l) {
 
 
 
-void textlayer_read_cache(layer *cached, layer *uncached) {
+int textlayer_read_cache(layer *cached, layer *uncached) {
   textlayer *s_uncached = (textlayer*)uncached->layer_data;
   textlayer *s_cached = (textlayer*)cached->layer_data;
 
@@ -237,6 +237,7 @@ void textlayer_read_cache(layer *cached, layer *uncached) {
   if (strcmp(s_cached->text, s_uncached->text) != -1) {
     layer_copy_program(cached, uncached);
   }
+  return 0;// FIXME return correct value
 }
 
 

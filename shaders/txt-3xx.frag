@@ -15,9 +15,22 @@ in vec2 o_tex_coord;
 
 layout(location = 0) out vec4 frag_color;
 
+#define M_PI 3.1415926535897932384626433832795
+
+vec2 rotate(vec2 p, float angle) {
+  vec2 rot;
+
+  rot.x = p.x * cos(angle) - p.y * sin(angle);
+  rot.y = p.x * sin(angle) + p.y * cos(angle);
+  return rot;
+}
+
 void main()
 {
-  float a = texture(tex, o_tex_coord).r;
+
+  vec2 tex_coord = rotate(o_tex_coord, 0.4*M_PI/2);
+  float a = texture(tex, tex_coord).r;
+
 
   vec4 fbo = texture(fbotex, (gl_FragCoord.xy / res));
   float n = elapsed / (dur/cps);

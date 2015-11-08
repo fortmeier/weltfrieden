@@ -18,7 +18,7 @@ void shaderlayer_add(t_showargs args);
 void shaderlayer_apply(layer *l);
 void shaderlayer_finish(layer *l);
 void shaderlayer_init(layer *l);
-void shaderlayer_read_cache(layer *cached, layer *uncached);
+int shaderlayer_read_cache(layer *cached, layer *uncached);
 
 layer *shaderlayer_new();
 #endif

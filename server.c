@@ -37,7 +37,9 @@ int generic_handler(const char *path, const char *types, lo_arg **argv,
 }
 
 void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
-  int blendmode = NSA;  // default is GL_ONE_MINUS_SRC_ALPHA
+  int dstblend = NSA;  // default is GL_ONE_MINUS_SRC_ALPHA
+  int srcblend = SA;  // default is GL_SRC_ALPHA
+  int blendeq = FA;
 
   double when = (double) argv[0]->i + ((double) argv[1]->i / 1000000.0);
 #ifdef SUBLATENCY
@@ -63,33 +65,61 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   float rot_x = argv[9+poffset]->f;
   float rot_y = argv[10+poffset]->f;
   float rot_z = argv[11+poffset]->f;
-  float width = argv[12+poffset]->f;
-  float height = argv[13+poffset]->f;
-  float speed = argv[14+poffset]->f;
-  char *blendmode_s = (char *) argv[15+poffset];
-  int level = argv[16+poffset]->i;
-  char *text = (char *) argv[17+poffset];
-  float fontsize = argv[18+poffset]->f;
-  int charcode = argv[19+poffset]->i;
+  float origin_x = argv[12+poffset]->f;
+  float origin_y = argv[13+poffset]->f;
+  float origin_z = argv[14+poffset]->f;
+  float width = argv[15+poffset]->f;
+  float height = argv[16+poffset]->f;
+  float speed = argv[17+poffset]->f;
+  char *srcblend_s = (char *) argv[18+poffset];
+  char *dstblend_s = (char *) argv[19+poffset];
+  char *blendeq_s = (char *) argv[20+poffset];
+  int level = argv[21+poffset]->i;
+  char *text = (char *) argv[22+poffset];
+  float fontsize = argv[23+poffset]->f;
+  int charcode = argv[24+poffset]->i;
 
   debug("[charcode] %d", charcode);
-  if (argc > 20+poffset) {
+  if (argc > 25+poffset) {
     printf("show server unexpectedly received extra parameters, maybe update weltfrieden?\n");
   }
 
-  switch(blendmode_s[0]) {
-  case 'c':  blendmode = SC; break; // src color
-  case 'a':  blendmode = SA; break; // src alpha
-  case 'C': blendmode = DC; break; // dst color
-  case 'A': blendmode = DA; break; // dst alpha
-  case 'l': blendmode = CA; break; // const alpha -- mnemonic lightness?
-  case 't': blendmode = CC; break; // const color -- mnemonic tint
-  case 's': blendmode = SS; break; // src saturate
-  case 'x': blendmode = NSA; break; // 1 - src alpha
-  case 'y': blendmode =  NSC; break; // 1 - src color
-  case 'X': blendmode = NDA; break; // 1 - dst alpha
-  case 'Y': blendmode = NDC; break; // 1 - dst color
+  switch(srcblend_s[0]) {
+  case 'c':  srcblend = SC; break; // src color
+  case 'a':  srcblend = SA; break; // src alpha
+  case 'C': srcblend = DC; break; // dst color
+  case 'A': srcblend = DA; break; // dst alpha
+  case 'l': srcblend = CA; break; // const alpha -- mnemonic lightness?
+  case 't': srcblend = CC; break; // const color -- mnemonic tint
+  case 's': srcblend = SS; break; // src saturate
+  case 'x': srcblend = NSA; break; // 1 - src alpha
+  case 'y': srcblend =  NSC; break; // 1 - src color
+  case 'X': srcblend = NDA; break; // 1 - dst alpha
+  case 'Y': srcblend = NDC; break; // 1 - dst color
   };
+
+  switch(dstblend_s[0]) {
+  case 'c':  dstblend = SC; break; // src color
+  case 'a':  dstblend = SA; break; // src alpha
+  case 'C': dstblend = DC; break; // dst color
+  case 'A': dstblend = DA; break; // dst alpha
+  case 'l': dstblend = CA; break; // const alpha -- mnemonic lightness?
+  case 't': dstblend = CC; break; // const color -- mnemonic tint
+  case 's': dstblend = SS; break; // src saturate
+  case 'x': dstblend = NSA; break; // 1 - src alpha
+  case 'y': dstblend =  NSC; break; // 1 - src color
+  case 'X': dstblend = NDA; break; // 1 - dst alpha
+  case 'Y': dstblend = NDC; break; // 1 - dst color
+  };
+
+  switch(blendeq_s[0]) {
+  case 'a':  blendeq = FA; break; // src color
+  case 's':  blendeq = FS; break; // src alpha
+  case 'r': blendeq = FRS; break; // dst color
+  case 'n': blendeq = FMIN; break; // dst alpha
+  case 'x': blendeq = FMAX; break; // const alpha -- mnemonic lightness?
+  };
+
 
   args->when = when;
   args->cps = cps;
@@ -106,7 +136,9 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   args->width = width;
   args->height = height;
   args->speed = speed;
-  args->blendmode = blendmode;
+  args->srcblend = srcblend;
+  args->dstblend = dstblend;
+  args->blendeq = blendeq;
   args->level = level;
   args->text = text;
   args->fontsize = fontsize;
@@ -114,6 +146,9 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   args->rot_x = rot_x;
   args->rot_y = rot_y;
   args->rot_z = rot_z;
+  args->origin_x = origin_x;
+  args->origin_y = origin_y;
+  args->origin_z = origin_z;
   return;
 }
 
@@ -124,6 +159,7 @@ int shader_handler(const char *path, const char *types, lo_arg **argv,
   parse_showargs(argv, argc, &args);
 
   if (strlen(args.words) > 0) {
+    debug("[server:new] %s", args.words);
     shaderlayer_add(args);
   }
   else {
@@ -153,7 +189,7 @@ extern int server_init(void) {
 
   lo_server_thread st = lo_server_thread_new(OSC_PORT, error);
 
-  lo_server_thread_add_method(st, "/shader", "iiffsffffffffffffffsisfi",
+  lo_server_thread_add_method(st, "/shader", "iiffsfffffffffffffffffsssisfi",
                               shader_handler,
                               NULL
 			      );

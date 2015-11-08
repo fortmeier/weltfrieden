@@ -14,7 +14,7 @@
 
 #define uarg2fv(s, key, num, value) glUniform2fv( glGetUniformLocation(s->progid, key), num, value )
 
-enum layerstate {UNUSED, UNINITIALIZED, INITIALIZED};
+enum layerstate {UNUSED, UNINITIALIZED, INITIALIZED, SHOWN};
 
 enum blendmode {
   NSA, // 1 - src alpha
@@ -28,6 +28,14 @@ enum blendmode {
   DA, // dst alpha
   CA, // const alpha
   CC // const color
+};
+
+enum blendeq {
+  FA, // FUNC_ADD
+  FS, // FUNC_SUBTRACT
+  FRS, // FUNC_REVERSE_SUBTRACT
+  FMIN, // MIN
+  FMAX // MAX
 };
 
 typedef struct {
@@ -50,6 +58,10 @@ typedef struct {
   float rot_y;
   float rot_z;
 
+  float origin_x;
+  float origin_y;
+  float origin_z;
+
   float width;
   float height;
   float speed;
@@ -62,7 +74,9 @@ typedef struct {
   int scribble;
 
 //  int drawmode;
-  int blendmode;
+  int srcblend;
+  int dstblend;
+  int blendeq;
   int level;
 } t_showargs;
 
@@ -70,7 +84,7 @@ struct layer_t;
 
 typedef void (*f_layer_apply)(struct layer_t *l);
 typedef void (*f_layer_init)(struct layer_t *l);
-typedef void (*f_layer_read_cache)(struct layer_t *cached, struct layer_t *uncached);
+typedef int (*f_layer_read_cache)(struct layer_t *cached, struct layer_t *uncached);
 
 
 typedef struct layer_t
@@ -86,6 +100,7 @@ typedef struct layer_t
   float color[4];
   float pos[4];
   float rot[3]; /* quaternions?! */
+  float origin[3];
 
   float width;
   float height;
@@ -99,7 +114,9 @@ typedef struct layer_t
   float fontsize;
   int charcode;
 
-  enum blendmode blendmode;
+  enum blendmode srcblend;
+  enum blendmode dstblend;
+  enum blendeq blendeq;
   int level;
 
   void *layer_data;

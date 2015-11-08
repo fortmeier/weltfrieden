@@ -14,7 +14,7 @@ void textlayer_add(t_showargs args);
 void textlayer_apply(layer* l);
 void textlayer_finish(layer* l);
 void textlayer_init(layer* l);
-void textlayer_read_cache(layer *cached, layer *uncached);
+int textlayer_read_cache(layer *cached, layer *uncached);
 void textlayer_load_shaders();
 
 layer *textlayer_new();

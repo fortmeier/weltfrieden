@@ -46,6 +46,8 @@ void map_show_args(layer* l) {
   uarg4(l, "color", 1, l->color);
   uarg4(l, "position", 1, l->pos);
   uarg3(l, "rotation", 1, l->rot);
+  uarg3(l, "origin", 1, l->origin);
+
   uarg(l, "width", l->width);
   uarg(l, "height", l->height);
   uarg(l, "speed", l->speed);
@@ -113,23 +115,40 @@ GLint _shader_load( const char *filename, GLenum type ) {
 
 
 void layer_copy_program(layer *cached, layer *uncached) {
+  pthread_mutex_lock(&layerlock);
   uncached->progid = cached->progid;
   uncached->shaderid = cached->shaderid;
-  debug("[cache:hit]\n");
+  pthread_mutex_unlock(&layerlock);
+  debug("[cache:hit]");
 }
 
 
 
 void layer_from_cache(layer *l) {
+  int cached = 0;
+  int tries = 0;
   if (l->is_text == 0) {
     for (int i = 0; i < MAXSHADERLAYERS; i++) {
       // TODO: implement a standard way to load _any_ layer from cache, maybe this needs a type flag in layer_T
-      if (layers[i].state != UNUSED && layers[i].type_flag == l->type_flag) // layers[i].is_text == 0 && strcmp(l->shader->filename, layers[i].shader->filename) == 0)
+      if ((layers[i].state == INITIALIZED || layers[i].state == SHOWN) && layers[i].type_flag == l->type_flag) // layers[i].is_text == 0 && strcmp(l->shader->filename, layers[i].shader->filename) == 0)
       {
-        l->f_read_cache(&layers[i], l);
-        break;
+        cached = l->f_read_cache(&layers[i], l);
+        if (cached == 1) {
+          break;
+        }
+        tries++;
       }
     }
+    if (cached == 1) {
+      debug("[layer:cache:hit] HIT after %d tries", tries);
+    }
+    else {
+      debug("[layer:cache:miss] MISS after %d tries", tries);
+    }
+
+  }
+  else {
+    debug("[layer:cache:text] cannot cache text");
   }
 }
 
@@ -138,7 +157,7 @@ layer *layer_new() {
   layer *result = NULL;
   pthread_mutex_lock(&layerlock);
   for (int i = 0; i < MAXSHADERLAYERS; i++) {
-    if (layers[i].state == UNUSED) {
+    if (layers[i].state == UNUSED || layers[i].state == SHOWN) {
       result = &layers[i];
       layer_reset(&layers[i]);
       break;
@@ -171,10 +190,16 @@ void layer_init(layer* l, t_showargs *args) {
   l->rot[1] = args->rot_y;
   l->rot[2] = args->rot_z;
 
+  l->origin[0] = args->origin_x;
+  l->origin[1] = args->origin_y;
+  l->origin[2] = args->origin_z;
+
   l->width = args->width;
   l->height = args->height;
   l->speed = args->speed;
-  l->blendmode = args->blendmode;
+  l->srcblend = args->srcblend;
+  l->dstblend = args->dstblend;
+  l->blendeq = args->blendeq;
   l->level = args->level;
 
   l->fontsize = args->fontsize;
@@ -189,22 +214,48 @@ void layer_add(layer *l) {
 }
 
 void layer_blend(layer *l) {
-  GLint blendmode = GL_ONE_MINUS_SRC_ALPHA;
-  switch(l->blendmode) {
-  case NSA: blendmode = GL_ONE_MINUS_SRC_ALPHA; break;
-  case NSC: blendmode = GL_ONE_MINUS_SRC_COLOR; break;
-  case NDA: blendmode = GL_ONE_MINUS_DST_ALPHA; break;
-  case NDC: blendmode = GL_ONE_MINUS_DST_COLOR; break;
-  case SA: blendmode = GL_SRC_ALPHA; break;
-  case SC: blendmode = GL_SRC_COLOR; break;
-  case DA: blendmode = GL_DST_ALPHA; break;
-  case DC: blendmode = GL_DST_COLOR; break;
-  case SS: blendmode = GL_SRC_ALPHA_SATURATE; break;
-  case CC: blendmode = GL_CONSTANT_COLOR; break;
-  case CA: blendmode = GL_CONSTANT_ALPHA; break;
+  GLint srcblend = GL_SRC_ALPHA;
+  GLint dstblend = GL_ONE_MINUS_SRC_ALPHA;
+  GLint blendeq = GL_FUNC_ADD;
+
+  switch(l->srcblend) {
+  case NSA: srcblend = GL_ONE_MINUS_SRC_ALPHA; break;
+  case NSC: srcblend = GL_ONE_MINUS_SRC_COLOR; break;
+  case NDA: srcblend = GL_ONE_MINUS_DST_ALPHA; break;
+  case NDC: srcblend = GL_ONE_MINUS_DST_COLOR; break;
+  case SA: srcblend = GL_SRC_ALPHA; break;
+  case SC: srcblend = GL_SRC_COLOR; break;
+  case DA: srcblend = GL_DST_ALPHA; break;
+  case DC: srcblend = GL_DST_COLOR; break;
+  case SS: srcblend = GL_SRC_ALPHA_SATURATE; break;
+  case CC: srcblend = GL_CONSTANT_COLOR; break;
+  case CA: srcblend = GL_CONSTANT_ALPHA; break;
   }
 
-  glBlendFunc(GL_SRC_ALPHA, blendmode);
+  switch(l->dstblend) {
+  case NSA: dstblend = GL_ONE_MINUS_SRC_ALPHA; break;
+  case NSC: dstblend = GL_ONE_MINUS_SRC_COLOR; break;
+  case NDA: dstblend = GL_ONE_MINUS_DST_ALPHA; break;
+  case NDC: dstblend = GL_ONE_MINUS_DST_COLOR; break;
+  case SA: dstblend = GL_SRC_ALPHA; break;
+  case SC: dstblend = GL_SRC_COLOR; break;
+  case DA: dstblend = GL_DST_ALPHA; break;
+  case DC: dstblend = GL_DST_COLOR; break;
+  case SS: dstblend = GL_SRC_ALPHA_SATURATE; break;
+  case CC: dstblend = GL_CONSTANT_COLOR; break;
+  case CA: dstblend = GL_CONSTANT_ALPHA; break;
+  }
+
+  switch(l->blendeq) {
+  case FA: blendeq = GL_FUNC_ADD; break;
+  case FS: blendeq = GL_FUNC_SUBTRACT; break;
+  case FRS: blendeq = GL_FUNC_REVERSE_SUBTRACT; break;
+  case FMIN: blendeq = GL_MIN; break;
+  case FMAX: blendeq = GL_MAX; break;
+  }
+
+  glBlendEquation(blendeq);
+  glBlendFunc(srcblend, dstblend);
 }
 
 void layer_apply(layer *l, int even) {
@@ -239,10 +290,12 @@ void layer_apply(layer *l, int even) {
       /* } */
       /* else { */
       /*   if (scribble == 1) { */
+      pthread_mutex_lock(&layerlock);
       shaderlayer_apply(l);
       if (l->is_text == 1) {
         textlayer_apply(l);
       }
+      pthread_mutex_unlock(&layerlock);
 
       /*     glBindFramebuffer(GL_FRAMEBUFFER, 0); */
       /*     shaderlayer_finish(l); */

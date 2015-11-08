@@ -186,6 +186,7 @@ void layers_cleanup() {
   while (p != NULL) {
     if ((p->when + (p->duration/p->cps)) < now) {
       queue_remove(&showing, p);
+      p->state = SHOWN;
       if (p->is_text == 1) {
         glDeleteTextures(1, &p->textid);
       }

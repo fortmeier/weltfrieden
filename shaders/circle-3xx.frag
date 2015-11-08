@@ -34,5 +34,5 @@ void main() {
 
   float box = step(circ, radius);
 
-  frag_color = mix(vec4(0,0,0,0), color, box);
+  frag_color = mix(vec4(0,0,0,0), color, box * n);
 }
