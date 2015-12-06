@@ -109,6 +109,7 @@ typedef struct layer_t
 
   int is_text;
   int is_scribble;
+  int is_image;
 
   char *text;
   float fontsize;

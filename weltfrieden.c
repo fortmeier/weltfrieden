@@ -1,4 +1,7 @@
 // header missing
+// only main will have image reading implementation
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_RESIZE_IMPLEMENTATION
 
 #include <assert.h>
 #include <stdio.h>
@@ -6,9 +9,9 @@
 #include <sys/time.h>
 #include <getopt.h>
 
-
-
 #include "config.h"
+#include "stb_image.h"
+#include "stb_image_resize.h"
 #include "gl_env.h"
 #include "dbg.h"
 #include "layers.h"
@@ -222,6 +225,7 @@ int main(int argc, char **argv) {
   glfwSetMouseButtonCallback(win, mouse_button_callback);
   glfwSetWindowSize( win, res[0], res[1] );
   glfwShowWindow( win );
+
 
 
   log_info("Starting Rendering\n");
