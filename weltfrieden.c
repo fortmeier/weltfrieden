@@ -16,7 +16,6 @@
 #include "dbg.h"
 #include "layers.h"
 #include "shader.h"
-#include "text.h"
 
 extern int server_init(void);
 
@@ -29,10 +28,6 @@ extern GLuint vao_texcoord;
 extern GLuint vbo;
 extern GLuint vao;
 extern float cursor[2];
-
-extern int scribble;
-
-int last_scribble = 0;
 
 extern int shader_lvl;
 
@@ -57,20 +52,9 @@ void error_callback(int err, const char* desc) {
 }
 
 void cursor_pos_callback(GLFWwindow *window, double xpos, double ypos) {
-  if (scribble == 1) {
-    cursor[0] = (float)xpos;
-    cursor[1] = (float) (res[1] - ypos);
-  }
 }
 
 void mouse_button_callback(GLFWwindow *window, int button, int action, int mods) {
-  if (button == GLFW_MOUSE_BUTTON_LEFT) {
-    scribble = (action == GLFW_PRESS) ? 1 : 0;
-
-    if (last_scribble != scribble) {
-      layers_redraw_scribble();
-    }
-  }
 }
 
 void reshape( GLFWwindow* window, int width, int height )

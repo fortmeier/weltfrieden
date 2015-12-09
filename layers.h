@@ -12,7 +12,6 @@ void layers_destroy();
 void layers_apply();
 void layers_cleanup();
 void layers_finish(int even);
-void layers_redraw_scribble();
 void layers_clear_cache();
 
 #endif

@@ -13,7 +13,6 @@
 #include "server.h"
 #include "layer.h"
 #include "shader.h"
-#include "text.h"
 
 extern double now;
 
@@ -75,12 +74,9 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   char *dstblend_s = (char *) argv[19+poffset];
   char *blendeq_s = (char *) argv[20+poffset];
   int level = argv[21+poffset]->i;
-  char *text = (char *) argv[22+poffset];
-  float fontsize = argv[23+poffset]->f;
-  int charcode = argv[24+poffset]->i;
 
   debug("[charcode] %d", charcode);
-  if (argc > 25+poffset) {
+  if (argc > 22+poffset) {
     printf("show server unexpectedly received extra parameters, maybe update weltfrieden?\n");
   }
 
@@ -140,9 +136,6 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   args->dstblend = dstblend;
   args->blendeq = blendeq;
   args->level = level;
-  args->text = text;
-  args->fontsize = fontsize;
-  args->charcode = charcode;
   args->rot_x = rot_x;
   args->rot_y = rot_y;
   args->rot_z = rot_z;
@@ -168,37 +161,14 @@ int shader_handler(const char *path, const char *types, lo_arg **argv,
   return 0;
 }
 
-int text_handler(const char *path, const char *types, lo_arg **argv,
-                 int argc, void *data, void *user_data) {
-  t_showargs args;
-
-  parse_showargs(argv, argc, &args);
-
-  if (strlen(args.words) > 0) {
-    textlayer_add(args);
-  }
-  else {
-    log_info("[server:text] no text given\n");
-  }
-
-  return 0;
-}
-
-
 extern int server_init(void) {
 
   lo_server_thread st = lo_server_thread_new(OSC_PORT, error);
 
-  lo_server_thread_add_method(st, "/shader", "iiffsfffffffffffffffffsssisfi",
+  lo_server_thread_add_method(st, "/shader", "iiffsfffffffffffffffffsssi",
                               shader_handler,
                               NULL
 			      );
-
-  /* lo_server_thread_add_method(st, "/text", "iiffsffffffffffsisi", */
-  /*                             text_handler, */
-  /*                             NULL */
-  /*       		      ); */
-
 
   lo_server_thread_add_method(st, NULL, NULL, generic_handler, NULL);
   lo_server_thread_start(st);

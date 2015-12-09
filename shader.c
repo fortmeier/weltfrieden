@@ -22,7 +22,6 @@ extern GLuint vbo;
 extern int cache;
 extern char* imageroot;
 
-int scribble = 0;
 float cursor[2];
 double now = 0;
 float res[2];
@@ -36,7 +35,6 @@ layer *shaderlayer_new() {
   }
 
   l->layer_data = (void*)malloc(sizeof(shaderlayer));
-  l->is_text = 0;
   l->type_flag = SHADERLAYER_TYPE_FLAG;
   l->f_apply = shaderlayer_apply;
   l->f_init = shaderlayer_init;
@@ -238,16 +236,6 @@ void shaderlayer_add(t_showargs args) {
   shaderlayer *s = (shaderlayer*)l->layer_data;
 
   s->filename = strdup(args.words);
-
-  if (strcmp(s->filename, "scribble") != -1) {
-    l->is_scribble = 1;
-  }
-
-  if (strlen(args.text) > 0 || args.charcode != -1) {
-    l->is_text = 1;
-    l->text = strdup(args.text);
-    debug("[text:add] %s %f\n", l->text, args.fontsize);
-  }
 
   layer_init(l, &args);
   layer_add(l);

@@ -5,9 +5,7 @@
 #include "dbg.h"
 
 #include "gl_env.h"
-/* #include "t_shader.h" */
-/* #include "t_text.h" */
-/* #include "t_scribble.h" */
+
 #define uarg(s, key, value) glUniform1f( glGetUniformLocation(s->progid, key), value )
 #define uarg4(s, key, num, value) glUniform4fv( glGetUniformLocation(s->progid, key), num, value)
 #define uarg3(s, key, num, value) glUniform3fv( glGetUniformLocation(s->progid, key), num, value)
@@ -66,14 +64,6 @@ typedef struct {
   float height;
   float speed;
 
-  float fontsize;
-  char *text;
-//  char *font;
-  int charcode;
-
-  int scribble;
-
-//  int drawmode;
   int srcblend;
   int dstblend;
   int blendeq;
@@ -107,13 +97,7 @@ typedef struct layer_t
   float speed;
 
 
-  int is_text;
-  int is_scribble;
   int is_image;
-
-  char *text;
-  float fontsize;
-  int charcode;
 
   enum blendmode srcblend;
   enum blendmode dstblend;
@@ -125,22 +109,13 @@ typedef struct layer_t
   f_layer_apply f_apply;
   f_layer_init f_init;
   f_layer_read_cache f_read_cache;
-  /* union { */
-  /*   shaderlayer *shader; */
-  /*   textlayer *text; */
-  /*   scribblelayer *scribble; */
-  /* }; */
 
   unsigned int progid;
   unsigned int shaderid;
   unsigned int textid;
-  unsigned int text_progid;
 
   GLuint vao;
   GLuint vbo;
-
-  GLuint text_vao;
-  GLuint text_vbo;
 
   struct layer_t *next, *prev;
 } layer;

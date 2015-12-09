@@ -6,7 +6,6 @@
 
 #include "layers.h"
 #include "thpool.h"
-#include "text.h"
 #include "shader.h"
 
 GLuint sampler = 0;
@@ -106,47 +105,13 @@ void dequeue(double now) {
 void layers_destroy() {
   pthread_mutex_destroy(&layerlock);
   pthread_mutex_destroy(&queuelock);
+
+  if (read_file_pool) {
+    thpool_destroy(read_file_pool);
+  }
 }
 
 void layers_finish(int even) {
-  /*  glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
-  if (cache == 0 || fbo_shader == 0) {
-    char filename[256];
-    sprintf(filename, "shaders/passthru-%dxx.frag",
-            shader_lvl);
-
-    fbo_shader = _shader_load(filename, GL_FRAGMENT_SHADER);
-  }
-
-  if (cache == 0 || fbo_progid == 0) {
-    fbo_progid = glCreateProgram();
-
-    glAttachShader( fbo_progid, fbo_shader );
-    glAttachShader( fbo_progid, get_vertex_shader() );
-    glLinkProgram( fbo_progid );
-
-    int infolength;
-    char infolog[2048];
-    glGetProgramInfoLog( fbo_progid, 2048, &infolength, infolog );
-
-    if (infolength > 0) {
-      log_err("[shader:passthru:link] %s\n", infolog);
-    }
-  }
-
-  glUseProgram( fbo_progid );
-  glUniform1i( glGetUniformLocation( fbo_progid, "tex"), 0 );
-  glUniform2fv( glGetUniformLocation( fbo_progid, "res"), 1, res );
-
-  glActiveTexture(GL_TEXTURE0);
-  //  glBindSampler(0, sampler);
-  glBindTexture(GL_TEXTURE_2D, texfbo[even]);
-
-  glBindVertexArray(vao);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  */
 }
 
 
@@ -172,14 +137,6 @@ void layers_apply() {
   }
 }
 
-void layers_redraw_scribble() {
-  glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
-  glClear(GL_COLOR_BUFFER_BIT);
-  glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
-  glClear(GL_COLOR_BUFFER_BIT);
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
 void layers_cleanup() {
   layer* p = showing;
 
@@ -187,9 +144,6 @@ void layers_cleanup() {
     if ((p->when + (p->duration/p->cps)) < now) {
       queue_remove(&showing, p);
       p->state = SHOWN;
-      if (p->is_text == 1) {
-        glDeleteTextures(1, &p->textid);
-      }
     }
     p = p->next;
   }
@@ -215,42 +169,8 @@ void layers_clear_cache() {
 void layers_init(int num_workers) {
   read_file_pool = thpool_init(num_workers);
   log_info("[shaders] init (cache: %d)\n", cache);
-  fbo = calloc(2, sizeof(GLuint));
-  texfbo = calloc(2, sizeof(GLuint));
   pthread_mutex_init(&layerlock, NULL);
   pthread_mutex_init(&queuelock, NULL);
 
-  textlayer_load_shaders();
   shaderlayer_init_noise();
-  /* glGenSamplers(1, &sampler); */
-  /* glSamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR); */
-  /* glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR); */
-
-  glActiveTexture(GL_TEXTURE0);
-  glGenTextures(1, &texfbo[0]);
-  glBindTexture(GL_TEXTURE_2D, texfbo[0]);
-  /* glBindSampler(0, sampler); */
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, res[0], res[1], 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-  glBindTexture(GL_TEXTURE_2D, 0);
-
-  glActiveTexture(GL_TEXTURE1);
-  glGenTextures(1, &texfbo[1]);
-  glBindTexture(GL_TEXTURE_2D, texfbo[1]);
-  /* glBindSampler(0, sampler); */
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, res[0], res[1], 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-  glBindTexture(GL_TEXTURE_2D, 0);
-
-  glActiveTexture(GL_TEXTURE0);
-
-  glGenFramebuffers(1, &fbo[0]);
-  glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
-  glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[0], 0);
-  glClear(GL_COLOR_BUFFER_BIT);
-
-  glGenFramebuffers(1, &fbo[1]);
-  glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
-  glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[1], 0);
-  glClear(GL_COLOR_BUFFER_BIT);
-
-  glDrawBuffers(1, &draw_buffer);
 }

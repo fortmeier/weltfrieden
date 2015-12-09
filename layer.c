@@ -6,15 +6,11 @@
 
 #include "layer.h"
 #include "shader.h"
-#include "text.h"
 
-const GLenum draw_buffer = GL_COLOR_ATTACHMENT0;
 
-GLuint* texfbo = 0;
 GLuint vertex_shader = 0;
 
 extern double now;
-extern GLuint* fbo;
 
 extern pthread_mutex_t layerlock;
 extern pthread_mutex_t queuelock;
@@ -22,13 +18,9 @@ extern pthread_mutex_t queuelock;
 extern layer layers[MAXSHADERLAYERS];
 extern int cache;
 extern int shader_lvl;
-extern int scribble;
 
 extern layer* waiting;
 extern layer* showing;
-
-extern GLuint text_shader;
-extern GLuint text_vshader;
 
 static void layer_reset(layer* s) {
   memset(s, 0, sizeof(layer));
@@ -59,7 +51,6 @@ GLuint get_vertex_shader() {
     sprintf(filename, "shaders/basic-%dxx.vert", shader_lvl);
 
     vertex_shader = _shader_load(filename , GL_VERTEX_SHADER );
-
   }
   return vertex_shader;
 }
@@ -124,33 +115,25 @@ void layer_copy_program(layer *cached, layer *uncached) {
   debug("[cache:hit]");
 }
 
-
-
 void layer_from_cache(layer *l) {
   int cached = 0;
   int tries = 0;
-  if (l->is_text == 0) {
-    for (int i = 0; i < MAXSHADERLAYERS; i++) {
-      // TODO: implement a standard way to load _any_ layer from cache, maybe this needs a type flag in layer_T
-      if ((layers[i].state == INITIALIZED || layers[i].state == SHOWN) && layers[i].type_flag == l->type_flag) // layers[i].is_text == 0 && strcmp(l->shader->filename, layers[i].shader->filename) == 0)
-      {
-        cached = l->f_read_cache(&layers[i], l);
-        if (cached == 1) {
-          break;
-        }
-        tries++;
+  for (int i = 0; i < MAXSHADERLAYERS; i++) {
+    // TODO: implement a standard way to load _any_ layer from cache, maybe this needs a type flag in layer_T
+    if ((layers[i].state == INITIALIZED || layers[i].state == SHOWN) && layers[i].type_flag == l->type_flag) // layers[i].is_text == 0 && strcmp(l->shader->filename, layers[i].shader->filename) == 0)
+    {
+      cached = l->f_read_cache(&layers[i], l);
+      if (cached == 1) {
+        break;
       }
+      tries++;
     }
-    if (cached == 1) {
-      debug("[layer:cache:hit] HIT after %d tries", tries);
-    }
-    else {
-      debug("[layer:cache:miss] MISS after %d tries", tries);
-    }
-
+  }
+  if (cached == 1) {
+    debug("[layer:cache:hit] HIT after %d tries", tries);
   }
   else {
-    debug("[layer:cache:text] cannot cache text");
+    debug("[layer:cache:miss] MISS after %d tries", tries);
   }
 }
 
@@ -203,9 +186,6 @@ void layer_init(layer* l, t_showargs *args) {
   l->dstblend = args->dstblend;
   l->blendeq = args->blendeq;
   l->level = args->level;
-
-  l->fontsize = args->fontsize;
-  l->charcode = args->charcode;
 }
 
 void layer_add(layer *l) {
@@ -262,11 +242,6 @@ void layer_blend(layer *l) {
 
 void layer_apply(layer *l, int even) {
   if ( l->state == UNINITIALIZED) {
-    /* l->f_init(l); */
-    if (l->is_text == 1) {
-       textlayer_init(l);
-    }
-
     if (l->progid == 0) {
       shaderlayer_init(l);
     }
@@ -277,32 +252,9 @@ void layer_apply(layer *l, int even) {
     if (l->when <= now) {
       layer_blend(l);
 
-
-      /* if (scribble && l->is_scribble == 1) { */
-      /*   glActiveTexture(GL_TEXTURE0); */
-      /*   glBindFramebuffer(GL_FRAMEBUFFER, fbo[even]); */
-      /*   glFramebufferTexture2D(GL_FRAMEBUFFER, draw_buffer, GL_TEXTURE_2D, texfbo[even], 0); */
-      /* } */
-
-
-      /* l->f_apply(l); */
-
-      /*   glBindFramebuffer(GL_FRAMEBUFFER, 0); */
-      /*   textlayer_finish(l); */
-      /* } */
-      /* else { */
-      /*   if (scribble == 1) { */
       pthread_mutex_lock(&layerlock);
       shaderlayer_apply(l);
-      if (l->is_text == 1) {
-        textlayer_apply(l);
-      }
       pthread_mutex_unlock(&layerlock);
-
-      /*     glBindFramebuffer(GL_FRAMEBUFFER, 0); */
-      /*     shaderlayer_finish(l); */
-      /*   } */
-      /* } */
     }
   }
 }
