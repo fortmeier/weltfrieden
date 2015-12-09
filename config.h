@@ -3,6 +3,7 @@
 
 #define OSC_PORT "7772"
 
+#define DEFAULT_WORKERS 4
 #define MAXSHADERLAYERS 1024
 
 #endif

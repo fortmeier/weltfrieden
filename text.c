@@ -126,7 +126,7 @@ void textlayer_init(layer* l) {
 
   debug("[text:params] %d,%d %d,%d %f\n", text_res[0], text_res[1], text_bearing[0], text_bearing[1], fontsize);
 
-  GLuint text_advance = face->glyph->advance.x;
+  //  GLuint text_advance = face->glyph->advance.x;
 
   GLfloat w = (float)text_res[0] / (float)res[0];
   GLfloat h = (float)text_res[1] / (float)res[0];

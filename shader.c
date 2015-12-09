@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
+#include <dirent.h>
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
@@ -10,11 +11,16 @@
 #include "stb_image.h"
 #include "stb_image_resize.h"
 
+#define MAXPATHSIZE 256
+
 extern GLuint *texfbo;
 extern GLuint sampler;
 extern GLuint vao;
 extern GLuint vbo;
+
+// options
 extern int cache;
+extern char* imageroot;
 
 int scribble = 0;
 float cursor[2];
@@ -84,6 +90,15 @@ void shaderlayer_init_noise() {
 
 }
 
+
+int jpg_filter(const struct dirent *d) {
+  if (strlen(d->d_name) > 4) {
+    return(strcmp(d->d_name + strlen(d->d_name) - 4, ".jpg") == 0 ||
+           strcmp(d->d_name + strlen(d->d_name) - 4, ".JPG") == 0);
+  }
+  return(0);
+}
+
 void shaderlayer_init(layer* l) {
   l->progid = glCreateProgram();
 
@@ -107,8 +122,33 @@ void shaderlayer_init(layer* l) {
     l->is_image = 1;
 
     // load an image
-    int iw,ih,in;
-    unsigned char* raw_image = stbi_load("images/nam/nam-0001.jpg", &iw, &ih, &in, 0);
+    int iw,ih,in,set_n;
+    char set[MAXPATHSIZE];
+    char sep[2];
+    char path[MAXPATHSIZE];
+    struct dirent **namelist;
+
+    if (sscanf(s->filename, "%[a-z0-9A-Z]%[/:]%d", set, sep, &set_n)) {
+      int n;
+      snprintf(path, MAXPATHSIZE -1, "%s/%s", imageroot, set);
+      //printf("looking in %s\n", set);
+      n = scandir(path, &namelist, jpg_filter, alphasort);
+      if (n > 0) {
+        snprintf(path, MAXPATHSIZE -1,
+                 "%s/%s/%s", imageroot, set, namelist[set_n % n]->d_name);
+        while (n--) {
+          free(namelist[n]);
+        }
+        free(namelist);
+      } else {
+        snprintf(path, MAXPATHSIZE -1, "%s/%s", imageroot, s->filename);
+      }
+    } else {
+      snprintf(path, MAXPATHSIZE -1, "%s/%s", imageroot, s->filename);
+    }
+
+
+    unsigned char* raw_image = stbi_load(path, &iw, &ih, &in, 0);
     unsigned char* image = (unsigned char*) malloc(res[0]*res[1]*in);
     if (raw_image) {
       log_info("raw image loaded: %d %d (%d)", iw, ih, in);
@@ -130,7 +170,7 @@ void shaderlayer_init(layer* l) {
 
       if (resize_result == 1) {
         GLuint texture;
-
+        log_info("[load:image] %fx%f (%f, %f)", res[0], res[1], s1, t1);
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(
@@ -151,6 +191,7 @@ void shaderlayer_init(layer* l) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
         l->textid = texture;
+        debug("[image:tex:create] %d", l->textid);
 
         stbi_image_free(image);
       }

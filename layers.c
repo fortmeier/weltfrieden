@@ -30,9 +30,6 @@ extern GLuint text_shader;
 extern GLenum draw_buffer;
 extern int cache;
 
-static GLuint fbo_shader = 0;
-static GLuint fbo_progid = 0;
-
 GLuint vbo;
 GLuint vao;
 
@@ -54,7 +51,7 @@ void dequeue(double now) {
     }
   }
   while ((p = queue_next(&waiting, now)) != NULL) {
-#ifndef NODEBUG
+#ifndef NDEBUG
     int s = queue_size(showing);
 #endif
     if (showing->level >= p->level) {
@@ -95,7 +92,7 @@ void dequeue(double now) {
         tmp = tmp->next;
       }
     }
-#ifndef NODEBUG
+#ifndef NDEBUG
     assert(s == (queue_size(showing) - 1));
 #endif
   }
@@ -195,6 +192,22 @@ void layers_cleanup() {
   }
 }
 
+void layers_clear_cache() {
+  pthread_mutex_lock(&layerlock);
+  for (int i = 0; i < MAXSHADERLAYERS; i++) {
+    int state = layers[i].state;
+
+    switch (state) {
+    case INITIALIZED:
+      layers[i].state = UNINITIALIZED;
+      break;
+    case SHOWN:
+      layers[i].state = UNUSED;
+      break;
+    }
+  }
+  pthread_mutex_unlock(&layerlock);
+}
 
 void layers_init() {
   log_info("[shaders] init (cache: %d)\n", cache);

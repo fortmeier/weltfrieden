@@ -36,7 +36,10 @@ int last_scribble = 0;
 
 extern int shader_lvl;
 
+// options
 int cache;
+char *imageroot = "./images";
+int num_workers = DEFAULT_WORKERS;
 
 float points[] = {
   1.0, 1.0, 0.0, 1.0, 0.0,
@@ -85,6 +88,8 @@ void reshape( GLFWwindow* window, int width, int height )
     res[0] = width;
     res[1] = width;
   }
+  // FIXME: this leads segfaults in shaderlayer_init when trying to upload image to texture
+  //  layers_clear_cache();
 
   glViewport(offset[0], offset[1], res[0], res[1]);
 }
@@ -115,13 +120,15 @@ int main(int argc, char **argv) {
         {"cache", no_argument, &cache, 1},
         {"width", required_argument, 0, 'w'},
         {"height", required_argument, 0, 'h'},
+        {"image-root-path", required_argument, 0, 'i'},
+        {"workers", required_argument, 0, 'j'},
         {"version", no_argument, 0, 'v'},
         {0,0,0,0}
       };
 
     int option_index = 0;
 
-    c = getopt_long(argc, argv, "w:h:", long_options, &option_index);
+    c = getopt_long(argc, argv, "w:h:i:", long_options, &option_index);
 
     if (c == -1) {
       break;
@@ -133,11 +140,17 @@ int main(int argc, char **argv) {
     case 'w':
       res[0] = atoi(optarg);
       break;
+    case 'j':
+      num_workers = atoi(optarg);
+      break;
     case 'h':
       res[1] = atoi(optarg);
       break;
     case 'v':
       log_info("Version: 0.0.0, not yet implemented");
+      break;
+    case 'i':
+      imageroot = optarg;
       break;
     default:
       return 1;

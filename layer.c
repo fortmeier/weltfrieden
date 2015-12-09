@@ -118,6 +118,8 @@ void layer_copy_program(layer *cached, layer *uncached) {
   pthread_mutex_lock(&layerlock);
   uncached->progid = cached->progid;
   uncached->shaderid = cached->shaderid;
+  uncached->textid = cached->textid;
+  uncached->is_image = cached->is_image;
   pthread_mutex_unlock(&layerlock);
   debug("[cache:hit]");
 }

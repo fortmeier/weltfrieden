@@ -54,38 +54,38 @@ void main() {
   vec4 pos = vec4(position.xy, 0, 0);
   float n = 1 - min(elapsed / (dur/cps) * speed, 1);
 
-  frag_color = tcol;
+//  frag_color = tcol;
 
-  /* if (rotation.x == 0 && width == 1 && height == 1 && origin == vec3(0,0,0)) { */
-  /*   frag_color = vec4(color.rgb, color.a * n); */
-  /* } */
-  /* else { */
-  /*   float angle = rotation.x*M_PI/2; */
+  if (rotation.x == 0 && width == 1 && height == 1 && origin == vec3(0,0,0)) {
+    frag_color = vec4(tcol.rgb, color.a * n);
+  }
+  else {
+    float angle = rotation.x*M_PI/2;
 
-  /*   vec2 top_left = rotate(origin.xy + vec2(-width/2,-height/2), angle); */
-  /*   vec2 top_right = rotate(origin.xy + vec2(width/2, -height/2), angle); */
-  /*   vec2 bottom_left = rotate(origin.xy + vec2(-width/2, height/2), angle); */
-  /*   vec2 bottom_right = rotate(origin.xy + vec2(width/2, height/2), angle); */
+    vec2 top_left = rotate(origin.xy + vec2(-width/2,-height/2), angle);
+    vec2 top_right = rotate(origin.xy + vec2(width/2, -height/2), angle);
+    vec2 bottom_left = rotate(origin.xy + vec2(-width/2, height/2), angle);
+    vec2 bottom_right = rotate(origin.xy + vec2(width/2, height/2), angle);
 
-  /*   top_left += pos.xy; */
-  /*   bottom_right += pos.xy; */
-  /*   top_right += pos.xy; */
-  /*   bottom_left += pos.xy; */
-
-
-  /*   int hits_up = get_line_intersection(0,0,uv.x,uv.y,top_left.x, top_left.y, top_right.x, top_right.y); */
-  /*   int hits_right = get_line_intersection(0,0,uv.x,uv.y,top_right.x, top_right.y, bottom_right.x, bottom_right.y); */
-  /*   int hits_bottom = get_line_intersection(0,0,uv.x,uv.y,bottom_right.x, bottom_right.y, bottom_left.x, bottom_left.y); */
-  /*   int hits_left = get_line_intersection(0,0,uv.x,uv.y,bottom_left.x, bottom_left.y, top_left.x, top_left.y); */
-
-  /*   int hits = hits_up + hits_right + hits_bottom + hits_left; */
+    top_left += pos.xy;
+    bottom_right += pos.xy;
+    top_right += pos.xy;
+    bottom_left += pos.xy;
 
 
-  /*   /\* if (hits == 1) { *\/ */
-  /*   /\*   frag_color = vec4(color.rgb, color.a * n); *\/ */
-  /*   /\* } *\/ */
-  /*   /\* else { *\/ */
-  /*   /\*   frag_color = vec4(0,0,0,0); *\/ */
-  /*   /\* } *\/ */
-  /* } */
+    int hits_up = get_line_intersection(0,0,uv.x,uv.y,top_left.x, top_left.y, top_right.x, top_right.y);
+    int hits_right = get_line_intersection(0,0,uv.x,uv.y,top_right.x, top_right.y, bottom_right.x, bottom_right.y);
+    int hits_bottom = get_line_intersection(0,0,uv.x,uv.y,bottom_right.x, bottom_right.y, bottom_left.x, bottom_left.y);
+    int hits_left = get_line_intersection(0,0,uv.x,uv.y,bottom_left.x, bottom_left.y, top_left.x, top_left.y);
+
+    int hits = hits_up + hits_right + hits_bottom + hits_left;
+
+
+    if (hits == 1) {
+      frag_color = vec4(tcol.rgb, color.a * n);
+    }
+    else {
+      frag_color = vec4(0,0,0,0);
+    }
+  }
 }
