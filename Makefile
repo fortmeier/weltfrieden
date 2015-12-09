@@ -25,6 +25,3 @@ weltfrieden: $(OBJECTS) Makefile
 
 test:
 	valgrind --suppressions=valgrind-opengl-10-11-manual.supp --suppressions=valgrind-opengl-10-11.supp --leak-check=full --gen-suppressions=all -v -d ./weltfrieden -w 256 -h 256 --cache
-
-indent:
-	find . \( -iname \*.[ch] -or -iname \*.frag  -or -iname \*.vert \) -exec emacs --batch -nw -q {} --eval "(progn (mark-whole-buffer) (indent-region (point-min) (point-max) nil) (save-buffer))" --kill \;
