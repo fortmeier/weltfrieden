@@ -7,7 +7,7 @@
 
 #include "queue.h"
 
-void layers_init();
+void layers_init(int num_workers);
 void layers_destroy();
 void layers_apply();
 void layers_cleanup();

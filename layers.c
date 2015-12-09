@@ -5,6 +5,7 @@
 #include <pthread.h>
 
 #include "layers.h"
+#include "thpool.h"
 #include "text.h"
 #include "shader.h"
 
@@ -20,6 +21,8 @@ layer layers[MAXSHADERLAYERS];
 
 pthread_mutex_t layerlock;
 pthread_mutex_t queuelock;
+
+thpool_t* read_file_pool;
 
 extern int shader_lvl;
 extern double now;
@@ -209,7 +212,8 @@ void layers_clear_cache() {
   pthread_mutex_unlock(&layerlock);
 }
 
-void layers_init() {
+void layers_init(int num_workers) {
+  read_file_pool = thpool_init(num_workers);
   log_info("[shaders] init (cache: %d)\n", cache);
   fbo = calloc(2, sizeof(GLuint));
   texfbo = calloc(2, sizeof(GLuint));

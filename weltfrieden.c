@@ -232,7 +232,7 @@ int main(int argc, char **argv) {
   }
 
   init();
-  layers_init();
+  layers_init(num_workers);
   glfwSetWindowRefreshCallback(win, render);
   glfwSetCursorPosCallback(win, cursor_pos_callback);
   glfwSetMouseButtonCallback(win, mouse_button_callback);

@@ -12,7 +12,7 @@ else
 	LDFLAGS += -lGL -ldl -lX11 -lXxf86vm -lXcursor -lXinerama -lXrandr -lXi -lepoxy -lm
 endif
 
-SOURCES=weltfrieden.c queue.c server.c layer.c shader.c text.c layers.c
+SOURCES=weltfrieden.c queue.c server.c layer.c shader.c text.c layers.c thpool.c jobqueue.c
 OBJECTS=$(SOURCES:.c=.o)
 
 all: weltfrieden
