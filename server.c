@@ -11,8 +11,7 @@
 
 #include "config.h"
 #include "server.h"
-#include "layer.h"
-#include "shader.h"
+#include "layers.h"
 
 extern double now;
 
@@ -75,7 +74,6 @@ void parse_showargs(lo_arg **argv, int argc, t_showargs *args) {
   char *blendeq_s = (char *) argv[20+poffset];
   int level = argv[21+poffset]->i;
 
-  debug("[charcode] %d", charcode);
   if (argc > 22+poffset) {
     printf("show server unexpectedly received extra parameters, maybe update weltfrieden?\n");
   }
@@ -153,7 +151,7 @@ int shader_handler(const char *path, const char *types, lo_arg **argv,
 
   if (strlen(args.words) > 0) {
     debug("[server:new] %s", args.words);
-    shaderlayer_add(args);
+    layers_add(args);
   }
   else {
     log_info("[server:shader] no name given\n");

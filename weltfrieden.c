@@ -15,7 +15,6 @@
 #include "gl_env.h"
 #include "dbg.h"
 #include "layers.h"
-#include "shader.h"
 
 extern int server_init(void);
 
@@ -30,6 +29,8 @@ extern GLuint vao;
 extern float cursor[2];
 
 extern int shader_lvl;
+
+GLFWwindow* win = NULL;
 
 // options
 int cache;
@@ -156,7 +157,6 @@ int main(int argc, char **argv) {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_FLOATING, GL_TRUE);
-  GLFWwindow* win = NULL;
 
   shader_lvl = 0;
 

@@ -12,7 +12,7 @@
 
 #define uarg2fv(s, key, num, value) glUniform2fv( glGetUniformLocation(s->progid, key), num, value )
 
-enum layerstate {UNUSED, UNINITIALIZED, INITIALIZED, SHOWN};
+enum layerstate {UNUSED, UNINITIALIZED, LOADING, INITIALIZED, SHOWN};
 
 enum blendmode {
   NSA, // 1 - src alpha
@@ -104,11 +104,14 @@ typedef struct layer_t
   enum blendeq blendeq;
   int level;
 
-  void *layer_data;
+  char *filename;
+  char *filecontent;
 
-  f_layer_apply f_apply;
-  f_layer_init f_init;
-  f_layer_read_cache f_read_cache;
+  /* void *layer_data; */
+
+  /* f_layer_apply f_apply; */
+  /* f_layer_init f_init; */
+  /* f_layer_read_cache f_read_cache; */
 
   unsigned int progid;
   unsigned int shaderid;
@@ -130,7 +133,7 @@ struct layer_t* layer_new();
 void map_show_args(layer *l);
 
 void layer_init(layer *l, t_showargs *args);
-void layer_add(layer *l);
+void layer_add(t_showargs args, int is_image, int textid);
 void layer_apply(layer *l, int even);
 
 void layer_copy_program(layer *cached, layer *uncached);
@@ -138,4 +141,5 @@ void layer_copy_program(layer *cached, layer *uncached);
 GLint _shader_load(const char* filename, GLenum type);
 
 GLuint get_vertex_shader();
+
 #endif

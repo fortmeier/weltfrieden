@@ -7,7 +7,13 @@
 
 #include "queue.h"
 
+typedef struct image {
+  char* name;
+  GLuint texture;
+} image_t;
+
 void layers_init(int num_workers);
+void layers_add(t_showargs args);
 void layers_destroy();
 void layers_apply();
 void layers_cleanup();
