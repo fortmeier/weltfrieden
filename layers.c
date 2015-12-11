@@ -282,8 +282,6 @@ GLuint image_to_texture(const char* filename) {
   unsigned char* raw_image = stbi_load(path, &iw, &ih, &in, 0);
   unsigned char* image = (unsigned char*) malloc(res[0]*res[1]*in);
   if (raw_image) {
-    log_info("raw image loaded: %d %d (%d)", iw, ih, in);
-
     /* fit image ratio into resolution ratio */
     float s0 = 0,
       t0 = 0,
@@ -440,6 +438,10 @@ static void init_images_loading() {
 
 void layers_init(int num_workers) {
   read_file_pool = thpool_init(num_workers);
+  if (!read_file_pool) {
+    log_err("[layers:init] cannot create `read_file_pool`");
+    exit(1);
+  }
   init_images_loading();
   log_info("[shaders] init (cache: %d)\n", cache);
   pthread_mutex_init(&layerlock, NULL);
