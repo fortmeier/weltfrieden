@@ -145,7 +145,7 @@ void shaderlayer_init(layer* l) {
   l->progid = glCreateProgram();
   char filename[256];
 
-  debug("[shader:cache:miss] %s\n", l->filename);
+  debug("[shader:cache:miss] %s %d %d", l->filename, l->is_image, l->textid);
 
   if (l->is_image == 1) {
     sprintf(filename, "shaders/image-%dxx.frag",
@@ -175,12 +175,22 @@ void shaderlayer_init(layer* l) {
 }
 
 void shaderlayer_apply(layer *l) {
+  GLuint boundTexture = 0;
+
   glfwMakeContextCurrent(win);
   glUseProgram(l->progid);
+  assert((l->is_image == 1) || (l->textid == 0));
   if (l->is_image == 1) {
+    glGetIntegerv(GL_TEXTURE_BINDING_2D, (GLint*) &boundTexture); // store currently bound texture id
     glUniform1i( glGetUniformLocation( l->progid, "tex"), 0 );
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, l->textid);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    // these are essential, otherwise texture cannot be accessed in shader
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   }
 
   uarg(l, "now", now);
@@ -198,8 +208,13 @@ void shaderlayer_apply(layer *l) {
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float) ,(void *) ( 0 * sizeof(float) ));
   }
+
   glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
 
+  // restore original state
+  if (l->is_image == 1) {
+    glBindTexture(GL_TEXTURE_2D, boundTexture);
+  }
   glUseProgram(0);
 }
 
@@ -297,8 +312,10 @@ GLuint image_to_texture(const char* filename) {
 
 
     if (resize_result == 1) {
+      log_info("[load:image] %s (%.fx%.f)", filename, res[0], res[1]);
+      GLuint boundTexture = 0;
+      glGetIntegerv(GL_TEXTURE_BINDING_2D, (GLint*) &boundTexture);
 
-      log_info("[load:image] %fx%f (%f, %f)", res[0], res[1], s1, t1);
       glGenTextures(1, &texture);
       glBindTexture(GL_TEXTURE_2D, texture);
       glTexImage2D(
@@ -313,11 +330,7 @@ GLuint image_to_texture(const char* filename) {
         image
         );
 
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
+      glBindTexture(GL_TEXTURE_2D, boundTexture);
       stbi_image_free(image);
     }
     else {
@@ -330,6 +343,7 @@ GLuint image_to_texture(const char* filename) {
     return -1;
   }
   debug("[image:resized] %s", filename);
+
   return texture;
 }
 
@@ -632,7 +646,7 @@ void layer_add(t_showargs args, int is_image, int textid) {
   layer_init(l, &args);
 
   pthread_mutex_lock(&queuelock);
-  debug("[shader:add]\n");
+  debug("[shader:add] %s %d %d", l->filename, l->is_image, l->textid);
   queue_add(&waiting, l);
   pthread_mutex_unlock(&queuelock);
 }
