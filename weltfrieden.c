@@ -215,8 +215,9 @@ int main(int argc, char **argv) {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) ( 3 * sizeof(float) ) );
   }
 
-  init();
   layers_init(num_workers);
+  init();
+
   glfwSetWindowRefreshCallback(win, render);
   glfwSetCursorPosCallback(win, cursor_pos_callback);
   glfwSetMouseButtonCallback(win, mouse_button_callback);
