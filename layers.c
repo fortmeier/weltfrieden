@@ -186,8 +186,11 @@ void shaderlayer_apply(layer *l) {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, l->textid);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    /* glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT); */
+    /* glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT); */
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
     // these are essential, otherwise texture cannot be accessed in shader
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -353,6 +356,8 @@ void read_image_func(void* raw_args) {
   char* filename = strdup(args->filename);
   image_t* img;
 
+  unmark_as_loading(args->filename);
+
   img = find_image(filename);
 
   if (img == NULL) {
@@ -383,7 +388,6 @@ void read_image_func(void* raw_args) {
     layer_add(*(args->args), 1, img->texture);
   }
 
-  unmark_as_loading(filename);
 
   free(args->filename);
   free(args);
@@ -395,16 +399,20 @@ void layers_add(t_showargs args) {
       layer_add(args, 0, 0);
     }
     else {
-      // load images async
       if (!is_image_loading(args.words)) {
         mark_as_loading(args.words);
         read_file_args_t *read_args = malloc(sizeof(read_file_args_t));
 
         read_args->filename = strdup(args.words);
         read_args->args = copy_show_args(&args);
-        if (!thpool_add_job(read_file_pool, (void*) read_image_func, (void*) read_args)) {
-          log_err("[layer:apply] Could not add image reading job for '%s'", read_args->filename);
-        }
+
+        // Read image sync for now
+        read_image_func(read_args);
+
+        // This leads to random segfaults (even in liblo and glDrawArrays), so I messed up badly...
+        /* if (!thpool_add_job(read_file_pool, (void*) read_image_func, (void*) read_args)) { */
+        /*   log_err("[layer:apply] Could not add image reading job for '%s'", read_args->filename); */
+        /* } */
       }
     }
 
@@ -456,12 +464,13 @@ void layers_init(int num_workers) {
     log_err("[layers:init] cannot create `read_file_pool`");
     exit(1);
   }
-  init_images_loading();
-  log_info("[shaders] init (cache: %d)\n", cache);
   pthread_mutex_init(&layerlock, NULL);
   pthread_mutex_init(&queuelock, NULL);
   pthread_mutex_init(&imagelock, NULL);
   pthread_mutex_init(&imageloadinglock, NULL);
+
+  init_images_loading();
+  log_info("[shaders] init (cache: %d)\n", cache);
 }
 
 static void layer_reset(layer* s) {
@@ -747,6 +756,7 @@ static void unmark_as_loading(const char* imagename) {
     const char* sn = images_loading[i];
     if (sn != NULL && strcmp(sn, imagename) == 0) break;
   }
+  log_info("[unmark] %d:%s", i, images_loading[i]);
   free(images_loading[i]);
   images_loading[i] = NULL;
 

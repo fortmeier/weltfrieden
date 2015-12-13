@@ -16,6 +16,8 @@ uniform vec2 offset;
 
 out vec4 frag_color;
 
+in vec2 tex_coord;
+
 vec2 rotate(vec2 p, float angle) {
   vec2 rot;
 
