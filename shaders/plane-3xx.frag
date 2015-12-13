@@ -50,7 +50,6 @@ int get_line_intersection(float p0_x, float p0_y, float p1_x, float p1_y, float 
 
 void main() {
   vec2 uv = (tex_coord - offset);
-  vec4 pos = vec4(position.xy, 0, 0);
   float n = 1 - min(elapsed / (dur/cps) * speed, 1);
 
   /* if (rotation.x == 0 && width == 1 && height == 1 && origin == vec3(0,0,0)) { */
