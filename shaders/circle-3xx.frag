@@ -27,7 +27,7 @@ vec2 rotate(vec2 p, float angle) {
 }
 
 void main() {
-  vec2 uv = (gl_FragCoord.xy - offset) / res.xy;
+  vec2 uv = (tex_coord.xy - offset);
 
   float radius = width / 2;
   float n = 1 - min(elapsed / (dur/cps) * speed, 1);
